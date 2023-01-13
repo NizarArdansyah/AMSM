@@ -1,0 +1,11 @@
+.bg-register {
+    background-image: url('../assets/img/auth-background.png');
+}
+
+.border-modal {
+    border: 1px solid #616161; 
+}
+
+.border-modal:is(:active, :focus) {
+    border: 1px solid  #1A73E8;
+}
