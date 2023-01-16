@@ -1,11 +1,14 @@
 <?= $this->extend('templates/index'); ?>
 
 <?= $this->Section('page-content'); ?>
+
 <div class="container-fluid py-4">
     <div class="row">
-        Profil
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            Profil Petugas
+        </div>
     </div>
-    <footer class="footer pt-4  ">
+    <footer class="footer py-4  ">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
                 <div class="col-lg-4 mb-lg-0 mb-4">
@@ -20,4 +23,5 @@
             </div>
     </footer>
 </div>
+
 <?= $this->endSection(); ?>

@@ -54,6 +54,14 @@
                     </li>
                 <?php elseif (in_groups('petugas')) : ?>
                     <li class="nav-item">
+                        <a class="nav-link text-white <?= uri_string() == 'pengajuan-surat' ? 'active' : '' ?>" href="<?= base_url('pengajuan-surat') ?>">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">mail</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Pengajuan Surat</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white <?= uri_string() == 'manajemen-surat' ? 'active' : '' ?>" href="<?= base_url('manajemen-surat') ?>">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">mail</i>
@@ -225,24 +233,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                </div>
-                            </a>
-                        </li>
 
-
-                        <li class="nav-item d-flex align-items-center">
+                        <li class="nav-item d-flex align-items-center d-none d-lg-block">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none"><?= user()->username; ?></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" style="margin-left: -100px;" aria-labelledby="dropdownMenuButton">
-                                <li class="mb-2">
+                            <ul class="dropdown-menu dropdown-menu-end px-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-lg-2">
                                     <a class="dropdown-item border-radius-md " href="javascript:;">
                                         <a href="<?= base_url('logout') ?>" style=":hover{background:black}" class="text-bold gap-2 d-flex justify-content-center align-items-center py-1">
                                             <img src="/assets/img/<?= user()->img_user ?>" class="avatar avatar-sm rounded-circle" alt="user_image">
@@ -251,6 +249,16 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </div>

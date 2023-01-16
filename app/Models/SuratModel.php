@@ -73,9 +73,14 @@ class SuratModel extends Model
         } else {
             return $kode . '/Ds.04/XII/2022';
         }
-        // return $kode . '/Ds.04/XII/2022';
     }
 
+    public function deleteSurat($id)
+    {
+        $builder = $this->db->table('surat');
+        $builder->where('id', $id);
+        return $builder->delete();
+    }
 
     function getPemohon($id)
     {

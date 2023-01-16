@@ -3,6 +3,33 @@
 <?= $this->Section('page-content'); ?>
 
 <div class="container-fluid py-4">
+    <div class="row justify-content-between">
+        <div class="col-auto">
+            <?php
+            if (session()->getFlashData('Berhasil')) :
+            ?>
+                <div class="alert alert-success alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData('Berhasil') ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            elseif (session()->getFlashData('Gagal')) :
+            ?>
+                <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData('Gagal') ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            endif;
+            ?>
+        </div>
+
+
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -20,6 +47,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Pemohon</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Permohonan</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detail Surat</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
@@ -49,28 +77,31 @@
                                             ?>
                                                 <span class="badge badge-sm bg-gradient-info"><?= $srt->status; ?></span>
                                             <?php
-                                            else :
+                                            elseif ($srt->status == 'siap') :
                                             ?>
                                                 <span class="badge badge-sm bg-gradient-success"><?= $srt->status; ?></span>
                                             <?php
-                                            endif
+                                            else :
+                                            ?>
+                                                <span class="badge badge-sm bg-gradient-danger"><?= $srt->status; ?></span>
+                                            <?php
+                                            endif;
                                             ?>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold"><?= $srt->tanggal_surat; ?></span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <!-- Button trigger modal -->
-                                            <button type="" class="btn btn-sm m-0 bg-dark text-white border-0 mr-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $srt->id ?>">
+                                        <td class="align-middle text-center">
+                                            <!-- Button trigger modal detail surat -->
+                                            <button type="" class="btn btn-sm m-0 bg-dark text-white border-0 mr-2" data-bs-toggle="modal" data-bs-target="#detail_surat<?= $srt->id ?>">
                                                 Detail
                                             </button>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade bd-example-modal-xl" id="staticBackdrop<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <!-- Modal detail surat -->
+                                            <div class="modal fade bd-example-modal-xl" id="detail_surat<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detail_suratLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                                                     <form class="modal-content" method="post" action="/update-surat">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Detail Surat Pemohonan</h5>
+                                                            <h5 class="modal-title" id="detail_suratLabel">Detail Surat Pemohonan</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -79,7 +110,7 @@
                                                                     <div class="col-md-6">
                                                                         <input type="hidden" name="id_surat" value="<?= $srt->id ?>">
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="nomor_surat">No Surat</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -87,7 +118,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="jenis">Jenis Surat</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -95,7 +126,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="tanggal">tanggal</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -103,7 +134,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="pemohon">Pemohon</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -113,7 +144,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="perihal">Perihal</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -121,7 +152,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="keperluan">Keperluan</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -129,7 +160,28 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
-                                                                            <div class="col-2 flex align-items-center">
+                                                                            <div class="col-12 text-start ">
+                                                                                <label for="status">Status</label>
+                                                                            </div>
+                                                                            <!-- <div class="col-10">
+                                                                                <input type="text" name="status" id="status" value="<?= $srt->status ?>" class="form-control border-modal w-100 px-3">
+                                                                            </div> -->
+                                                                            <div class="col-10">
+                                                                                <select class="form-select border-modal w-100 px-3" name="status" id="status">
+                                                                                    <option value="siap" <?php if ($srt->status == 'siap') {
+                                                                                                                echo ('selected');
+                                                                                                            } ?>>Siap</option>
+                                                                                    <option value="antre" <?php if ($srt->status == 'antre') {
+                                                                                                                echo ('selected');
+                                                                                                            } ?>>Belum Siap</option>
+                                                                                    <option value="dibatalkan" <?php if ($srt->status == 'dibatalkan') {
+                                                                                                                    echo ('selected');
+                                                                                                                } ?>>Dibatalkan</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class=" mb-3">
+                                                                            <div class="col-12 text-start ">
                                                                                 <label for="keterangan">Keterangan</label>
                                                                             </div>
                                                                             <div class="col-10">
@@ -143,11 +195,71 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button type="submit" class="btn btn-info">Edit Surat</button>
+                                                            <a href="/hapus-surat/<?= $srt->id ?>" class="btn btn-danger">Hapus</a>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
-                                            <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="btn btn-sm btn-primary m-0" target="_blank"><i class="fas fa-print"></i></a>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+
+                                            <?php
+                                            if ($srt->status == 'dibatalkan') :
+                                            ?>
+                                                <button type="" class="btn btn-sm m-0 bg-secondary text-white border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
+
+                                            <?php else : ?>
+                                                <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="btn btn-sm btn-info m-0" target="_blank"><i class="fas fa-print"></i></a>
+
+                                            <?php
+                                            endif;
+                                            ?>
+                                            <!-- Modal pesan pembatalan surat -->
+                                            <div class="modal fade bd-example-modal-xl" id="pesan_pembatalan_surat<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="pesan_pembatalan_suratLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                                                    <form class="modal-content" method="post" action="/pesan-pembatalan">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="pesan_pembatalan_suratLabel">Pesan Terkait Pembatalan Surat</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="container-fluid">
+                                                                <input type="text" name="id_surat" value="<?= $srt->id ?>" hidden>
+                                                                <div class="row">
+                                                                    <div class="col-4" style="text-align: left;">
+                                                                        <div class="mb-3">
+                                                                            <div class="flex align-items-center">
+                                                                                <label for="no_surat">No Surat :</label>
+                                                                            </div>
+                                                                            <div class="">
+                                                                                <?= $srt->nomor_surat ?>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-12" style="text-align: left;">
+                                                                        <div class="mb-3">
+                                                                            <div class="text-left flex align-items-center">
+                                                                                <label for="pesan">Pesan</label>
+                                                                            </div>
+                                                                            <div class="">
+                                                                                <textarea type="text" name="pesan" id="pesan" class="form-control border-modal w-100 px-3"><?= $srt->pesan ?></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-info">Kirim Pesan</button>
+                                                            </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
 

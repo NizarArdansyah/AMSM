@@ -13,6 +13,6 @@ class Home extends BaseController
 
     public function surat()
     {
-        return view('surat');
+        return view('cetak_surat');
     }
 }

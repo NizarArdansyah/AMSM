@@ -40,14 +40,17 @@ $routes->get('/surat', 'Home::surat');
 
 // Role User Route
 $routes->get('/profil', 'User\User::profil', ['filter' => 'role:user']);
-$routes->get('/pengajuan-surat', 'User\User::pengajuan_surat', ['filter' => 'role:user']);
-$routes->post('/pengajuan-surat', 'User\User::buat_pengajuan_surat', ['filter' => 'role:user']);
+$routes->get('/pengajuan-surat', 'User\User::pengajuan_surat', ['filter' => 'role:user,petugas']);
+$routes->post('/pengajuan-surat', 'User\User::buat_pengajuan_surat', ['filter' => 'role:user,petugas']);
 $routes->post('/update-pengajuan-surat', 'User\User::update_pengajuan_surat', ['filter' => 'role:user']);
 
 // Role Petugas Route
+$routes->get('/profil-petugas', 'Petugas\Petugas::profil_petugas', ['filter' => 'role:petugas']);
 $routes->get('/manajemen-surat', 'Petugas\Petugas::manajemen_surat', ['filter' => 'role:petugas']);
 $routes->post('/update-surat', 'Petugas\Petugas::update_surat', ['filter' => 'role:petugas']);
+$routes->post('/pesan-pembatalan', 'Petugas\Petugas::pesan_pembatalan', ['filter' => 'role:petugas']);
 $routes->get('/cetak-surat/(:num)', 'Petugas\Petugas::cetak_surat/$1', ['filter' => 'role:petugas']);
+$routes->get('/hapus-surat/(:num)', 'Petugas\Petugas::hapus_surat/$1', ['filter' => 'role:petugas']);
 
 /*
  * --------------------------------------------------------------------
