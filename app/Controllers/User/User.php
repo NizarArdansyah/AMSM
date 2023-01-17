@@ -34,6 +34,33 @@ class User extends BaseController
         return view('user/warga/profil', $data);
     }
 
+    public function ubah_profil()
+    {
+        $data['user'] = user();
+        $data['title'] = 'AMSM - Warga';
+        $data = [
+            'fullname' => $this->request->getVar('fullname'),
+            'nik' => $this->request->getVar('nik'),
+            'ttl' => $this->request->getVar('ttl'),
+            'kewarganegaraan' => $this->request->getVar('kewarganegaraan'),
+            'agama' => $this->request->getVar('agama'),
+            'pekerjaan' => $this->request->getVar('pekerjaan'),
+            'alamat' => $this->request->getVar('alamat'),
+        ];
+
+        $id_user = $this->request->getVar('id_user');
+
+        if ($this->sm->updateProfil($id_user, $data)) {
+            session()->setFlashdata('Berhasil', 'Profil berhasil diupdate');
+            return redirect()->to(base_url('/profil'));
+        } else {
+            session()->setFlashdata('Gagal', 'Profil gagal diupdate, pastikan masukan setiap kolom sesuai');
+            return redirect()->to(base_url('/profil'));
+        }
+
+        return view('user/warga/profil', $data);
+    }
+
     public function pengajuan_surat()
     {
         $data['title'] = 'AMSM - Warga';

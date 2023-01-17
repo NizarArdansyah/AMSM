@@ -91,7 +91,7 @@
                 <div class="col">
                     <ul class="list-unstyled">
                         <li>: <?= $surat->pemohon ?></li>
-                        <li>: TTL</li>
+                        <li>: <?= d($datas) ?></li>
                         <li>: WNI</li>
                         <li>: Pekerjaan</li>
                         <li>: Alamat</li>

@@ -55,6 +55,9 @@ class SuratModel extends Model
     private function get_nomor_surat()
     {
         $builder = $this->db->table('surat');
+        if ($builder->countAllResults() == 0) {
+            return '001/Ds.04/XII/2022';
+        }
         $builder->selectMax('nomor_surat');
         $data = $builder->get()->getResultObject();
         return $data[0]->nomor_surat;
@@ -62,16 +65,20 @@ class SuratModel extends Model
 
     public function generate_nomor_surat()
     {
+
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+
         $nomor_surat = $this->get_nomor_surat();
         $kode = explode('/', $nomor_surat);
         $kode = $kode[0];
         $kode = $kode + 1;
         if ($kode < 10) {
-            return '00' . $kode . '/Ds.04/XII/2022';
+            return '00' . $kode . "/Ds.04/" . $bln . "/" . date('Y');
         } elseif ($kode < 100) {
-            return '0' . $kode . '/Ds.04/XII/2022';
+            return '0' . $kode . "/Ds.04/" . $bln . "/" . date('Y');
         } else {
-            return $kode . '/Ds.04/XII/2022';
+            return $kode . "/Ds.04/" . $bln . "/" . date('Y');
         }
     }
 
@@ -82,17 +89,34 @@ class SuratModel extends Model
         return $builder->delete();
     }
 
+    //untuk mengetahui siapa yang mengajukan surat
     function getPemohon($id)
     {
         $builder = $this->db->table('users');
         $builder->where('id', $id);
         $data = $builder->select('username')->get()->getResultObject();
-        return $data[0]->username;
+        return $data;
+    }
+
+    // untuk mendapatkan data user berdasarkan pemohon
+    function getUserBySurat()
+    {
+        $builder = $this->db->table('surat');
+        $builder->join('users', 'users.id = surat.id_user');
+        $data = $builder->get()->getResultObject();
+        return $data;
     }
 
     function updateSurat($id, $data)
     {
         $builder = $this->db->table('surat');
+        $builder->where('id', $id);
+        return $builder->update($data);
+    }
+
+    function updateProfil($id, $data)
+    {
+        $builder = $this->db->table('users');
         $builder->where('id', $id);
         return $builder->update($data);
     }

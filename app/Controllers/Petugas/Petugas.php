@@ -83,7 +83,10 @@ class Petugas extends BaseController
 
     public function cetak_surat($id_surat)
     {
-        $data['user'] = user();
+        $id_pemohon = $this->sm->getSurats()[0]->id_user;
+        $data['datas'] = $this->sm->getUserBySurat();
+
+
         $data['title'] = 'AMSM - Petugas';
         $data['surat'] = $this->sm->getSuratByIDSurat($id_surat);
         $data['surat'] = $data['surat'][0];

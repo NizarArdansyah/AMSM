@@ -40,6 +40,7 @@ $routes->get('/surat', 'Home::surat');
 
 // Role User Route
 $routes->get('/profil', 'User\User::profil', ['filter' => 'role:user']);
+$routes->post('/ubah-profil', 'User\User::ubah_profil', ['filter' => 'role:user']);
 $routes->get('/pengajuan-surat', 'User\User::pengajuan_surat', ['filter' => 'role:user,petugas']);
 $routes->post('/pengajuan-surat', 'User\User::buat_pengajuan_surat', ['filter' => 'role:user,petugas']);
 $routes->post('/update-pengajuan-surat', 'User\User::update_pengajuan_surat', ['filter' => 'role:user']);
