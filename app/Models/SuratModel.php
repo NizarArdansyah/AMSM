@@ -29,6 +29,20 @@ class SuratModel extends Model
         $this->db = \Config\Database::connect();
     }
 
+    // cek profil apakah sudah lengkap atau belum
+    public function cekProfil($id_user)
+    {
+        $builder = $this->db->table('users');
+        $builder->where('id', $id_user);
+        $data = $builder->get()->getResultObject();
+
+        if ($data[0]->fullname == null || $data[0]->alamat == null || $data[0]->nik == null || $data[0]->ttl == null || $data[0]->kewarganegaraan == null || $data[0]->agama == null || $data[0]->pekerjaan == null) {
+            return false;
+        }
+        return true;
+    }
+
+    //menampilkan data surat berdasarkan id user
     public function getSuratByID($id)
     {
         $builder = $this->db->table('surat');
@@ -37,6 +51,7 @@ class SuratModel extends Model
         return $data;
     }
 
+    //menampilkan data surat berdasarkan id surat
     public function getSuratByIDSurat($id)
     {
         $builder = $this->db->table('surat');
@@ -45,6 +60,7 @@ class SuratModel extends Model
         return $data;
     }
 
+    //menampilkan semua data surat 
     function getSurats()
     {
         $builder = $this->db->table('surat');
@@ -52,9 +68,12 @@ class SuratModel extends Model
         return $data;
     }
 
+    //mengambil nomor surat terakhir
     private function get_nomor_surat()
     {
         $builder = $this->db->table('surat');
+
+        //jika belum ada data surat maka nomor surat akan diisi 001/Ds.04/XII/2022
         if ($builder->countAllResults() == 0) {
             return '001/Ds.04/XII/2022';
         }
@@ -63,6 +82,7 @@ class SuratModel extends Model
         return $data[0]->nomor_surat;
     }
 
+    //mengenerate nomor surat
     public function generate_nomor_surat()
     {
 
@@ -82,6 +102,7 @@ class SuratModel extends Model
         }
     }
 
+    //menghapus data surat berdasarkan id surat
     public function deleteSurat($id)
     {
         $builder = $this->db->table('surat');
@@ -89,24 +110,25 @@ class SuratModel extends Model
         return $builder->delete();
     }
 
-    //untuk mengetahui siapa yang mengajukan surat
+    //mengetahui siapa yang mengajukan surat saat pengajuan
     function getPemohon($id)
     {
         $builder = $this->db->table('users');
         $builder->where('id', $id);
         $data = $builder->select('username')->get()->getResultObject();
-        return $data;
+        return $data[0]->username;
     }
 
-    // untuk mendapatkan data user berdasarkan pemohon
-    function getUserBySurat()
+    // untuk mendapatkan data user berdasarkan pemohon surat
+    function getUserBySurat($id_pemohon)
     {
-        $builder = $this->db->table('surat');
-        $builder->join('users', 'users.id = surat.id_user');
+        $builder = $this->db->table('users');
+        $builder->where('id', $id_pemohon);
         $data = $builder->get()->getResultObject();
         return $data;
     }
 
+    // mengupdate data surat
     function updateSurat($id, $data)
     {
         $builder = $this->db->table('surat');
@@ -114,6 +136,7 @@ class SuratModel extends Model
         return $builder->update($data);
     }
 
+    //mengupdate data user
     function updateProfil($id, $data)
     {
         $builder = $this->db->table('users');

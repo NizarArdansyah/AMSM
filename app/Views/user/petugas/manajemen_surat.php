@@ -206,9 +206,18 @@
                                             <?php
                                             if ($srt->status == 'dibatalkan') :
                                             ?>
-                                                <button type="" class="btn btn-sm m-0 bg-secondary text-white border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
-                                                    <i class="fas fa-envelope"></i>
-                                                </button>
+                                                <?php
+                                                if ($srt->pesan == null) :
+
+                                                ?>
+                                                    <button type="" class="btn btn-sm m-0 bg-secondary text-white border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                <?php else : ?>
+                                                    <button type="" class="btn btn-sm m-0 bg-success text-white border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </button>
+                                                <?php endif; ?>
 
                                             <?php else : ?>
                                                 <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="btn btn-sm btn-info m-0" target="_blank"><i class="fas fa-print"></i></a>

@@ -36,17 +36,15 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/surat', 'Home::surat');
 
 // Role User Route
-$routes->get('/profil', 'User\User::profil', ['filter' => 'role:user']);
-$routes->post('/ubah-profil', 'User\User::ubah_profil', ['filter' => 'role:user']);
+$routes->get('/profil', 'User\User::profil', ['filter' => 'role:user,petugas']);
+$routes->post('/ubah-profil', 'User\User::ubah_profil', ['filter' => 'role:user,petugas']);
 $routes->get('/pengajuan-surat', 'User\User::pengajuan_surat', ['filter' => 'role:user,petugas']);
 $routes->post('/pengajuan-surat', 'User\User::buat_pengajuan_surat', ['filter' => 'role:user,petugas']);
 $routes->post('/update-pengajuan-surat', 'User\User::update_pengajuan_surat', ['filter' => 'role:user']);
 
 // Role Petugas Route
-$routes->get('/profil-petugas', 'Petugas\Petugas::profil_petugas', ['filter' => 'role:petugas']);
 $routes->get('/manajemen-surat', 'Petugas\Petugas::manajemen_surat', ['filter' => 'role:petugas']);
 $routes->post('/update-surat', 'Petugas\Petugas::update_surat', ['filter' => 'role:petugas']);
 $routes->post('/pesan-pembatalan', 'Petugas\Petugas::pesan_pembatalan', ['filter' => 'role:petugas']);

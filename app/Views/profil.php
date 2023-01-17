@@ -9,7 +9,7 @@
         <div class="card card-body mx-3 mx-md-4 mt-n6">
             <div class="row gx-4 mb-2">
                 <div class="col-auto">
-                    <div class="avatar avatar-xl position-relative">
+                    <div class="avatar avatar-xl bg-gradient-dark position-relative">
                         <img src="/assets/img/<?= $user->img_user ?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                     </div>
                 </div>

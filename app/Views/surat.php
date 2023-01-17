@@ -44,6 +44,7 @@
 
         .ttd {
             margin-top: 5em;
+            margin-right: 2.5em;
         }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -90,13 +91,13 @@
                 </div>
                 <div class="col">
                     <ul class="list-unstyled">
-                        <li>: <?= $surat->pemohon ?></li>
-                        <li>: <?= d($datas) ?></li>
-                        <li>: WNI</li>
-                        <li>: Pekerjaan</li>
-                        <li>: Alamat</li>
-                        <li>: </li>
-                        <li>: Buti diri</li>
+                        <li>: <?= $data_pemohon[0]->fullname ?></li>
+                        <li>: <?= $data_pemohon[0]->ttl ?></li>
+                        <li>: <?= $data_pemohon[0]->kewarganegaraan ?> & <?= $data_pemohon[0]->agama ?></li>
+                        <li>: <?= $data_pemohon[0]->pekerjaan ?></li>
+                        <li>: <?= $data_pemohon[0]->alamat ?></li>
+                        <li>&nbsp; </li>
+                        <li>: <?= $data_pemohon[0]->nik ?></li>
                         <li>: <?= $surat->keperluan ?></li>
                         <li>: <?= $surat->keterangan ?></li>
                     </ul>
@@ -108,9 +109,12 @@
             <div class="text-center">
                 <p><?= $tanggal ?></p>
                 <p>Kepala Desa Podosari</p>
+
+                <!-- Gambar tanda tangan -->
                 <div class="position-relative" style="width: fit-content;">
                     <img src="<?= base_url() ?>/assets/img/ttd.png" alt="" srcset="" style="width: 200px; top:-60px; z-index: 10;" class="position-absolute">
                 </div>
+                <!-- Nama Kepala Desa -->
                 <p style="margin-top: 100px;"><strong>NURCAHYO</strong></p>
             </div>
         </div>

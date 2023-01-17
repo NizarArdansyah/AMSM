@@ -130,7 +130,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/icon-surat.png" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                                    <img src="<?= base_url() ?>/assets/img/icon-surat.png" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm"><?= $srt->jenis; ?></h6>
@@ -262,7 +262,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php
-                                            if ($srt->status == 'dibatalkan') :
+                                            if ($srt->pesan !== '') :
                                             ?>
                                                 <button class="badge bg-info text-white border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
                                                     <i class="fas fa-envelope"></i>

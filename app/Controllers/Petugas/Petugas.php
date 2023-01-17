@@ -23,6 +23,7 @@ class Petugas extends BaseController
         return view('user/petugas/index');
     }
 
+    // mengarahkan ke manajemen surat
     public function manajemen_surat()
     {
         $data['user'] = user();
@@ -31,14 +32,7 @@ class Petugas extends BaseController
         return view('user/petugas/manajemen_surat', $data);
     }
 
-    //get id pemohon
-    public function get_id_pemohon()
-    {
-        $id_user = $this->request->getVar('id_user');
-        $data = $this->sm->getPemohon($id_user);
-        echo json_encode($data);
-    }
-
+    // update surat
     public function update_surat()
     {
         $data['title'] = 'AMSM - Petugas';
@@ -66,34 +60,26 @@ class Petugas extends BaseController
         return view('user/petugas/manajemen_surat', $data);
     }
 
-    public function update_stts_surat()
-    {
-        $id_surat = $this->request->getVar('id_surat');
-        $data = [
-            'status' => 'selesai',
-        ];
-        if ($this->sm->updateSurat($id_surat, $data)) {
-            session()->setFlashdata('Berhasil', 'Surat berhasil diselesaikan');
-            return redirect()->to(base_url('/manajemen-surat'));
-        } else {
-            session()->setFlashdata('Gagal', 'Surat gagal diselesaikan');
-            return redirect()->to(base_url('/manajemen-surat'));
-        }
-    }
-
+    // cetak surat
     public function cetak_surat($id_surat)
     {
-        $id_pemohon = $this->sm->getSurats()[0]->id_user;
-        $data['datas'] = $this->sm->getUserBySurat();
-
 
         $data['title'] = 'AMSM - Petugas';
+        $data['tanggal'] = $this->getTanggalIndo();
+
+        //data surat
         $data['surat'] = $this->sm->getSuratByIDSurat($id_surat);
         $data['surat'] = $data['surat'][0];
-        $data['tanggal'] = $this->getTanggalIndo();
+
+        //data pemohon
+        $id_pemohon = $data['surat']->id_user;
+        $data['data_pemohon'] = $this->sm->getUserBySurat($id_pemohon);
+
+
         return view('surat', $data);
     }
 
+    // mengirim pesan pembatalan ke pemohon
     public function pesan_pembatalan()
     {
         $id_surat = $this->request->getVar('id_surat');
@@ -116,16 +102,16 @@ class Petugas extends BaseController
 
         if ($this->sm->deleteSurat($id_surat)) {
             session()->setFlashdata('Berhasil', 'Surat berhasil dihapus');
-            return redirect()->to(base_url('/pengajuan-surat'));
+            return redirect()->to(base_url('/manajemen-surat'));
         } else {
             session()->setFlashdata('Gagal', 'Surat gagal dihapus');
-            return redirect()->to(base_url('/pengajuan-surat'));
+            return redirect()->to(base_url('/manajemen-surat'));
         }
 
-        return view('pengajuan_surat', $data);
+        return view('user/petugas/manajemen_surat', $data);
     }
 
-    //profil petugas
+    //mengarahkan ke profil petugas
     public function profil_petugas()
     {
         $data['user'] = user();
@@ -133,6 +119,7 @@ class Petugas extends BaseController
         return view('user/petugas/profil_petugas', $data);
     }
 
+    //mengambil waktu dg format indonesia
     public function getTanggalIndo()
     {
         $hari = date("l");

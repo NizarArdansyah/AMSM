@@ -31,9 +31,10 @@ class User extends BaseController
     {
         $data['user'] = user();
         $data['title'] = 'AMSM - Warga';
-        return view('user/warga/profil', $data);
+        return view('profil', $data);
     }
 
+    // update profil 
     public function ubah_profil()
     {
         $data['user'] = user();
@@ -58,9 +59,10 @@ class User extends BaseController
             return redirect()->to(base_url('/profil'));
         }
 
-        return view('user/warga/profil', $data);
+        return view('profil', $data);
     }
 
+    // mengarahkan ke pengajuan surat
     public function pengajuan_surat()
     {
         $data['title'] = 'AMSM - Warga';
@@ -71,10 +73,11 @@ class User extends BaseController
     }
 
 
-
+    // membuat pengajuan surat
     public function buat_pengajuan_surat()
     {
-
+        $data['title'] = 'AMSM - Warga';
+        $data['user'] = user();
         $data = [
             'id_user' => user_id(),
             'nomor_surat' => $this->sm->generate_nomor_surat(),
@@ -87,19 +90,25 @@ class User extends BaseController
             'status' => 'antre',
         ];
 
-        if ($this->sm->save($data)) {
-            session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
-            return redirect()->to(base_url('/pengajuan-surat'));
+        $profil_lengkap = $this->sm->cekProfil(user_id());
+
+        if ($profil_lengkap) {
+            if ($this->sm->insert($data)) {
+                session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
+                return redirect()->to(base_url('/pengajuan-surat'));
+            } else {
+                session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
+                return redirect()->to(base_url('/pengajuan-surat'));
+            }
         } else {
-            session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
+            session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan profil lengkap');
             return redirect()->to(base_url('/pengajuan-surat'));
         }
-        $data['title'] = 'AMSM - Warga';
-        $data['user'] = user();
 
         return view('pengajuan_surat', $data);
     }
 
+    // update surat yang sudah diajukan
     public function update_pengajuan_surat()
     {
         $data['title'] = 'AMSM - Warga';
