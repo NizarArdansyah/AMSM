@@ -97,7 +97,7 @@ class Petugas extends BaseController
 
     public function hapus_surat($id_surat)
     {
-        $data['title'] = 'AMSM - Warga';
+        $data['title'] = 'AMSM - Petugas';
         $data['user'] = user();
 
         if ($this->sm->deleteSurat($id_surat)) {

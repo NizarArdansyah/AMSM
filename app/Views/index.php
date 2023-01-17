@@ -360,8 +360,9 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-12 col-12">
-                                <h6>Pesan pembatalan</h6>
+                                <h6>Pembatalan Surat</h6>
                                 <p class="text-sm mb-0">
+                                    Ada
                                     <span class="font-weight-bold ms-1">
                                         <?php
                                         $count = 0;
@@ -373,7 +374,7 @@
                                         $count == 0 ? $count = 'Tidak ada' : $count;
                                         echo $count;
                                         ?>
-                                    </span> pesan dari pengajuan surat
+                                    </span> surat yang dibatalkan
                                 </p>
                             </div>
                         </div>
@@ -427,17 +428,17 @@
                                                     <?php
                                                     if ($s->pesan !== '') :
                                                     ?>
-                                                        <button class="badge bg-info text-white border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
+                                                        <button class="badge bg-info border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
                                                             <i class="fas fa-envelope"></i>
-                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                                1
+                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-info bg-white">
+                                                                ✓
                                                                 <span class="visually-hidden">unread messages</span>
                                                             </span>
                                                         </button>
                                                     <?php
                                                     else :
                                                     ?>
-                                                        <button disabled class="badge border border-1 border-secondary text-secondary border-0">
+                                                        <button class="badge border border-1 border-secondary text-secondary border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
                                                             <i class="fas fa-envelope"></i>
                                                         </button>
                                                     <?php endif; ?>

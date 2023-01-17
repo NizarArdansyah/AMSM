@@ -201,7 +201,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center">
 
                                             <?php
                                             if ($srt->status == 'dibatalkan') :
@@ -210,17 +210,22 @@
                                                 if ($srt->pesan == null) :
 
                                                 ?>
-                                                    <button type="" class="btn btn-sm m-0 bg-secondary text-white border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                    <button class="badge border border-1 border-secondary text-secondary border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
                                                         <i class="fas fa-envelope"></i>
                                                     </button>
+
                                                 <?php else : ?>
-                                                    <button type="" class="btn btn-sm m-0 bg-success text-white border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                    <button class="badge bg-info border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
                                                         <i class="fas fa-envelope"></i>
+                                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-info bg-white">
+                                                            ✓
+                                                            <span class="visually-hidden">unread messages</span>
+                                                        </span>
                                                     </button>
                                                 <?php endif; ?>
 
                                             <?php else : ?>
-                                                <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="btn btn-sm btn-info m-0" target="_blank"><i class="fas fa-print"></i></a>
+                                                <button href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge bg-info border-0 m-0" target="_blank"><i class="fas fa-print"></i></button>
 
                                             <?php
                                             endif;

@@ -30,7 +30,15 @@ class User extends BaseController
     public function profil()
     {
         $data['user'] = user();
-        $data['title'] = 'AMSM - Warga';
+
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
+
         return view('profil', $data);
     }
 
@@ -38,7 +46,14 @@ class User extends BaseController
     public function ubah_profil()
     {
         $data['user'] = user();
-        $data['title'] = 'AMSM - Warga';
+
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
         $data = [
             'fullname' => $this->request->getVar('fullname'),
             'nik' => $this->request->getVar('nik'),
@@ -65,7 +80,15 @@ class User extends BaseController
     // mengarahkan ke pengajuan surat
     public function pengajuan_surat()
     {
-        $data['title'] = 'AMSM - Warga';
+
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
+
         $data['user'] = user();
         $data['id_user'] = user_id();
         $data['surat'] = $this->sm->getSuratByID(user_id());
@@ -76,7 +99,13 @@ class User extends BaseController
     // membuat pengajuan surat
     public function buat_pengajuan_surat()
     {
-        $data['title'] = 'AMSM - Warga';
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
         $data['user'] = user();
         $data = [
             'id_user' => user_id(),
@@ -111,7 +140,15 @@ class User extends BaseController
     // update surat yang sudah diajukan
     public function update_pengajuan_surat()
     {
-        $data['title'] = 'AMSM - Warga';
+
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
+
         $data['user'] = user();
         $data = [
             'tanggal_surat' => date("Y-m-d H:i:s"),
