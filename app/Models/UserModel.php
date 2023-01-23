@@ -38,6 +38,23 @@ class UserModel extends Model
      */
     protected $assignGroup;
 
+    //get data users
+    public function getUsers()
+    {
+        $builder = $this->db->table('users');
+        $builder->select('users.id, users.email, users.username, users.active, users.deleted_at, auth_groups.name');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+        $data = $builder->get()->getResultObject();
+        return $data;
+    }
+
+    //get insert id
+    public function getInsertId()
+    {
+        return $this->db->insertID();
+    }
+
     /**
      * Logs a password reset attempt for posterity sake.
      */
