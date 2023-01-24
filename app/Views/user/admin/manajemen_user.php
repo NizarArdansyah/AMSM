@@ -35,9 +35,10 @@
             </button>
 
             <!-- Modal tambah user -->
-            <div class="modal fade bd-example-modal-xl" id="modal_tambah_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_tambah_userLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                    <form class="modal-content" method="post" action="/manajemen-user">
+            <div class="modal fade " id="modal_tambah_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_tambah_userLabel" aria-hidden="true">
+                <div class="modal-dialog modal-l modal-dialog-centered modal-dialog-scrollable">
+                    <form class="modal-content" method="post" action="/tambah-user">
+                        <?php csrf_field(); ?>
                         <div class="modal-header">
                             <h5 class="modal-title" id="modal_tambah_userLabel">Tambah User</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -45,78 +46,25 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class=" mb-3">
-                                            <input hidden type="text" name="id" id="id" class="form-control border-modal w-100 px-3" disabled>
-                                            <div class="col-12 text-start ">
-                                                <label for="username">Username</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="username" id="username" class="form-control border-modal w-100 px-3">
-                                            </div>
-                                        </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="group">Role</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <select name="group" autofocus class="form-control border-modal form-select px-3">
-                                                    <option class="p-2" selected disabled>Pilih role user</option>
-                                                    <option class="p-2" value="admin">Admin</option>
-                                                    <option class="p-2" value="petugas">Petugas</option>
-                                                    <option class="p-2" value="user">Warga</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="fullname">Nama Lengkap</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="fullname" id="fullname" class="form-control border-modal w-100 px-3">
-                                            </div>
-                                        </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="email">Email</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="email" id="email" class="form-control border-modal w-100 px-3">
-                                            </div>
+                                    <div class="form-group row mb-3">
+                                        <div class="col-sm-12">
+                                            <input type="email" class="form-control border-modal w-100 px-3  form-control-user <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" aria-describedby="emailHelp" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="ttl">Tempat, tanggal lahir</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="ttl" id="ttl" class="form-control border-modal w-100 px-3">
-                                            </div>
+
+                                    <div class="form-group row mb-3">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control border-modal w-100 px-3 form-control-user <?php if (session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>">
                                         </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="agama">Agama</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="agama" id="agama" class="form-control border-modal w-100 px-3">
-                                            </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="password" name="password" class="form-control border-modal w-100 px-3 form-control-user <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>" autocomplete="off">
                                         </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="pekerjaan">Pekerjaan</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="pekerjaan" id="pekerjaan" class="form-control border-modal w-100 px-3">
-                                            </div>
-                                        </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start ">
-                                                <label for="kewarganegaraan">Kewarganegaraan</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="text" name="kewarganegaraan" id="kewarganegaraan" class="form-control border-modal w-100 px-3">
-                                            </div>
+
+                                        <div class="col-sm-6">
+                                            <input type="password" name="pass_confirm" class="form-control border-modal w-100 px-3 form-control-user <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.repeatPassword') ?>" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -144,207 +92,26 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIK</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detail User</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $no = 1;
-                            foreach ($users as $usr) :
-                            ?>
-                                <tr>
-                                    <td class="align-middle text-center text-sm">
-                                        <span>
-                                            <?= $no ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="<?= base_url() ?>/assets/img/<?= $usr->img_user ?>" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"><?= $usr->username; ?></h6>
-                                                <p class="text-xs text-secondary mb-0">ID : <?= $usr->id; ?></p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <p class="text-xs font-weight-bold m-0">
-                                            <?php if ($usr->name == 'admin') : ?>
-                                                <span class="badge badge-sm bg-gradient-success">Admin</span>
-                                            <?php elseif ($usr->name == 'petugas') : ?>
-                                                <span class="badge badge-sm bg-gradient-info">Petugas</span>
-                                            <?php elseif ($usr->name == 'user') : ?>
-                                                <span class="badge badge-sm bg-gradient-secondary">Warga</span>
-                                            <?php endif; ?>
-                                        </p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <?= $usr->email; ?>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">
-                                            <?= $usr->nik; ?>
-                                        </span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <!-- Button trigger modal detail user -->
-                                        <button type="" class="btn btn-sm m-0 bg-dark text-white border-0 mr-2" data-bs-toggle="modal" data-bs-target="#detail_user<?= $usr->id ?>">
-                                            Detail
-                                        </button>
-                                        <!-- Modal detail user -->
-                                        <div class="modal fade bd-example-modal-xl" id="detail_user<?= $usr->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detail_userLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                                                <form class="modal-content" method="post" action="/update-user">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="detail_userLabel">Detail User</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class=" mb-3">
-                                                                        <input hidden type="text" name="id" id="id" value="<?= $usr->id ?>" class="form-control border-modal w-100 px-3" disabled>
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="username">Username</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="username" id="username" value="<?= $usr->username ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="name">Role</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <select name="name" autofocus class="form-control border-modal form-select px-3">
-                                                                                <option class="p-2" disabled>Pilih role user</option>
-                                                                                <option class="p-2" value="admin" <?php if ($usr->name == 'admin') {
-                                                                                                                        echo ("selected");
-                                                                                                                    }  ?>>Admin</option>
-                                                                                <option class="p-2" value="petugas" <?php if ($usr->name == 'petugas') {
-                                                                                                                        echo 'selected';
-                                                                                                                    } ?>>Petugas</option>
-                                                                                <option class="p-2" value="user" <?php if ($usr->name == 'user') {
-                                                                                                                        echo 'selected';
-                                                                                                                    } ?>>Warga</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="fullname">Nama Lengkap</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="fullname" id="fullname" value="<?= $usr->fullname ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="email">Email</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="email" id="email" value="<?= $usr->email ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="ttl">Tempat, tanggal lahir</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="ttl" id="ttl" value="<?= $usr->ttl ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="agama">Agama</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="agama" id="agama" value="<?= $usr->agama ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="pekerjaan">Pekerjaan</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="pekerjaan" id="pekerjaan" value="<?= $usr->pekerjaan ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=" mb-3">
-                                                                        <div class="col-12 text-start ">
-                                                                            <label for="kewarganegaraan">Kewarganegaraan</label>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <input type="text" name="kewarganegaraan" id="kewarganegaraan" value="<?= $usr->kewarganegaraan ?>" class="form-control border-modal w-100 px-3">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-info">Edit User</button>
-                                                        <a href="/hapus-user/<?= $usr->id ?>" class="btn btn-danger">Hapus</a>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <!-- Button trigger modal konfirmasi hapus user -->
-                                        <button type="button" class="badge border border-1 border-warning badge-warning text-warning " data-bs-toggle="modal" data-bs-target="#hapusUserModal<?= $usr->id ?>">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
 
-                                        <!-- Modal konfirmasi hapus user -->
-                                        <div class="modal fade" id="hapusUserModal<?= $usr->id ?>" tabindex="-1" aria-labelledby="hapusUserModalLabel<?= $usr->id ?>" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered ">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="hapusUserModalLabel<?= $usr->id ?>">Konfirmasi Hapus User</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Apakah anda yakin ingin menghapus user <b><?= $usr->username ?></b> ?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <a href="/hapus-user/<?= $usr->id ?>" class="btn btn-danger">
-                                                            Hapus
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </td>
-                                </tr>
-
-                            <?php
-                                $no++;
-                            endforeach
+                            foreach ($users as $rw) {
+                                $row = "row" . $rw->id;
+                                echo $$row;
+                            }
                             ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <?php
-
-        ?>
         <footer class="footer py-4  ">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-lg-between">
@@ -360,5 +127,53 @@
                 </div>
         </footer>
     </div>
+
+    <!-- modal update group -->
+    <form action="/ubah-group" method="post">
+        <div class="modal fade" id="changeGroupModal" tabindex="-1" role="dialog" aria-labelledby="changeGroupModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changeGroupModal">Ubah Grup</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class=" p-3">
+                            <div class="row align-items-start">
+                                <div class="col-md-4 mb-8pt mb-md-0">
+                                    <div class="media align-items-left">
+                                        <div class="d-flex flex-column media-body media-middle">
+                                            <span class="card-title">Grup</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col mb-8pt mb-md-0">
+                                    <select name="group" class="form-control border-modal form-select px-3" data-toggle="select">
+                                        <?php
+                                        foreach ($groups as $key => $row) {
+                                        ?>
+                                            <option value="<?= $row->id; ?>"><?= $row->name; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" class="id">
+
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <?= $this->endSection(); ?>

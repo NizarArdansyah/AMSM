@@ -1,17 +1,15 @@
 <?php
 
 
-namespace App\Controllers\User;
+namespace App\Controllers\Warga;
 
 use App\Controllers\BaseController;
 
 use App\Models\SuratModel;
-use App\Models\UsersModel;
-use CodeIgniter\I18n\Time;
 
 
 
-class User extends BaseController
+class Warga extends BaseController
 {
     protected $sm;
 
@@ -68,6 +66,9 @@ class User extends BaseController
 
         if ($this->sm->updateProfil($id_user, $data)) {
             session()->setFlashdata('Berhasil', 'Profil berhasil diupdate');
+            if (in_groups('admin')) {
+                return redirect()->to(base_url('/manajemen-user'));
+            }
             return redirect()->to(base_url('/profil'));
         } else {
             session()->setFlashdata('Gagal', 'Profil gagal diupdate, pastikan masukan setiap kolom sesuai');

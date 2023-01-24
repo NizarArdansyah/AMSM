@@ -38,11 +38,11 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 // Role User Route
-$routes->get('/profil', 'User\User::profil', ['filter' => 'role:user,petugas,admin']);
-$routes->post('/ubah-profil', 'User\User::ubah_profil', ['filter' => 'role:user,petugas,admin']);
-$routes->get('/pengajuan-surat', 'User\User::pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
-$routes->post('/pengajuan-surat', 'User\User::buat_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
-$routes->post('/update-pengajuan-surat', 'User\User::update_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
+$routes->get('/profil', 'Warga\Warga::profil', ['filter' => 'role:user,petugas,admin']);
+$routes->post('/ubah-profil', 'Warga\Warga::ubah_profil', ['filter' => 'role:user,petugas,admin']);
+$routes->get('/pengajuan-surat', 'Warga\Warga::pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
+$routes->post('/pengajuan-surat', 'Warga\Warga::buat_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
+$routes->post('/update-pengajuan-surat', 'Warga\Warga::update_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
 
 // Role Petugas Route
 $routes->get('/manajemen-surat', 'Petugas\Petugas::manajemen_surat', ['filter' => 'role:petugas,admin']);
@@ -53,9 +53,8 @@ $routes->get('/hapus-surat/(:num)', 'Petugas\Petugas::hapus_surat/$1', ['filter'
 
 // Role Admin Route
 $routes->get('/manajemen-user', 'Admin\Admin::manajemen_user', ['filter' => 'role:admin']);
-$routes->post('/manajemen-user', 'Admin\Admin::tambah_user', ['filter' => 'role:admin']);
-$routes->put('/manajemen-user', 'Admin\Admin::manajemen_user', ['filter' => 'role:admin']);
-$routes->delete('/manajemen-user', 'Admin\Admin::manajemen_user', ['filter' => 'role:admin']);
+$routes->post('/tambah-user', 'Admin\Admin::tambah_user', ['filter' => 'role:admin']);
+$routes->post('/ubah-group', 'Admin\Admin::ubah_group', ['filter' => 'role:admin']);
 
 /*
  * --------------------------------------------------------------------

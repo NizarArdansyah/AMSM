@@ -24,6 +24,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                    <!-- Button trigger modal ubah profil -->
                     <div class="nav-wrapper position-relative end-0">
                         <ul class="nav nav-pills nav-fill p-1" role="tablist">
                             <li class="nav-item">
@@ -34,7 +35,7 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- Modal -->
+                    <!-- Modal ubah profil -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                             <form action="/ubah-profil" method="post" class="modal-content">

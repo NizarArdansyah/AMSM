@@ -93,7 +93,7 @@
                                         <td class="align-middle text-center">
                                             <!-- Button trigger modal detail surat -->
                                             <button type="" class="btn btn-sm m-0 bg-dark text-white border-0 mr-2" data-bs-toggle="modal" data-bs-target="#detail_surat<?= $srt->id ?>">
-                                                Detail
+                                                <i class="fas fa-tasks"></i>
                                             </button>
                                             <!-- Modal detail surat -->
                                             <div class="modal fade bd-example-modal-xl" id="detail_surat<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detail_suratLabel" aria-hidden="true">
@@ -224,8 +224,7 @@
                                                 <?php endif; ?>
 
                                             <?php else : ?>
-                                                <button href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge bg-info border-0 m-0" target="_blank"><i class="fas fa-print"></i></button>
-
+                                                <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge bg-info border-0 m-0 text-white" target="_blank"><i class="fas fa-print"></i></a>
                                             <?php
                                             endif;
                                             ?>
