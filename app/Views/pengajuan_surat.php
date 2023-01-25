@@ -4,6 +4,28 @@
 
 <div class="container-fluid py-4">
     <div class="row justify-content-between">
+        <?php
+        if (isset($validation)) {
+            $erros = $validation->getErrors();
+            $erros = array_values($erros);
+            $erros = $erros[0];
+            echo $erros;
+        }
+        // dd($erros->getErrors());
+        ?>
+        <!-- <?php if (isset($validation)) { ?>
+            <div class="col-md-12">
+                <?php foreach ($validation->getErrors() as $error) : ?>
+                    <div class="alert alert-warning text-white d-flex justify-content-between" role="alert">
+                        <div>
+                            <i class="fas fa-bell me-2"></i>
+                            <?= esc($error) ?>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        <?php } ?> -->
         <div class="col-auto">
             <?php
             if (session()->getFlashData('Berhasil')) :
@@ -52,8 +74,8 @@
                                                 <label for="jenis">Jenis Surat</label>
                                             </div>
                                             <div class="col-12">
-                                                <select name="jenis" autofocus class="form-control border-modal form-select px-3">
-                                                    <option class="p-2" selected disabled>Pilih jenis surat</option>
+                                                <select name="jenis" autofocus required class="form-control border-modal form-select px-3">
+                                                    <option class="p-2" disabled>Pilih jenis surat</option>
                                                     <option class="p-2" value="Surat Keterangan">Surat Keterangan</option>
                                                     <option class="p-2" value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
                                                     <option class="p-2" value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu</option>
@@ -65,7 +87,11 @@
                                                 <label for="perihal">Perihal</label>
                                             </div>
                                             <div class="col-12">
-                                                <input type="text" name="perihal" id="perihal" class="form-control border-modal w-100 px-3">
+                                                <select name="perihal" id="perihal" required class="form-control border-modal form-select px-3">
+                                                    <option class="p-2" disabled>Pilih perihal</option>
+                                                    <option class="p-2" value="Permohonan">Permohonan</option>
+                                                    <option class="p-2" value="Pengajuan">Pengajuan</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +101,7 @@
                                                 <label for="keperluan">Keperluan</label>
                                             </div>
                                             <div class="col-12">
-                                                <input type="text" name="keperluan" id="keperluan" class="form-control border-modal w-100 px-3">
+                                                <input type="text" name="keperluan" id="keperluan" required class="form-control border-modal w-100 px-3">
                                             </div>
                                         </div>
                                         <div class=" mb-3">
@@ -83,7 +109,7 @@
                                                 <label for="keterangan">Keterangan</label>
                                             </div>
                                             <div class="col-12">
-                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3"></textarea>
+                                                <textarea type="text" name="keterangan" id="keterangan" required class="form-control border-modal w-100 px-3"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -166,11 +192,11 @@
                                             <span class="text-secondary text-xs font-weight-bold"><?= $srt->tanggal_surat; ?></span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <!-- Button trigger modal detail surat permohonan -->
+                                            <!-- Button trigger modal detail surat  -->
                                             <button class="badge bg-dark text-white border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $srt->id ?>">
                                                 Detail
                                             </button>
-                                            <!-- Modal detail surat permohonan-->
+                                            <!-- Modal detail surat -->
                                             <div class="modal fade bd-example-modal-xl" id="staticBackdrop<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                                                     <form class="modal-content" method="post" action="/update-pengajuan-surat">
@@ -188,7 +214,7 @@
                                                                                 <label for="nomor_surat">No Surat</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <input type="text" name="nomor_surat" id="nomor_surat" value="<?= $srt->nomor_surat ?>" class="form-control border-modal w-100 px-3" disabled>
+                                                                                <input type="text" name="nomor_surat" id="nomor_surat" readonly value="<?= $srt->nomor_surat ?>" class="form-control border-modal w-100 px-3" disabled>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -196,7 +222,7 @@
                                                                                 <label for="jenis">Jenis Surat</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <select name="jenis" autofocus class="form-control border-modal form-select px-3">
+                                                                                <select name="jenis" autofocus class="form-control border-modal form-select px-3" required>
                                                                                     <option class="p-2" disabled>Pilih jenis surat</option>
                                                                                     <option class="p-2" value="Surat Keterangan" <?php if ($srt->jenis == 'Surat Keterangan') {
                                                                                                                                         echo ("selected");
@@ -215,7 +241,7 @@
                                                                                 <label for="tanggal">tanggal</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <input disabled type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input disabled type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -223,7 +249,7 @@
                                                                                 <label for="pemohon">Pemohon</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <input disabled type="text" name="pemohon" id="pemohon" value="<?= $srt->pemohon ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input disabled type="text" name="pemohon" id="pemohon" value="<?= $srt->pemohon ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -233,7 +259,7 @@
                                                                                 <label for="perihal">Perihal</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <input type="text" name="perihal" id="perihal" value="<?= $srt->perihal ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input type="text" name="perihal" id="perihal" value="<?= $srt->perihal ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -241,7 +267,7 @@
                                                                                 <label for="keperluan">Keperluan</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <input type="text" name="keperluan" id="keperluan" value="<?= $srt->keperluan ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input type="text" name="keperluan" id="keperluan" value="<?= $srt->keperluan ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -249,7 +275,7 @@
                                                                                 <label for="keterangan">Keterangan</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3"><?= $srt->keterangan ?></textarea>
+                                                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3" required><?= $srt->keterangan ?></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -291,7 +317,12 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body" style="text-align: start;">
-                                                            <p class="flex-wrap"><?= $srt->pesan; ?></p>
+                                                            <div class="d-flex w-100 gap-4 align-items-center">
+                                                                <div class="w-5 p-1 bg-outline-dark shadow-card rounded-3" title="Petugas">
+                                                                    <img src="<?= base_url() ?>/assets/img/default.svg" class="rounded-circle w-100" alt="" srcset="">
+                                                                </div>
+                                                                <p class="m-0"><?= $srt->pesan; ?></p>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>

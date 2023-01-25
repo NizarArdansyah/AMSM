@@ -2,8 +2,6 @@
 
 namespace App\Controllers\Petugas;
 
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use App\Controllers\BaseController;
 use App\Models\SuratModel;
 
@@ -16,18 +14,17 @@ class Petugas extends BaseController
         $this->sm = new SuratModel();
     }
 
-    public function index()
-    {
-        $data['user'] = user();
-        $data['title'] = 'AMSM - Petugas';
-        return view('user/petugas/index');
-    }
-
     // mengarahkan ke manajemen surat
     public function manajemen_surat()
     {
         $data['user'] = user();
-        $data['title'] = 'AMSM - Petugas';
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
         $data['surat'] = $this->sm->getSurats();
         return view('user/petugas/manajemen_surat', $data);
     }

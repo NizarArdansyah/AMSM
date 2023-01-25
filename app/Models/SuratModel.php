@@ -36,7 +36,7 @@ class SuratModel extends Model
         $builder->where('id', $id_user);
         $data = $builder->get()->getResultObject();
 
-        if ($data[0]->fullname == null || $data[0]->alamat == null || $data[0]->nik == null || $data[0]->ttl == null || $data[0]->kewarganegaraan == null || $data[0]->agama == null || $data[0]->pekerjaan == null) {
+        if ($data[0]->fullname == null || $data[0]->alamat == null || $data[0]->nik == null || $data[0]->tempat_lahir == null || $data[0]->tgl_lahir == null || $data[0]->kewarganegaraan == null || $data[0]->agama == null || $data[0]->pekerjaan == null) {
             return false;
         }
         return true;

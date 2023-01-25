@@ -185,12 +185,10 @@ use function PHPUnit\Framework\isNull;
                                 <span class="d-sm-inline d-none"> &nbsp; <?= user()->username; ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end px-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                                <li class="mb-lg-2">
-                                    <a class="dropdown-item border-radius-md " href="javascript:;">
-                                        <a href="<?= base_url('logout') ?>" style=":hover{background:black}" class="text-bold gap-2 d-flex justify-content-center align-items-center py-1">
-                                            <img src="<?= base_url() ?>/assets/img/<?= user()->img_user ?>" class="avatar avatar-sm rounded-circle" alt="user_image">
-                                            Keluar
-                                        </a>
+                                <li class="">
+                                    <a href="<?= base_url('logout') ?>" id="logout" class="text-bold gap-2 d-flex justify-content-center align-items-center py-1">
+                                        <img src="<?= base_url() ?>/assets/img/<?= user()->img_user ?>" class="avatar avatar-sm rounded-circle" alt="user_image">
+                                        Keluar
                                     </a>
                                 </li>
                             </ul>

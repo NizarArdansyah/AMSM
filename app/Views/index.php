@@ -128,23 +128,22 @@
                             <div class="col-lg-12 col-12">
                                 <h6>Pembatalan Surat</h6>
                                 <p class="text-sm mb-0">
-                                    <?php if ($surat != null) : ?>
-                                        Ada
-                                        <span class="font-weight-bold ms-1">
-                                            <?php
-                                            $count = 0;
-                                            foreach ($surat as $s) {
-                                                if ($s->status == 'dibatalkan') {
-                                                    $count++;
-                                                }
+                                    <span class="font-weight-bold ms-1">
+                                        <?php
+                                        $count = 0;
+                                        foreach ($surat as $s) {
+                                            if ($s->status == 'dibatalkan') {
+                                                $count++;
                                             }
-                                            $count == 0 ? $count = 'Tidak ada' : $count;
-                                            echo $count;
-                                            ?>
-                                        </span> surat yang dibatalkan
-                                    <?php else : ?>
-                                        Tidak ada surat yang dibatalkan
-                                    <?php endif; ?>
+                                        }
+                                        if ($count == 0) {
+                                            $count = 'Tidak ada';
+                                        } else {
+                                            $count = $count;
+                                        }
+                                        echo $count;
+                                        ?>
+                                    </span> surat yang dibatalkan
                                 </p>
                             </div>
                         </div>
@@ -208,7 +207,7 @@
                                                     <?php
                                                     else :
                                                     ?>
-                                                        <button disabled class="badge border border-1 border-secondary text-secondary border-0">
+                                                        <button disabled class="badge border border-1 border-secondary text-secondary">
                                                             <i class="fas fa-envelope"></i>
                                                         </button>
                                                     <?php endif; ?>
@@ -366,7 +365,6 @@
                             <div class="col-lg-12 col-12">
                                 <h6>Pembatalan Surat</h6>
                                 <p class="text-sm mb-0">
-                                    Ada
                                     <span class="font-weight-bold ms-1">
                                         <?php
                                         $count = 0;
@@ -375,7 +373,11 @@
                                                 $count++;
                                             }
                                         }
-                                        $count == 0 ? $count = 'Tidak ada' : $count;
+                                        if ($count == 0) {
+                                            $count = 'Tidak ada';
+                                        } else {
+                                            $count = $count;
+                                        }
                                         echo $count;
                                         ?>
                                     </span> surat yang dibatalkan
@@ -442,7 +444,7 @@
                                                     <?php
                                                     else :
                                                     ?>
-                                                        <button class="badge border border-1 border-secondary text-secondary border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
+                                                        <button class="badge border border-1 border-secondary text-secondary" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
                                                             <i class="fas fa-envelope"></i>
                                                         </button>
                                                     <?php endif; ?>
@@ -625,7 +627,6 @@
                             <div class="col-lg-12 col-12">
                                 <h6>Pembatalan Surat</h6>
                                 <p class="text-sm mb-0">
-                                    Ada
                                     <span class="font-weight-bold ms-1">
                                         <?php
                                         $count = 0;
@@ -634,7 +635,11 @@
                                                 $count++;
                                             }
                                         }
-                                        $count == 0 ? $count = 'Tidak ada' : $count;
+                                        if ($count == 0) {
+                                            $count = 'Tidak ada';
+                                        } else {
+                                            $count = $count;
+                                        }
                                         echo $count;
                                         ?>
                                     </span> surat yang dibatalkan
@@ -701,7 +706,7 @@
                                                     <?php
                                                     else :
                                                     ?>
-                                                        <button class="badge border border-1 border-secondary text-secondary border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
+                                                        <button class="badge border border-1 border-secondary text-secondary" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $s->id ?>">
                                                             <i class="fas fa-envelope"></i>
                                                         </button>
                                                     <?php endif; ?>

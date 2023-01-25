@@ -40,7 +40,7 @@
                         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                             <form action="/ubah-profil" method="post" class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Ubah Profil</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Lengkapi Profil</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -53,7 +53,7 @@
                                                         <label for="nik">NIK</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="number" name="nik" id="nik" value="<?= $user->nik ?>" class="form-control border-modal w-100 px-3">
+                                                        <input type="number" name="nik" id="nik" value="<?= $user->nik ?>" class="form-control border-modal w-100 px-3" required>
                                                     </div>
                                                 </div>
                                                 <div class=" mb-3">
@@ -61,15 +61,27 @@
                                                         <label for="fullname">Nama Lengkap</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="fullname" id="fullname" value="<?= $user->fullname ?>" class="form-control border-modal w-100 px-3">
+                                                        <input type="text" name="fullname" id="fullname" value="<?= $user->fullname ?>" class="form-control border-modal w-100 px-3" required>
                                                     </div>
                                                 </div>
                                                 <div class=" mb-3">
-                                                    <div class="col-12 text-start ">
-                                                        <label for="ttl">Tempat & Tanggal lahir</label>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <input type="text" name="ttl" id="ttl" value="<?= $user->ttl ?>" class="form-control border-modal w-100 px-3">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="col-12 text-start ">
+                                                                <label for="tempat_lahir">Tempat lahir</label>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <input type="text" name="tempat_lahir" id="tempat_lahir" value="<?= $user->tempat_lahir ?>" class="form-control border-modal w-100 px-3" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="col-12 text-start ">
+                                                                <label for="tgl_lahir">Tanggal lahir</label>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <input type="date" name="tgl_lahir" id="tgl_lahir" value="<?= $user->tgl_lahir ?>" class="form-control border-modal w-100 px-3" required>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class=" mb-3">
@@ -77,7 +89,23 @@
                                                         <label for="kewarganegaraan">Kewarganegaraan</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="kewarganegaraan" id="kewarganegaraan" value="<?= $user->kewarganegaraan ?>" class="form-control border-modal w-100 px-3">
+                                                        <select name="kewarganegaraan" id="kewarganegaraan" class="form-control form-select border-modal w-100 px-3" required>
+                                                            <option value="Indonesia" <?php if ($user->kewarganegaraan == 'Indonesia') {
+                                                                                            echo ("selected");
+                                                                                        } else {
+                                                                                            echo (" ");
+                                                                                        } ?>>Indonesia</option>
+                                                            <option value="Singapura" <?php if ($user->kewarganegaraan == 'Singapura') {
+                                                                                            echo ("selected");
+                                                                                        } else {
+                                                                                            echo (" ");
+                                                                                        } ?>>Singapura</option>
+                                                            <option value="Malaysia" <?php if ($user->kewarganegaraan == 'Malaysia') {
+                                                                                            echo ("selected");
+                                                                                        } else {
+                                                                                            echo (" ");
+                                                                                        } ?>>Malaysia</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,7 +115,33 @@
                                                         <label for="agama">Agama</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="agama" id="agama" value="<?= $user->agama ?>" class="form-control border-modal w-100 px-3">
+                                                        <select name="agama" id="agama" class="form-control form-select border-modal w-100 px-3" required>
+                                                            <option value="Islam" <?php if ($user->agama == 'Islam') {
+                                                                                        echo ("selected");
+                                                                                    } else {
+                                                                                        echo (" ");
+                                                                                    } ?>>Islam</option>
+                                                            <option value="Katolik" <?php if ($user->agama == 'Katolik') {
+                                                                                        echo ("selected");
+                                                                                    } else {
+                                                                                        echo (" ");
+                                                                                    } ?>>Katolik</option>
+                                                            <option value="Hindu" <?php if ($user->agama == 'Hindu') {
+                                                                                        echo ("selected");
+                                                                                    } else {
+                                                                                        echo (" ");
+                                                                                    } ?>>Hindu</option>
+                                                            <option value="Kristen" <?php if ($user->agama == 'Kristen') {
+                                                                                        echo ("selected");
+                                                                                    } else {
+                                                                                        echo (" ");
+                                                                                    } ?>>Kristen</option>
+                                                            <option value="Budha" <?php if ($user->agama == 'Budha') {
+                                                                                        echo ("selected");
+                                                                                    } else {
+                                                                                        echo (" ");
+                                                                                    } ?>>Budha</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class=" mb-3">
@@ -95,7 +149,48 @@
                                                         <label for="pekerjaan">Pekerjaan</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="pekerjaan" id="pekerjaan" value="<?= $user->pekerjaan ?>" class="form-control border-modal w-100 px-3">
+                                                        <select name="pekerjaan" id="pekerjaan" class="form-control form-select border-modal w-100 px-3" required>
+                                                            <option value="Belum/ Tidak Bekerja" <?php if ($user->pekerjaan == 'Belum/ Tidak Bekerja') {
+                                                                                                        echo ("selected");
+                                                                                                    } else {
+                                                                                                        echo (" ");
+                                                                                                    } ?>>Belum/ Tidak Bekerja</option>
+                                                            <option value="Mengurus Rumah Tangga" <?php if ($user->pekerjaan == 'Mengurus Rumah Tangga') {
+                                                                                                        echo ("selected");
+                                                                                                    } else {
+                                                                                                        echo (" ");
+                                                                                                    } ?>>Mengurus Rumah Tangga</option>
+                                                            <option value="Pelajar/ Mahasiswa" <?php if ($user->pekerjaan == 'Pelajar/ Mahasiswa') {
+                                                                                                    echo ("selected");
+                                                                                                } else {
+                                                                                                    echo (" ");
+                                                                                                } ?>>Pelajar/ Mahasiswa</option>
+                                                            <option value="Pensiunan" <?php if ($user->pekerjaan == 'Pensiunan') {
+                                                                                            echo ("selected");
+                                                                                        } else {
+                                                                                            echo (" ");
+                                                                                        } ?>>Pensiunan</option>
+                                                            <option value="Pewagai Negeri Sipil" <?php if ($user->pekerjaan == 'Pewagai Negeri Sipil') {
+                                                                                                        echo ("selected");
+                                                                                                    } else {
+                                                                                                        echo (" ");
+                                                                                                    } ?>>Pewagai Negeri Sipil</option>
+                                                            <option value="Tentara Nasional Indonesia" <?php if ($user->pekerjaan == 'Tentara Nasional Indonesia') {
+                                                                                                            echo ("selected");
+                                                                                                        } else {
+                                                                                                            echo (" ");
+                                                                                                        } ?>>Tentara Nasional Indonesia</option>
+                                                            <option value="Kepolisisan RI" <?php if ($user->pekerjaan == 'Kepolisisan RI') {
+                                                                                                echo ("selected");
+                                                                                            } else {
+                                                                                                echo (" ");
+                                                                                            } ?>>Kepolisisan RI</option>
+                                                            <option value="Perdagangan" <?php if ($user->pekerjaan == 'Perdagangan') {
+                                                                                            echo ("selected");
+                                                                                        } else {
+                                                                                            echo (" ");
+                                                                                        } ?>>Perdagangan</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class=" mb-3">
@@ -103,7 +198,7 @@
                                                         <label for="alamat">Alamat Tempat tinggal</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea type="text" name="alamat" id="alamat" class="form-control border-modal w-100 px-3"><?= $user->alamat ?></textarea>
+                                                        <textarea type="text" name="alamat" id="alamat" class="form-control border-modal w-100 px-3" required><?= $user->alamat ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,7 +256,7 @@
                                                 <strong class="text-dark">Tempat & Tanggal lahir</strong>
                                             </div>
                                             <div class="col-xl-8">
-                                                <?= $user->ttl ?>
+                                                <?= $user->tgl_lahir ?>
                                             </div>
                                         </div>
                                     </li>

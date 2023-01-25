@@ -3,14 +3,14 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use PhpParser\Node\Expr\Cast\Object_;
-use stdClass;
 use App\Models\UserModel;
 
 use Myth\Auth\Entities\User;
 use Myth\Auth\Authorization\GroupModel;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Password;
+
+
 
 class Admin extends BaseController
 {
@@ -92,11 +92,11 @@ class Admin extends BaseController
             }
 
             // Success!
-            return redirect()->to(base_url('/manajemen-user'))->with('message', lang('Auth.activationSuccess'));
+            return redirect()->to(base_url('/manajemen-user'))->with('Berhasil', lang('Auth.activationSuccess'));
         }
 
         // Success!
-        return redirect()->to(base_url('/manajemen-user'));
+        return redirect()->to(base_url('/manajemen-user'))->with('Berhasil', 'Berhasil menambahkan user');
     }
 
     //ubah group user
@@ -110,24 +110,26 @@ class Admin extends BaseController
 
         $groupModel->addUserToGroup(intval($userId), intval($groupId));
 
-        return redirect()->to(base_url('/manajemen-user'))->with('message', 'Berhasil mengubah group user');
+        return redirect()->to(base_url('/manajemen-user'))->with('Berhasil', 'Berhasil mengubah group user');
     }
 
-    public function changePassword($id = null)
+    public function update_pass($id = null)
     {
         if ($id == null) {
-            return redirect()->to(base_url('/manajemen-user'));
+            return redirect()->to(base_url('/users/index'));
         } else {
             $data = [
                 'id' => $id,
                 'title' => 'Update Password',
             ];
-            return view('manajemen_user', $data);
+            return view('user/admin/update_pass', $data);
         }
     }
 
-    public function setPassword()
+
+    public function set_password()
     {
+
         $id = $this->request->getVar('id');
         $rules = [
             'password'     => 'required|strong_password',
@@ -135,13 +137,14 @@ class Admin extends BaseController
         ];
 
         if (!$this->validate($rules)) {
+            $userModel = new UserModel();
             $data = [
                 'id' => $id,
                 'title' => 'Update Password',
                 'validation' => $this->validator,
             ];
 
-            return view('users/set_password', $data);
+            return view('user/admin/update_pass', $data);
         } else {
             $userModel = new UserModel();
             $data = [
@@ -150,9 +153,22 @@ class Admin extends BaseController
                 'reset_at' => null,
                 'reset_expires' => null,
             ];
+
             $userModel->update($this->request->getVar('id'), $data);
 
-            return redirect()->to(base_url('/users/index'));
+            return redirect()->to(base_url('/manajemen-user'))->with('Berhasil', 'Berhasil mengubah password user');
+        }
+    }
+
+    //hapus user
+    public function hapus_user($id = null)
+    {
+        if ($id == null) {
+            return redirect()->to(base_url('/manajemen-user'));
+        } else {
+            $userModel = new UserModel();
+            $userModel->delete($id);
+            return redirect()->to(base_url('/manajemen-user'))->with('Berhasil', 'Berhasil menghapus user');
         }
     }
 }

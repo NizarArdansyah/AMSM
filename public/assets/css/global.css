@@ -9,3 +9,9 @@
 .border-modal:is(:active, :focus) {
     border: 1px solid  #1A73E8;
 }
+
+#logout:hover {
+    color: white;
+    background-color: #dbdbdb;
+    border-radius: .5em;
+}

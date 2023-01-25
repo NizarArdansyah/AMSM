@@ -22,10 +22,14 @@
         </p>
 
     </td>
-    <td class="align-middle text-center"><?= $row->email; ?></td>
+    <td class="align-middle">
+        <p class="text-xs font-weight-bold mb-0">
+            <?= $row->email; ?>
+        </p>
+    </td>
     <td class="align-middle text-center">
         <!-- Button trigger modal detail user -->
-        <button type="button" class="btn btn-success btn-circle btn-sm m-0" title="Detail User" data-bs-toggle="modal" data-bs-target="#editUserModal<?= $row->id ?>">
+        <button type="button" class="btn bg-dark text-white btn-circle btn-sm m-0" title="Detail User" data-bs-toggle="modal" data-bs-target="#editUserModal<?= $row->id ?>">
             <i class="fas fa-tasks"></i>
         </button>
 
@@ -47,7 +51,7 @@
                                             <label for="nik">NIK</label>
                                         </div>
                                         <div class="col-12">
-                                            <input type="number" name="nik" id="nik" value="<?= $row->nik ?>" class="form-control border-modal w-100 px-3">
+                                            <input type="number" name="nik" id="nik" value="<?= $row->nik ?>" class="form-control border-modal w-100 px-3" required>
                                         </div>
                                     </div>
                                     <div class=" mb-3">
@@ -55,15 +59,27 @@
                                             <label for="fullname">Nama Lengkap</label>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" name="fullname" id="fullname" value="<?= $row->fullname ?>" class="form-control border-modal w-100 px-3">
+                                            <input type="text" name="fullname" id="fullname" value="<?= $row->fullname ?>" class="form-control border-modal w-100 px-3" required>
                                         </div>
                                     </div>
                                     <div class=" mb-3">
-                                        <div class="col-12 text-start ">
-                                            <label for="ttl">Tempat & Tanggal lahir</label>
-                                        </div>
-                                        <div class="col-12">
-                                            <input type="text" name="ttl" id="ttl" value="<?= $row->ttl ?>" class="form-control border-modal w-100 px-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-12 text-start ">
+                                                    <label for="tempat_lahir">Tempat lahir</label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <input type="text" name="tempat_lahir" id="tempat_lahir" value="<?= $row->tempat_lahir ?>" class="form-control border-modal w-100 px-3" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="col-12 text-start ">
+                                                    <label for="tgl_lahir">Tanggal lahir</label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <input type="date" name="tgl_lahir" id="tgl_lahir" value="<?= $row->tgl_lahir ?>" class="form-control border-modal w-100 px-3" required>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class=" mb-3">
@@ -71,7 +87,23 @@
                                             <label for="kewarganegaraan">Kewarganegaraan</label>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" name="kewarganegaraan" id="kewarganegaraan" value="<?= $row->kewarganegaraan ?>" class="form-control border-modal w-100 px-3">
+                                            <select name="kewarganegaraan" id="kewarganegaraan" class="form-control form-select border-modal w-100 px-3" required>
+                                                <option value="Indonesia" <?php if ($row->kewarganegaraan == 'Indonesia') {
+                                                                                echo ("selected");
+                                                                            } else {
+                                                                                echo (" ");
+                                                                            } ?>>Indonesia</option>
+                                                <option value="Singapura" <?php if ($row->kewarganegaraan == 'Singapura') {
+                                                                                echo ("selected");
+                                                                            } else {
+                                                                                echo (" ");
+                                                                            } ?>>Singapura</option>
+                                                <option value="Malaysia" <?php if ($row->kewarganegaraan == 'Malaysia') {
+                                                                                echo ("selected");
+                                                                            } else {
+                                                                                echo (" ");
+                                                                            } ?>>Malaysia</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +113,33 @@
                                             <label for="agama">Agama</label>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" name="agama" id="agama" value="<?= $row->agama ?>" class="form-control border-modal w-100 px-3">
+                                            <select name="agama" id="agama" class="form-control form-select border-modal w-100 px-3" required>
+                                                <option value="Islam" <?php if ($row->agama == 'Islam') {
+                                                                            echo ("selected");
+                                                                        } else {
+                                                                            echo (" ");
+                                                                        } ?>>Islam</option>
+                                                <option value="Katolik" <?php if ($row->agama == 'Katolik') {
+                                                                            echo ("selected");
+                                                                        } else {
+                                                                            echo (" ");
+                                                                        } ?>>Katolik</option>
+                                                <option value="Hindu" <?php if ($row->agama == 'Hindu') {
+                                                                            echo ("selected");
+                                                                        } else {
+                                                                            echo (" ");
+                                                                        } ?>>Hindu</option>
+                                                <option value="Kristen" <?php if ($row->agama == 'Kristen') {
+                                                                            echo ("selected");
+                                                                        } else {
+                                                                            echo (" ");
+                                                                        } ?>>Kristen</option>
+                                                <option value="Budha" <?php if ($row->agama == 'Budha') {
+                                                                            echo ("selected");
+                                                                        } else {
+                                                                            echo (" ");
+                                                                        } ?>>Budha</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class=" mb-3">
@@ -89,7 +147,7 @@
                                             <label for="pekerjaan">Pekerjaan</label>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" name="pekerjaan" id="pekerjaan" value="<?= $row->pekerjaan ?>" class="form-control border-modal w-100 px-3">
+                                            <input type="text" name="pekerjaan" id="pekerjaan" value="<?= $row->pekerjaan ?>" class="form-control border-modal w-100 px-3" required>
                                         </div>
                                     </div>
                                     <div class=" mb-3">
@@ -97,7 +155,7 @@
                                             <label for="alamat">Alamat Tempat tinggal</label>
                                         </div>
                                         <div class="col-12">
-                                            <textarea type="text" name="alamat" id="alamat" class="form-control border-modal w-100 px-3"><?= $row->alamat ?></textarea>
+                                            <textarea type="text" name="alamat" id="alamat" class="form-control border-modal w-100 px-3" required><?= $row->alamat ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -119,50 +177,10 @@
             <i class="fas fa-edit"></i>
         </button>
 
-        <!-- Button trigger modal ubah password user -->
-        <button type="button" class="badge border border-1 border-warning badge-warning text-warning" title="Ubah Password" data-bs-toggle="modal" data-bs-target="#ubahPasswordModal<?= $row->id ?>">
+        <a href="<?= base_url() ?>/update-password/<?= $row->id; ?>" class="badge border border-1 border-warning badge-warning text-warning" title="Ubah Password">
             <i class="fas fa-key"></i>
-        </button>
-        <!-- Modal ubah Password -->
-        <div class="modal fade" id="ubahPasswordModal<?= $row->id ?>" tabindex="-1" aria-labelledby="ubahPasswordModalLabel<?= $row->id ?>" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered ">
-                <form class="modal-content" action="/update-password" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ubahPasswordModalLabel<?= $row->id ?>">Ubah Password</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <input type="text" name="id" id="id" value="<?= $row->id ?>" hidden>
-                                    <div class="col-12 text-start ">
-                                        <label for="password">Password</label>
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="password" name="password" id="password" class="form-control border-modal w-100 px-3">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="col-12 text-start ">
-                                        <label for="konfirmasi_password">Konfirmasi Password</label>
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="password" name="konfirmasi_password" id="konfirmasi_password" class="form-control border-modal w-100 px-3">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="<?= base_url(); ?>/users/changePassword/<?= $row->id; ?>" class="btn btn-warning" title="Ubah Password">
-                            <i class="fas fa-key"></i> Ubah Password
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </a>
+
 
         <!-- Button trigger modal konfirmasi hapus user -->
         <button type="button" class="badge border border-1 border-danger badge-danger text-danger " title="Hapus User" data-bs-toggle="modal" data-bs-target="#hapusUserModal<?= $row->id ?>">
@@ -181,8 +199,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="/hapus-user/<?= $row->id ?>" class="btn btn-danger">
-                            Hapus
+                        <a href="<?= base_url() ?>/hapus-user/<?= $row->id ?>" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Hapus
                         </a>
                     </div>
                 </div>

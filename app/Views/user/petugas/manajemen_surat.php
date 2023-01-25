@@ -113,7 +113,7 @@
                                                                                 <label for="nomor_surat">No Surat</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="nomor_surat" id="nomor_surat" value="<?= $srt->nomor_surat ?>" class="form-control border-modal w-100 px-3" disabled>
+                                                                                <input type="text" name="nomor_surat" id="nomor_surat" value="<?= $srt->nomor_surat ?>" class="form-control border-modal w-100 px-3" disabled required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -121,7 +121,7 @@
                                                                                 <label for="jenis">Jenis Surat</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="jenis" id="jenis" value="<?= $srt->jenis ?>" class="form-control border-modal w-100 px-3" autofocus>
+                                                                                <input type="text" name="jenis" id="jenis" value="<?= $srt->jenis ?>" class="form-control border-modal w-100 px-3" autofocus required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -129,7 +129,7 @@
                                                                                 <label for="tanggal">tanggal</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -137,7 +137,7 @@
                                                                                 <label for="pemohon">Pemohon</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="pemohon" id="pemohon" value="<?= $srt->pemohon ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input type="text" name="pemohon" id="pemohon" value="<?= $srt->pemohon ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -147,7 +147,7 @@
                                                                                 <label for="perihal">Perihal</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="perihal" id="perihal" value="<?= $srt->perihal ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input type="text" name="perihal" id="perihal" value="<?= $srt->perihal ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -155,18 +155,15 @@
                                                                                 <label for="keperluan">Keperluan</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="keperluan" id="keperluan" value="<?= $srt->keperluan ?>" class="form-control border-modal w-100 px-3">
+                                                                                <input type="text" name="keperluan" id="keperluan" value="<?= $srt->keperluan ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
                                                                             <div class="col-12 text-start ">
                                                                                 <label for="status">Status</label>
                                                                             </div>
-                                                                            <!-- <div class="col-10">
-                                                                                <input type="text" name="status" id="status" value="<?= $srt->status ?>" class="form-control border-modal w-100 px-3">
-                                                                            </div> -->
                                                                             <div class="col-10">
-                                                                                <select class="form-select border-modal w-100 px-3" name="status" id="status">
+                                                                                <select class="form-select border-modal w-100 px-3" name="status" id="status" required>
                                                                                     <option value="siap" <?php if ($srt->status == 'siap') {
                                                                                                                 echo ('selected');
                                                                                                             } ?>>Siap</option>
@@ -184,7 +181,7 @@
                                                                                 <label for="keterangan">Keterangan</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3"><?= $srt->keterangan ?></textarea>
+                                                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3" required><?= $srt->keterangan ?></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -192,9 +189,11 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-info">Edit Surat</button>
-                                                            <a href="/hapus-surat/<?= $srt->id ?>" class="btn btn-danger">Hapus</a>
+                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-info">
+                                                                <i class="fas fa-edit"></i>
+                                                                Edit Surat
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -209,7 +208,7 @@
                                                 if ($srt->pesan == null) :
 
                                                 ?>
-                                                    <button class="badge border border-1 border-secondary text-secondary border-0" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                    <button class="badge border border-1 border-secondary text-secondary" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
                                                         <i class="fas fa-envelope"></i>
                                                     </button>
 
@@ -224,10 +223,38 @@
                                                 <?php endif; ?>
 
                                             <?php else : ?>
-                                                <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge bg-info border-0 m-0 text-white" target="_blank"><i class="fas fa-print"></i></a>
+                                                <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge border border-1 border-info m-0 text-info" target="_blank"><i class="fas fa-print"></i></a>
                                             <?php
                                             endif;
                                             ?>
+                                            <!-- Button trigger modal hapus surat -->
+                                            <button type="button" class="badge border border-1 border-danger badge-danger text-danger" title="Hapus surat" data-bs-toggle="modal" data-bs-target="#hapusSuratModal<?= $srt->id ?>">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+
+                                            <!-- Modal hapus surat -->
+                                            <div class="modal fade" id="hapusSuratModal<?= $srt->id ?>" tabindex="-1" aria-labelledby="hapusSuratModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="hapusSuratModalLabel">Modal title</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <span>
+                                                                Apakah anda yakin ingin menghapus <br> <b><?= $srt->jenis ?></b> milik <b><?= $srt->pemohon ?></b> ?
+                                                            </span>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <a href="<?= base_url() ?>/hapus-surat/<?= $srt->id ?>" class="btn btn-danger">
+                                                                <i class="fas fa-trash"></i> Hapus
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <!-- Modal pesan pembatalan surat -->
                                             <div class="modal fade bd-example-modal-xl" id="pesan_pembatalan_surat<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="pesan_pembatalan_suratLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">

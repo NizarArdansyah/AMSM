@@ -91,15 +91,15 @@
                 </div>
                 <div class="col">
                     <ul class="list-unstyled">
-                        <li>: <?= $data_pemohon[0]->fullname ?></li>
-                        <li>: <?= $data_pemohon[0]->ttl ?></li>
-                        <li>: <?= $data_pemohon[0]->kewarganegaraan ?> & <?= $data_pemohon[0]->agama ?></li>
-                        <li>: <?= $data_pemohon[0]->pekerjaan ?></li>
-                        <li>: <?= $data_pemohon[0]->alamat ?></li>
+                        <li class="text-capitalize">: <?= $data_pemohon[0]->fullname ?></li>
+                        <li class="text-capitalize">: <?= $data_pemohon[0]->tempat_lahir ?>, <?= $data_pemohon[0]->tgl_lahir ?></li>
+                        <li class="text-capitalize">: <?= $data_pemohon[0]->kewarganegaraan ?> & <?= $data_pemohon[0]->agama ?></li>
+                        <li class="text-capitalize">: <?= $data_pemohon[0]->pekerjaan ?></li>
+                        <li class="text-capitalize">: <?= $data_pemohon[0]->alamat ?></li>
                         <li>&nbsp; </li>
-                        <li>: <?= $data_pemohon[0]->nik ?></li>
-                        <li>: <?= $surat->keperluan ?></li>
-                        <li>: <?= $surat->keterangan ?></li>
+                        <li class="text-capitalize">: <?= $data_pemohon[0]->nik ?></li>
+                        <li class="text-capitalize">: <?= $surat->keperluan ?></li>
+                        <li class="">: <?= $surat->keterangan ?></li>
                     </ul>
                 </div>
             </div>

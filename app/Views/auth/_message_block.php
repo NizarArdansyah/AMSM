@@ -1,5 +1,5 @@
 <?php if (session()->has('message')) : ?>
-	<div class="alert alert-success">
+	<div class="alert alert-success text-white">
 		<?= session('message') ?>
 	</div>
 <?php endif ?>

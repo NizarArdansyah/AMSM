@@ -55,6 +55,9 @@ $routes->get('/hapus-surat/(:num)', 'Petugas\Petugas::hapus_surat/$1', ['filter'
 $routes->get('/manajemen-user', 'Admin\Admin::manajemen_user', ['filter' => 'role:admin']);
 $routes->post('/tambah-user', 'Admin\Admin::tambah_user', ['filter' => 'role:admin']);
 $routes->post('/ubah-group', 'Admin\Admin::ubah_group', ['filter' => 'role:admin']);
+$routes->get('/update-password/(:num)', 'Admin\Admin::update_pass/$1', ['filter' => 'role:admin']);
+$routes->post('/update-password', 'Admin\Admin::set_password', ['filter' => 'role:admin']);
+$routes->get('/hapus-user/(:num)', 'Admin\Admin::hapus_user/$1', ['filter' => 'role:admin']);
 
 /*
  * --------------------------------------------------------------------

@@ -5,6 +5,19 @@
 <div class="container-fluid py-4">
     <div class="row justify-content-between">
         <div class="col-auto">
+            <?php if (isset($validation)) { ?>
+                <div class="col-md-12">
+                    <?php foreach ($validation->getErrors() as $error) : ?>
+                        <div class="alert alert-warning text-white d-flex justify-content-between" role="alert">
+                            <div>
+                                <i class="fas fa-bell me-2"></i>
+                                <?= esc($error) ?>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            <?php } ?>
             <?php
             if (session()->getFlashData('Berhasil')) :
             ?>
@@ -94,7 +107,7 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detail User</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                             </tr>
