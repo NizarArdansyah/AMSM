@@ -48,11 +48,20 @@
             <?php
             endif;
             ?>
+
+            <?php if (!$profil_lengkap) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span class="alert-icon text-white"><i class="fas fa-exclamation-triangle"></i></span>
+                    <span class="alert-text text-white">Anda belum melengkapi profil, silahkan lengkapi profil anda <a href="<?= base_url('profil') ?>" class="text-white font-weight-bold text-decoration-underline">disini</a></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
         </div>
+
 
         <div class="col-auto">
             <!-- Button trigger modal pengajuan surat -->
-            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal_buat_surat">
+            <button class="btn btn-outline-info" <?= !$profil_lengkap ? 'disabled' : '' ?> data-bs-toggle="modal" data-bs-target="#modal_buat_surat">
                 Buat Baru
                 <i class="material-icons opacity-10">add</i>
             </button>

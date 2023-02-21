@@ -87,6 +87,8 @@ class Warga extends BaseController
         $data['user'] = user();
         $data['id_user'] = user_id();
         $data['surat'] = $this->sm->getSuratByID(user_id());
+        $data['profil_lengkap'] = $this->sm->cekProfil(user_id());
+
         return view('pengajuan_surat', $data);
     }
 
@@ -101,7 +103,9 @@ class Warga extends BaseController
         } elseif (in_groups('admin')) {
             $data['title'] = 'AMSM - Admin';
         }
+
         $data['user'] = user();
+        
         $data = [
             'id_user' => user_id(),
             'nomor_surat' => $this->sm->generate_nomor_surat(),
