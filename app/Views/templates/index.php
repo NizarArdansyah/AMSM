@@ -9,9 +9,22 @@ use function PHPUnit\Framework\isNull;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- PWA Start -->
+    <meta name="Description" content="Manajemen surat yang lebih efisien dan mudah untuk permintaan surat ke Balai Desa." />
+    <meta name="theme-color" content="#414f57" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Nama Situs" />
+
+    <meta name="msapplication-TileImage" content="/icon/android-chrome-512x512.png" />
+    <meta name="msapplication-TileColor" content="#000000" />
+
+    <link rel="apple-touch-icon" href="/icon/apple-touch-icon.png" />
 
     <!-- manifest.json -->
     <link rel="manifest" href="/manifest.json">
+    <!-- PWA End -->
 
     <title><?= $title; ?></title>
 
@@ -28,6 +41,18 @@ use function PHPUnit\Framework\isNull;
     <link id="pagestyle" href="<?= base_url() ?>/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
     <!-- Global css -->
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/global.css">
+
+    <!-- PWA Register service-worker Start -->
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope:', registration.scope);
+            }).catch(function(error) {
+                console.log('ServiceWorker registration failed:', errror);
+            });
+        }
+    </script>
+    <!-- PWA Register service-worker End -->
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
