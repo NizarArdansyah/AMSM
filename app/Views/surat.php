@@ -87,7 +87,6 @@
                         <li>Tempat Tinggal</li><br>
                         <li>Surat bukti diri</li>
                         <li>Keperluan</li>
-                        <li>Keterangan</li>
                     </ol>
                 </div>
                 <div class="col">
@@ -100,7 +99,6 @@
                         <li>&nbsp; </li>
                         <li class="text-capitalize">: <?= $data_pemohon[0]->nik ?></li>
                         <li class="text-capitalize">: <?= $surat->keperluan ?></li>
-                        <li class="">: <?= $surat->keterangan ?></li>
                     </ul>
                 </div>
             </div>

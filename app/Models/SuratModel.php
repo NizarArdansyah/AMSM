@@ -14,7 +14,7 @@ class SuratModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["id_user", "judul", "nomor_surat", "tanggal_surat", "pemohon", "perihal", "keperluan", "keterangan", "jenis", "status"];
+    protected $allowedFields    = ["id_user", "judul", "nomor_surat", "tanggal_surat", "pemohon", "perihal", "keperluan",  "jenis", "status"];
 
     // Dates
     protected $useTimestamps = false;
@@ -36,7 +36,7 @@ class SuratModel extends Model
         $builder->where('id', $id_user);
         $data = $builder->get()->getResultObject();
 
-        if ($data[0]->fullname == null || $data[0]->alamat == null || $data[0]->nik == null || $data[0]->tempat_lahir == null || $data[0]->tgl_lahir == null || $data[0]->kewarganegaraan == null || $data[0]->agama == null || $data[0]->pekerjaan == null) {
+        if ($data[0]->fullname == null || $data[0]->alamat == null || $data[0]->nik == null || $data[0]->kk == null || $data[0]->tempat_lahir == null || $data[0]->tgl_lahir == null || $data[0]->kewarganegaraan == null || $data[0]->agama == null || $data[0]->pekerjaan == null) {
             return false;
         }
         return true;

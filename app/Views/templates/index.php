@@ -9,7 +9,7 @@ use function PHPUnit\Framework\isNull;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- PWA Start -->
     <meta name="Description" content="Manajemen surat yang lebih efisien dan mudah untuk permintaan surat ke Balai Desa." />
     <meta name="theme-color" content="#414f57" />
@@ -41,6 +41,10 @@ use function PHPUnit\Framework\isNull;
     <link id="pagestyle" href="<?= base_url() ?>/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
     <!-- Global css -->
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/global.css">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/DataTables-1.13.2/css/dataTables.bootstrap5.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/css/magnific-popup.css">
 
     <!-- PWA Register service-worker Start -->
     <script>
@@ -252,8 +256,16 @@ use function PHPUnit\Framework\isNull;
     <script src="<?= base_url() ?>/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="<?= base_url() ?>/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="<?= base_url() ?>/assets/js/plugins/chartjs.min.js"></script>
-    <script src="/js/app.js"></script>
     <script src="/js/jquery-3.6.3.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/jquery.magnific-popup.js"></script>
+    <script src="<?= base_url() ?>/assets/DataTables-1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>/assets/DataTables-1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#data_table').DataTable();
+        });
+    </script>
     <script>
         $('.btn-change-group').on('click', function() {
             const id = $(this).data('id');
@@ -271,6 +283,51 @@ use function PHPUnit\Framework\isNull;
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+    <script text="text/javascript">
+        // memanggil plugin magnific popup
+        $('.portfolio-popup').magnificPopup({
+            type: 'image',
+            removalDelay: 300,
+            mainClass: 'mfp-fade',
+            gallery: {
+                enabled: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300,
+                easing: 'ease-in-out',
+                opener: function(openerElement) {
+                    return openerElement.is('img') ? openerElement : openerElement.find('img');
+                }
+            }
+        });
+        // memanggil datatable membuat callback datatable pada magnific popup agar gambar 
+        // yang di munculkan sesuai pada saat pindah paginasi dari 1 ke 2 
+        // dan seterusnya
+        $(document).ready(function() {
+            var table = $('#example').dataTable({
+                "fnDrawCallback": function() {
+                    $('.portfolio-popup').magnificPopup({
+                        type: 'image',
+                        removalDelay: 300,
+                        mainClass: 'mfp-fade',
+                        gallery: {
+                            enabled: true
+                        },
+                        zoom: {
+                            enabled: true,
+                            duration: 300,
+                            easing: 'ease-in-out',
+                            opener: function(openerElement) {
+                                return openerElement.is('img') ? openerElement : openerElement.find('img');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

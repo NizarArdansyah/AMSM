@@ -82,6 +82,37 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class=" mb-3">
+                                        <div class="col-12 text-start ">
+                                            <label for="kk">KK</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <?php if ($row->kk !== '') : ?>
+                                                <div id="portfolio">
+                                                    <div class="portfolio-item">
+                                                        <a href="<?= base_url() . "/uploads/kk/" . $row->kk; ?>" class="portfolio-popup">
+                                                            <img src="<?= base_url() . "/uploads/kk/" . $row->kk; ?>" alt="your image" class="img-fluid" id="gambar">
+                                                            <div class="portfolio-overlay">
+                                                                <div class="portfolio-info">
+                                                                    <div class="text-center">
+                                                                        <i class="material-icons text-lg position-relative">visibility</i>
+                                                                        <span class="ms-1">Lihat</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            <?php else : ?>
+                                                <div class="col-12">
+                                                    <input readonly type="text" name="kk" id="kk" placeholder="Belum upload KK" class="form-control border-modal w-100 px-3" required>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
                                     <div class=" mb-3">
                                         <div class="col-12 text-start ">
                                             <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -106,8 +137,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-6">
                                     <div class=" mb-3">
                                         <div class="col-12 text-start ">
                                             <label for="agama">Agama</label>

@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                    <div class="table-responsive p-4">
+                        <table id="data_table" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
@@ -121,15 +121,26 @@
                                                                                 <label for="jenis">Jenis Surat</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="jenis" id="jenis" value="<?= $srt->jenis ?>" class="form-control border-modal w-100 px-3" autofocus required>
+                                                                                <select name="jenis" autofocus class="form-control border-modal form-select px-3" required>
+                                                                                    <option class="p-2" disabled>Pilih jenis surat</option>
+                                                                                    <option class="p-2" value="Surat Keterangan" <?php if ($srt->jenis == 'Surat Keterangan') {
+                                                                                                                                        echo ("selected");
+                                                                                                                                    }  ?>>Surat Keterangan</option>
+                                                                                    <option class="p-2" value="Surat Keterangan Usaha" <?php if ($srt->jenis == 'Surat Keterangan Usaha') {
+                                                                                                                                            echo 'selected';
+                                                                                                                                        } ?>>Surat Keterangan Usaha</option>
+                                                                                    <option class="p-2" value="Surat Keterangan Tidak Mampu" <?php if ($srt->jenis == 'Surat Keterangan Tidak Mampu') {
+                                                                                                                                                    echo 'selected';
+                                                                                                                                                } ?>>Surat Keterangan Tidak Mampu</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
                                                                             <div class="col-12 text-start ">
-                                                                                <label for="tanggal">tanggal</label>
+                                                                                <label for="tanggal">Tanggal</label>
                                                                             </div>
                                                                             <div class="col-10">
-                                                                                <input type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
+                                                                                <input readonly type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class=" mb-3">
@@ -176,14 +187,6 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" mb-3">
-                                                                            <div class="col-12 text-start ">
-                                                                                <label for="keterangan">Keterangan</label>
-                                                                            </div>
-                                                                            <div class="col-10">
-                                                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3" required><?= $srt->keterangan ?></textarea>
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -227,10 +230,13 @@
                                             <?php
                                             endif;
                                             ?>
-                                            <!-- Button trigger modal hapus surat -->
-                                            <button type="button" class="badge border border-1 border-danger badge-danger text-danger" title="Hapus surat" data-bs-toggle="modal" data-bs-target="#hapusSuratModal<?= $srt->id ?>">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+
+                                            <?php if (in_groups('admin')) : ?>
+                                                <!-- Button trigger modal hapus surat -->
+                                                <button type="button" class="badge border border-1 border-danger badge-danger text-danger" title="Hapus surat" data-bs-toggle="modal" data-bs-target="#hapusSuratModal<?= $srt->id ?>">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            <?php endif ?>
 
                                             <!-- Modal hapus surat -->
                                             <div class="modal fade" id="hapusSuratModal<?= $srt->id ?>" tabindex="-1" aria-labelledby="hapusSuratModalLabel" aria-hidden="true">

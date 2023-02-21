@@ -2,6 +2,31 @@
 
 <?= $this->Section('page-content'); ?>
 <div class="container-fluid py-4">
+    <div class="row justify-content-between">
+        <div class="col-auto">
+            <?php
+            if (session()->getFlashData('Berhasil')) :
+            ?>
+                <div class="alert alert-success alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData('Berhasil') ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            elseif (session()->getFlashData('Gagal')) :
+            ?>
+                <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData('Gagal') ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            endif;
+            ?>
+        </div>
+    </div>
     <div class="container-fluid px-2 px-md-4">
         <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/assets/img/profile-background.png');">
             <span class=""></span>
@@ -28,7 +53,7 @@
                     <div class="nav-wrapper position-relative end-0">
                         <ul class="nav nav-pills nav-fill p-1" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link cursor-pointer mb-0 px-0 py-1 " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <a class="nav-link cursor-pointer mb-0 px-0 py-1 " data-bs-toggle="modal" data-bs-target="#modalUbahProfil">
                                     <i class="material-icons text-lg position-relative">settings</i>
                                     <span class="ms-1">Ubah Profile</span>
                                 </a>
@@ -36,11 +61,11 @@
                         </ul>
                     </div>
                     <!-- Modal ubah profil -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalUbahProfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUbahProfilLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                             <form action="/ubah-profil" method="post" class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Lengkapi Profil</h5>
+                                    <h5 class="modal-title" id="modalUbahProfilLabel">Lengkapi Profil</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -90,7 +115,11 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <select name="kewarganegaraan" id="kewarganegaraan" class="form-control form-select border-modal w-100 px-3" required>
-                                                            <option value="Indonesia" <?php if ($user->kewarganegaraan == 'Indonesia') {
+                                                            <option value="Indonesia" <?php
+
+                                                                                        use function PHPUnit\Framework\isEmpty;
+
+                                                                                        if ($user->kewarganegaraan == 'Indonesia') {
                                                                                             echo ("selected");
                                                                                         } else {
                                                                                             echo (" ");
@@ -237,6 +266,85 @@
                                             </div>
                                             <div class="col-xl-8">
                                                 <?= $user->fullname ?>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                        <div class="row">
+                                            <div class="col-xl-4 d-flex flex-column justify-content-center">
+                                                <strong class="text-dark">Kartu Keluarga</strong>
+                                            </div>
+                                            <div class="col-xl-8 ">
+                                                <?php if ($user->kk !== '') : ?>
+                                                    <div id="portfolio">
+                                                        <div class="portfolio-item">
+                                                            <a href="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" class="portfolio-popup">
+                                                                <img src="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" alt="your image" class="img-fluid" id="gambar">
+                                                                <div class="portfolio-overlay">
+                                                                    <div class="portfolio-info">
+                                                                        <div class="text-center">
+                                                                            <i class="material-icons text-lg position-relative">visibility</i>
+                                                                            <span class="ms-1">Lihat</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <!-- Button trigger modal upload KK -->
+                                                <div class="nav-wrapper w-xl-45">
+                                                    <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link cursor-pointer mb-0 px-0 py-1 " data-bs-toggle="modal" data-bs-target="#modalUploadKK">
+                                                                <i class="material-icons text-lg position-relative">upload_file</i>
+                                                                <span class="ms-1">Upload</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Modal upload KK -->
+                                                <div class="modal fade" id="modalUploadKK" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUploadKKLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                                                        <div class="modal-content">
+                                                            <form method="post" action="<?= base_url(); ?>/upload-kk" enctype="multipart/form-data">
+                                                                <?= csrf_field(); ?>
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="modalUploadKKLabel">Upload Kartu Keluarga</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="container-fluid">
+                                                                        <input type="hidden" name="id_user" value="<?= $user->id ?>">
+                                                                        <div class="row">
+                                                                            <div class="col-xl">
+                                                                                <div class=" mb-3">
+                                                                                    <div class="col-12 text-start ">
+                                                                                        <label for="kk">Pilih File</label>
+                                                                                    </div>
+                                                                                    <div class="col-12">
+                                                                                        <?php if ($user->kk == isEmpty()) : ?>
+                                                                                            <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
+                                                                                        <?php else : ?>
+                                                                                            <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
+
+                                                                                        <?php endif; ?>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn border border-1 border-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" value="upload" class="btn btn-info">Kirim</button>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>

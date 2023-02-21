@@ -43,6 +43,7 @@ $routes->post('/ubah-profil', 'Warga\Warga::ubah_profil', ['filter' => 'role:use
 $routes->get('/pengajuan-surat', 'Warga\Warga::pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
 $routes->post('/pengajuan-surat', 'Warga\Warga::buat_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
 $routes->post('/update-pengajuan-surat', 'Warga\Warga::update_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
+$routes->post('/upload-kk', 'Warga\Warga::upload_kk', ['filter' => 'role:user,petugas,admin']);
 
 // Role Petugas Route
 $routes->get('/manajemen-surat', 'Petugas\Petugas::manajemen_surat', ['filter' => 'role:petugas,admin']);

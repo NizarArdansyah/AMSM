@@ -113,14 +113,6 @@
                                                 <input type="text" name="keperluan" id="keperluan" required class="form-control border-modal w-100 px-3">
                                             </div>
                                         </div>
-                                        <div class=" mb-3">
-                                            <div class="col-12 text-start">
-                                                <label for="keterangan">Keterangan</label>
-                                            </div>
-                                            <div class="col-12">
-                                                <textarea type="text" name="keterangan" id="keterangan" required class="form-control border-modal w-100 px-3"></textarea>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -145,8 +137,8 @@
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                    <div class="table-responsive p-4">
+                        <table id="data_table" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
@@ -177,7 +169,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="align-middle text-sm">
                                             <p class="text-xs font-weight-bold mb-0"><?= $srt->pemohon; ?></p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
@@ -247,14 +239,6 @@
                                                                         </div>
                                                                         <div class=" mb-3">
                                                                             <div class="col-12 text-start">
-                                                                                <label for="tanggal">tanggal</label>
-                                                                            </div>
-                                                                            <div class="col-12">
-                                                                                <input disabled type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class=" mb-3">
-                                                                            <div class="col-12 text-start">
                                                                                 <label for="pemohon">Pemohon</label>
                                                                             </div>
                                                                             <div class="col-12">
@@ -263,6 +247,14 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
+                                                                        <div class=" mb-3">
+                                                                            <div class="col-12 text-start">
+                                                                                <label for="tanggal">Tanggal</label>
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                <input readonly type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class=" mb-3">
                                                                             <div class="col-12 text-start">
                                                                                 <label for="perihal">Perihal</label>
@@ -277,14 +269,6 @@
                                                                             </div>
                                                                             <div class="col-12">
                                                                                 <input type="text" name="keperluan" id="keperluan" value="<?= $srt->keperluan ?>" class="form-control border-modal w-100 px-3" required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class=" mb-3">
-                                                                            <div class="col-12 text-start">
-                                                                                <label for="keterangan">Keterangan</label>
-                                                                            </div>
-                                                                            <div class="col-12">
-                                                                                <textarea type="text" name="keterangan" id="keterangan" class="form-control border-modal w-100 px-3" required><?= $srt->keterangan ?></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>

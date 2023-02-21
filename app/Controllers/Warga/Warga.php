@@ -105,7 +105,7 @@ class Warga extends BaseController
         }
 
         $data['user'] = user();
-        
+
         $data = [
             'id_user' => user_id(),
             'nomor_surat' => $this->sm->generate_nomor_surat(),
@@ -113,7 +113,6 @@ class Warga extends BaseController
             'pemohon' => $this->sm->getPemohon(user_id()),
             'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
-            'keterangan' => $this->request->getVar('keterangan'),
             'jenis' => $this->request->getVar('jenis'),
             'status' => 'antre',
         ];
@@ -154,7 +153,6 @@ class Warga extends BaseController
             'jenis' => $this->request->getVar('jenis'),
             'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
-            'keterangan' => $this->request->getVar('keterangan'),
             'status' => 'antre',
         ];
 
@@ -169,5 +167,47 @@ class Warga extends BaseController
         }
 
         return view('pengajuan_surat', $data);
+    }
+
+    // upload kartu keluarga
+    public function upload_kk()
+    {
+        if (!$this->validate([
+            'kk' => [
+                'rules' => 'uploaded[kk]|mime_in[kk,image/jpg,image/jpeg,image/png]|max_size[kk,2048]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,png',
+                    'max_size' => 'Ukuran File Maksimal 2 MB'
+                ]
+
+            ]
+        ])) {
+            session()->setFlashdata('Gagal', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $data['user'] = user();
+        $data['id_user'] = user_id();
+        $data['surat'] = $this->sm->getSuratByID(user_id());
+        $data['profil_lengkap'] = $this->sm->cekProfil(user_id());
+
+        $file = $this->request->getFile('kk');
+        $file->move('uploads/kk');
+        $data = [
+            'kk' => $file->getName(),
+        ];
+
+        $id_user = $this->request->getVar('id_user');
+
+        if ($this->sm->updateProfil($id_user, $data)) {
+            session()->setFlashdata('Berhasil', 'Kartu Keluarga berhasil diupload');
+            return redirect()->to(base_url('/profil'));
+        } else {
+            session()->setFlashdata('Gagal', 'Kartu Keluarga gagal diupload');
+            return redirect()->to(base_url('/profil'));
+        }
+
+        return view('profil', $data);
     }
 }

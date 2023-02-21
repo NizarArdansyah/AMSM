@@ -149,8 +149,8 @@
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
+                        <div class="table-responsive p-4">
+                            <table id="data_table" class="table align-items-center mb-0 ">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
@@ -386,8 +386,8 @@
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
+                        <div class="table-responsive p-4">
+                            <table id="data_table" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
@@ -648,8 +648,8 @@
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
+                        <div class="table-responsive p-4">
+                            <table id="data_table" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>

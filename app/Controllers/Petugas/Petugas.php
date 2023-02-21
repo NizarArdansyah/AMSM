@@ -39,7 +39,6 @@ class Petugas extends BaseController
             'pemohon' => $this->request->getVar('pemohon'),
             'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
-            'keterangan' => $this->request->getVar('keterangan'),
             'status' => $this->request->getVar('status'),
             'jenis' => $this->request->getVar('jenis'),
         ];
