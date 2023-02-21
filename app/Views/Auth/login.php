@@ -75,7 +75,7 @@
                     </div>
                   <?php endif; ?>
 
-                  <div class="input-group input-group-outline mb-3">
+                  <div class="input-group input-group-outline mb-1">
                     <label class="form-label"><?= lang('Auth.password') ?></label>
                     <input type="password" name="password" class="form-control <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>">
                     <div class="invalid-feedback">
@@ -83,12 +83,22 @@
                     </div>
                   </div>
 
-                  <?php if ($config->allowRemembering) : ?>
-                    <div class="form-check form-switch d-flex align-items-center mb-3">
-                      <input class="form-check-input" type="checkbox" id="rememberMe" <?php if (old('remember')) : ?> checked <?php endif ?>>
-                      <label class="form-check-label mb-0 ms-3" for="rememberMe"><?= lang('Auth.rememberMe') ?></label>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-check form-switch d-flex align-items-center mt-1">
+                        <small><input class="form-check-input" type="checkbox" role="switch" id="showPassword"></small>
+                        <label class="form-check-label mb-0 ms-2" for="showPassword"><small>Show Password</small></label>
+                      </div>
                     </div>
-                  <?php endif; ?>
+                    <div class="col">
+                      <?php if ($config->allowRemembering) : ?>
+                        <div class="form-check float-end">
+                          <input class="form-check-input" type="checkbox" id="rememberMe" <?php if (old('remember')) : ?> checked <?php endif ?>>
+                          <label class="form-check-label" for="rememberMe"><small><?= lang('Auth.rememberMe') ?></small></label>
+                        </div>
+                      <?php endif; ?>
+                    </div>
+                  </div>
 
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Masuk</button>
@@ -133,6 +143,18 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
+    // showPassword 
+    const showPassword = document.querySelector('#showPassword');
+    const password = document.querySelector('input[name=password]');
+
+    showPassword.addEventListener('click', function() {
+      if (password.type === 'password') {
+        password.type = 'text';
+      } else {
+        password.type = 'password';
+      }
+    });
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
