@@ -4,6 +4,7 @@ namespace App\Controllers\Petugas;
 
 use App\Controllers\BaseController;
 use App\Models\SuratModel;
+use App\Models\UserModel;
 
 class Petugas extends BaseController
 {
@@ -17,6 +18,9 @@ class Petugas extends BaseController
     // mengarahkan ke manajemen surat
     public function manajemen_surat()
     {
+        $userModel = new UserModel();
+        $data['users'] = $userModel->findAll();
+
         $data['user'] = user();
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
@@ -26,6 +30,7 @@ class Petugas extends BaseController
             $data['title'] = 'AMSM - Admin';
         }
         $data['surat'] = $this->sm->getSurats();
+
         return view('user/petugas/manajemen_surat', $data);
     }
 

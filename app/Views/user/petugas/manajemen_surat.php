@@ -68,7 +68,6 @@
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0"><?= $srt->pemohon; ?></p>
-                                            <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <?php
@@ -185,6 +184,32 @@
                                                                                                                     echo ('selected');
                                                                                                                 } ?>>Dibatalkan</option>
                                                                                 </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <div class="col-12 text-start ">
+                                                                                <label for="status">Kartu Keluarga</label>
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <?php foreach ($users as $usr) : ?>
+                                                                                    <?php if ($usr->id == $srt->id_user) : ?>
+                                                                                        <div id="portfolio">
+                                                                                            <div class="portfolio-item">
+                                                                                                <a href="<?= base_url() . "/uploads/kk/" . $usr->kk; ?>" class="portfolio-popup">
+                                                                                                    <img src="<?= base_url() . "/uploads/kk/" . $usr->kk; ?>" alt="your image" class="img-fluid" id="gambar">
+                                                                                                    <div class="portfolio-overlay">
+                                                                                                        <div class="portfolio-info">
+                                                                                                            <div class="text-center">
+                                                                                                                <i class="material-icons text-lg position-relative">visibility</i>
+                                                                                                                <span class="ms-1">Lihat</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <?php endif ?>
+                                                                                <?php endforeach ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
