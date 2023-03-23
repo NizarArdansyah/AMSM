@@ -125,3 +125,7 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+#-------------------------
+# public uploads kk images
+#-------------------------
+public/uploads/kk/*
