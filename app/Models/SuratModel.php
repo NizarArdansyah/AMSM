@@ -44,6 +44,14 @@ class SuratModel extends Model
         return true;
     }
 
+    //menampilkan data kk user
+    public function getKK()
+    {
+        $builder = $this->db->table('users');
+        $data = $builder->get()->getResultObject();
+        return $data[0]->kk;
+    }
+
     //menampilkan data surat berdasarkan id user
     public function getSuratByID($id)
     {
