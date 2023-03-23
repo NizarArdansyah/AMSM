@@ -10,52 +10,25 @@ class CreateTableSurat extends Migration
     {
         //
         $this->forge->addField([
-            'id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'auto_increment' => true
-            ],
-            'id_user' => [
-                'type' => 'INT',
-                'constraint' => 11
-            ],
-            'nomor_surat' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-                'unique' => true
-            ],
-            'tanggal_surat' => [
-                'type' => 'DATE'
-            ],
-            'pemohon' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100
-            ],
-            'perihal' => [
-                'type' => 'TEXT',
-                'constraint' => 255
-            ],
-            'keperluan' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255
-            ],
-            'keterangan' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255
-            ],
-            'status' => [
-                'type' => 'VARCHAR',
-                'constraint' => 30
-            ],
+            'id'            => [ 'type' => 'INT', 'constraint' => 11, 'auto_increment' => true ],
+            'id_user'       => [ 'type' => 'INT', 'constraint' => 11 ],
+            'nomor_surat'   => [ 'type' => 'VARCHAR', 'constraint' => 255, 'unique' => true ],
+            'tanggal_surat' => [ 'type' => 'DATE' ],
+            'pemohon'       => [ 'type' => 'VARCHAR', 'constraint' => 100 ],
+            'perihal'       => [ 'type' => 'TEXT', 'constraint' => 255 ],
+            'keperluan'     => [ 'type' => 'VARCHAR', 'constraint' => 255],
+            'keterangan'    => [ 'type' => 'VARCHAR', 'constraint' => 255 ],
+            'jenis'         => [ 'type' => 'VARCHAR', 'constraint' => 200 ],
+            'status'        => [ 'type' => 'VARCHAR', 'constraint' => 30 ],
+            'pesan'         => [ 'type' => 'TEXT', 'null' => true ],
         ]);
         $this->forge->addKey('id', true);
         // $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('surat');
+        $this->forge->createTable('surat', true);
     }
 
     public function down()
     {
-        //
-        $this->forge->dropTable('surat');
+        $this->forge->dropTable('surat', true);
     }
 }

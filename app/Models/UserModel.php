@@ -19,6 +19,10 @@ class UserModel extends Model
     protected $allowedFields  = [
         'email', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash',
         'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at',
+
+        // Custom Fields
+        'fullname', 'img_user', 'alamat', 'nik', 'kk', 'tgl_lahir', 'tempat_lahir', 'kewarganegaraan', 
+        'agama', 'pekerjaan'
     ];
     protected $useTimestamps   = true;
     protected $validationRules = [

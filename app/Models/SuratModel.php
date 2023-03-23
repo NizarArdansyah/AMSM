@@ -14,7 +14,9 @@ class SuratModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["id_user", "judul", "nomor_surat", "tanggal_surat", "pemohon", "perihal", "keperluan",  "jenis", "status"];
+    protected $allowedFields    = [
+        "id_user", "nomor_surat", "tanggal_surat", "pemohon", "perihal", "keperluan", "keterangan", "jenis", "status", "pesan"
+    ];
 
     // Dates
     protected $useTimestamps = false;
