@@ -104,7 +104,10 @@
                     <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Masuk</button>
                   </div>
                 </form>
-                <p class="mt-4 text-sm text-center">
+                <?php if ($config->activeResetter) : ?>
+                  <p class="mt-4 text-sm text-center mb-2 p-0"><a class="text-info text-gradient font-weight-bold" href="<?= url_to('forgot') ?>"><?= lang('Auth.forgotYourPassword') ?></a></p>
+                <?php endif; ?>
+                <p class="text-sm text-center <?= !$config->activeResetter ? 'mt-4' : 'mt-3' ?>">
                   Belum punya akun?
                   <a href="/register" class="text-info text-gradient font-weight-bold">Daftar</a>
                 </p>
