@@ -275,7 +275,7 @@
                                                 <strong class="text-dark">Kartu Keluarga</strong>
                                             </div>
                                             <div class="col-xl-8 ">
-                                                <?php if ($user->kk !== '') : ?>
+                                                <?php if ($user->kk != '' || $user->kk != null) : ?>
                                                     <div id="portfolio">
                                                         <div class="portfolio-item">
                                                             <a href="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" class="portfolio-popup">

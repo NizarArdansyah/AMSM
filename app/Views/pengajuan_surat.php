@@ -285,7 +285,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             <?php
-                                            if ($srt->pesan !== '') :
+                                            if ($srt->pesan != '' || $srt->pesan != null) :
                                             ?>
                                                 <button class="badge bg-info text-white border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
                                                     <i class="fas fa-envelope"></i>
