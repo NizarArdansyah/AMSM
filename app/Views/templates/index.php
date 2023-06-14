@@ -46,6 +46,16 @@ use function PHPUnit\Framework\isNull;
     <!-- Magnific Popup -->
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/magnific-popup.css">
 
+
+    <style>
+        .mfp-wrap {
+            z-index: 1200 !important;
+        }
+        .mfp-bg {
+            z-index: 1150 !important;
+        }
+    </style>
+
     <!-- PWA Register service-worker Start -->
     <script>
         if (navigator.serviceWorker) {

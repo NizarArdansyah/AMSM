@@ -4,27 +4,21 @@
 <div class="container-fluid py-4">
     <div class="row justify-content-between">
         <div class="col-auto">
-            <?php
-            if (session()->getFlashData('Berhasil')) :
-            ?>
-                <div class="alert alert-success alert-dismissible text-white" role="alert">
-                    <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData('Berhasil') ?></span>
-                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <?php
-            elseif (session()->getFlashData('Gagal')) :
-            ?>
-                <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                    <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData('Gagal') ?></span>
-                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <?php
-            endif;
-            ?>
+            <?php if (session()->getFlashData('Berhasil')): ?>
+                    <div class="alert alert-success alert-dismissible text-white" role="alert">
+                        <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData('Berhasil') ?></span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            <?php elseif (session()->getFlashData('Gagal')): ?>
+                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                        <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData('Gagal') ?></span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="container-fluid px-2 px-md-4">
@@ -41,10 +35,10 @@
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            <?= $user->username ?>
+                            <?= $user->fullname ?>
                         </h5>
                         <p class="mb-0 font-weight-normal text-sm">
-                            <?= $user->email ?>
+                        <?= $user->username ?> | <?= $user->email ?>
                         </p>
                     </div>
                 </div>
@@ -62,7 +56,7 @@
                     </div>
                     <!-- Modal ubah profil -->
                     <div class="modal fade" id="modalUbahProfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUbahProfilLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                             <form action="/ubah-profil" method="post" class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="modalUbahProfilLabel">Lengkapi Profil</h5>
@@ -114,27 +108,7 @@
                                                         <label for="kewarganegaraan">Kewarganegaraan</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <select name="kewarganegaraan" id="kewarganegaraan" class="form-control form-select border-modal w-100 px-3" required>
-                                                            <option value="Indonesia" <?php
-
-                                                                                        use function PHPUnit\Framework\isEmpty;
-
-                                                                                        if ($user->kewarganegaraan == 'Indonesia') {
-                                                                                            echo ("selected");
-                                                                                        } else {
-                                                                                            echo (" ");
-                                                                                        } ?>>Indonesia</option>
-                                                            <option value="Singapura" <?php if ($user->kewarganegaraan == 'Singapura') {
-                                                                                            echo ("selected");
-                                                                                        } else {
-                                                                                            echo (" ");
-                                                                                        } ?>>Singapura</option>
-                                                            <option value="Malaysia" <?php if ($user->kewarganegaraan == 'Malaysia') {
-                                                                                            echo ("selected");
-                                                                                        } else {
-                                                                                            echo (" ");
-                                                                                        } ?>>Malaysia</option>
-                                                        </select>
+                                                        <input type="text" name="kewarganegaraan" id="kewarganegaraan" class="form-control border-modal px-3 w-100" value="<?= $user->kewarganegaraan ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,30 +120,30 @@
                                                     <div class="col-12">
                                                         <select name="agama" id="agama" class="form-control form-select border-modal w-100 px-3" required>
                                                             <option value="Islam" <?php if ($user->agama == 'Islam') {
-                                                                                        echo ("selected");
-                                                                                    } else {
-                                                                                        echo (" ");
-                                                                                    } ?>>Islam</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Islam</option>
                                                             <option value="Katolik" <?php if ($user->agama == 'Katolik') {
-                                                                                        echo ("selected");
-                                                                                    } else {
-                                                                                        echo (" ");
-                                                                                    } ?>>Katolik</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Katolik</option>
                                                             <option value="Hindu" <?php if ($user->agama == 'Hindu') {
-                                                                                        echo ("selected");
-                                                                                    } else {
-                                                                                        echo (" ");
-                                                                                    } ?>>Hindu</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Hindu</option>
                                                             <option value="Kristen" <?php if ($user->agama == 'Kristen') {
-                                                                                        echo ("selected");
-                                                                                    } else {
-                                                                                        echo (" ");
-                                                                                    } ?>>Kristen</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Kristen</option>
                                                             <option value="Budha" <?php if ($user->agama == 'Budha') {
-                                                                                        echo ("selected");
-                                                                                    } else {
-                                                                                        echo (" ");
-                                                                                    } ?>>Budha</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Budha</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -180,45 +154,45 @@
                                                     <div class="col-12">
                                                         <select name="pekerjaan" id="pekerjaan" class="form-control form-select border-modal w-100 px-3" required>
                                                             <option value="Belum/ Tidak Bekerja" <?php if ($user->pekerjaan == 'Belum/ Tidak Bekerja') {
-                                                                                                        echo ("selected");
-                                                                                                    } else {
-                                                                                                        echo (" ");
-                                                                                                    } ?>>Belum/ Tidak Bekerja</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Belum/ Tidak Bekerja</option>
                                                             <option value="Mengurus Rumah Tangga" <?php if ($user->pekerjaan == 'Mengurus Rumah Tangga') {
-                                                                                                        echo ("selected");
-                                                                                                    } else {
-                                                                                                        echo (" ");
-                                                                                                    } ?>>Mengurus Rumah Tangga</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Mengurus Rumah Tangga</option>
                                                             <option value="Pelajar/ Mahasiswa" <?php if ($user->pekerjaan == 'Pelajar/ Mahasiswa') {
-                                                                                                    echo ("selected");
-                                                                                                } else {
-                                                                                                    echo (" ");
-                                                                                                } ?>>Pelajar/ Mahasiswa</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Pelajar/ Mahasiswa</option>
                                                             <option value="Pensiunan" <?php if ($user->pekerjaan == 'Pensiunan') {
-                                                                                            echo ("selected");
-                                                                                        } else {
-                                                                                            echo (" ");
-                                                                                        } ?>>Pensiunan</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Pensiunan</option>
                                                             <option value="Pewagai Negeri Sipil" <?php if ($user->pekerjaan == 'Pewagai Negeri Sipil') {
-                                                                                                        echo ("selected");
-                                                                                                    } else {
-                                                                                                        echo (" ");
-                                                                                                    } ?>>Pewagai Negeri Sipil</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Pewagai Negeri Sipil</option>
                                                             <option value="Tentara Nasional Indonesia" <?php if ($user->pekerjaan == 'Tentara Nasional Indonesia') {
-                                                                                                            echo ("selected");
-                                                                                                        } else {
-                                                                                                            echo (" ");
-                                                                                                        } ?>>Tentara Nasional Indonesia</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Tentara Nasional Indonesia</option>
                                                             <option value="Kepolisisan RI" <?php if ($user->pekerjaan == 'Kepolisisan RI') {
-                                                                                                echo ("selected");
-                                                                                            } else {
-                                                                                                echo (" ");
-                                                                                            } ?>>Kepolisisan RI</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Kepolisisan RI</option>
                                                             <option value="Perdagangan" <?php if ($user->pekerjaan == 'Perdagangan') {
-                                                                                            echo ("selected");
-                                                                                        } else {
-                                                                                            echo (" ");
-                                                                                        } ?>>Perdagangan</option>
+                                                                echo ("selected");
+                                                            } else {
+                                                                echo (" ");
+                                                            } ?>>Perdagangan</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -245,7 +219,7 @@
             </div>
             <div class="row">
                 <div class="row">
-                    <div class="col-12 col-xl-8">
+                    <div class="col-12">
                         <div class="card card-plain h-100">
                             <div class="card-header pb-0 p-3">
                                 <div class="row d-flex align-items-center py-2 rounded-3">
@@ -275,22 +249,22 @@
                                                 <strong class="text-dark">Kartu Keluarga</strong>
                                             </div>
                                             <div class="col-xl-8 ">
-                                                <?php if ($user->kk != '' || $user->kk != null) : ?>
-                                                    <div id="portfolio">
-                                                        <div class="portfolio-item">
-                                                            <a href="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" class="portfolio-popup">
-                                                                <img src="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" alt="your image" class="img-fluid" id="gambar">
-                                                                <div class="portfolio-overlay">
-                                                                    <div class="portfolio-info">
-                                                                        <div class="text-center">
-                                                                            <i class="material-icons text-lg position-relative">visibility</i>
-                                                                            <span class="ms-1">Lihat</span>
-                                                                        </div>
+                                                <?php if ($user->kk != '' || $user->kk != null): ?>
+                                                                <div id="portfolio">
+                                                                    <div class="portfolio-item">
+                                                                        <a href="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" class="portfolio-popup">
+                                                                            <img src="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" alt="your image" class="img-fluid" id="gambar">
+                                                                            <div class="portfolio-overlay">
+                                                                                <div class="portfolio-info">
+                                                                                    <div class="text-center">
+                                                                                        <i class="material-icons text-lg position-relative">visibility</i>
+                                                                                        <span class="ms-1">Lihat</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
                                                 <?php endif; ?>
                                                 <!-- Button trigger modal upload KK -->
                                                 <div class="nav-wrapper w-xl-45">
@@ -305,7 +279,7 @@
                                                 </div>
                                                 <!-- Modal upload KK -->
                                                 <div class="modal fade" id="modalUploadKK" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalUploadKKLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                                                         <div class="modal-content">
                                                             <form method="post" action="<?= base_url(); ?>/upload-kk" enctype="multipart/form-data">
                                                                 <?= csrf_field(); ?>
@@ -321,17 +295,9 @@
                                                                                 <div class=" mb-3">
                                                                                     <div class="col-12 text-start ">
                                                                                         <label for="kk">Pilih File</label>
-                                                                                    </div>
-                                                                                    <div class="col-12">
-                                                                                        <?php if ($user->kk == isEmpty()) : ?>
-                                                                                            <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
-                                                                                        <?php else : ?>
-                                                                                            <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
-
-                                                                                        <?php endif; ?>
+                                                                                        <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -340,7 +306,6 @@
                                                                     <button type="button" class="btn border border-1 border-secondary" data-bs-dismiss="modal">Close</button>
                                                                     <button type="submit" value="upload" class="btn btn-info">Kirim</button>
                                                                 </div>
-
                                                             </form>
                                                         </div>
                                                     </div>

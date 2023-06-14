@@ -41,7 +41,7 @@ class InitialSeed extends Seeder
             'img_user' => 'default.svg',
             'alamat' => $faker->address,
             'nik' => $faker->nik,
-            'kk' => $faker->nik,
+            'kk' => null,
             'tgl_lahir' => $faker->date('Y-m-d'),
             'tempat_lahir' => $faker->city,
             'kewarganegaraan' => 'WNI',
@@ -61,7 +61,7 @@ class InitialSeed extends Seeder
                 'img_user' => 'default.svg',
                 'alamat' => $faker->address,
                 'nik' => $faker->nik,
-                'kk' => $faker->nik,
+                'kk' => null,
                 'tgl_lahir' => $faker->date('Y-m-d'),
                 'tempat_lahir' => $faker->city,
                 'kewarganegaraan' => 'WNI',
@@ -82,7 +82,7 @@ class InitialSeed extends Seeder
                 'img_user' => 'default.svg',
                 'alamat' => $faker->address,
                 'nik' => $faker->nik,
-                'kk' => $faker->nik,
+                'kk' => null,
                 'tgl_lahir' => $faker->date('Y-m-d'),
                 'tempat_lahir' => $faker->city,
                 'kewarganegaraan' => 'WNI',
@@ -99,14 +99,14 @@ class InitialSeed extends Seeder
         $surat = new \App\Models\SuratModel();
         for ($i = 0; $i < 10; $i++) {
             $dpn = str_pad(($i+1), 3, '0', STR_PAD_LEFT);
-            // $month = $faker->monthName('now');
-            $month = $faker->randomElement(['January', 'February', 'March', 'December']);
+            $month = $faker->randomElement(['January', 'February', 'March', 'April', 'May', 'June']);
+
             $nama_waraga = $user->select('username')->where('id', $faker->numberBetween(7, 16))->first();
 
             $data = [
                 'id_user'       => $faker->numberBetween(1, 10),
-                'nomor_surat'   => $dpn . "/Ds.04/" .$this->monthToRomawi($month) . "/" . date('Y'),
-                'tanggal_surat' => $faker->date('Y-m-d'),
+                'nomor_surat'   => $dpn . "/DS.04/" .$this->monthToRomawi($month) . "/" . date('Y'),
+                'tanggal_surat' => $faker->dateTimeThisYear()->format('Y-m-d'),
                 'pemohon'       => $nama_waraga->username,
                 'perihal'       => $faker->randomElement(['permohonan', 'pengajuan']),
                 'keperluan'     => $faker->words($faker->randomDigit(), true),

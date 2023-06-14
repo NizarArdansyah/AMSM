@@ -18,7 +18,7 @@ class CreateAuthTables extends Migration
             'img_user'         => ['type' => 'varchar', 'constraint' => 255, 'default' => 'default.svg'],
             'alamat'           => ['type' => 'varchar', 'constraint' => 255],
             'nik'              => ['type' => 'varchar', 'constraint' => 20],
-            'kk'               => ['type' => 'varchar', 'constraint' => 20],
+            'kk'               => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'tgl_lahir'        => ['type' => 'date'],
             'tempat_lahir'     => ['type' => 'varchar', 'constraint' => 255],
             'kewarganegaraan'  => ['type' => 'varchar', 'constraint' => 50],

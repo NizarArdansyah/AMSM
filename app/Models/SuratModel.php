@@ -125,8 +125,8 @@ class SuratModel extends Model
     {
         $builder = $this->db->table('users');
         $builder->where('id', $id);
-        $data = $builder->select('username')->get()->getResultObject();
-        return $data[0]->username;
+        $data = $builder->select('fullname')->get()->getResultObject();
+        return $data[0]->fullname;
     }
 
     // untuk mendapatkan data user berdasarkan pemohon surat

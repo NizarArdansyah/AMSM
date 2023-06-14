@@ -104,32 +104,30 @@ class Warga extends BaseController
             $data['title'] = 'AMSM - Admin';
         }
 
-        $data['user'] = user();
-
         $data = [
             'id_user' => user_id(),
             'nomor_surat' => $this->sm->generate_nomor_surat(),
             'tanggal_surat' => date('Y-m-d H:i:s'),
-            'pemohon' => $this->sm->getPemohon(user_id()),
+            'pemohon' => $this->sm->getPemohon($this->request->getPost('pemohon')),
             'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
             'jenis' => $this->request->getVar('jenis'),
             'status' => 'antre',
         ];
 
-        $profil_lengkap = $this->sm->cekProfil(user_id());
+        $profil_lengkap = $this->sm->cekProfil($this->request->getPost('pemohon'));
 
         if ($profil_lengkap) {
             if ($this->sm->insert($data)) {
                 session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
-                return redirect()->to(base_url('/pengajuan-surat'));
+                return redirect()->to(base_url('/manajemen-surat'));
             } else {
                 session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
-                return redirect()->to(base_url('/pengajuan-surat'));
+                return redirect()->to(base_url('/manajemen-surat'));
             }
         } else {
             session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan profil lengkap');
-            return redirect()->to(base_url('/pengajuan-surat'));
+            return redirect()->to(base_url('/manajemen-surat'));
         }
 
         return view('pengajuan_surat', $data);
@@ -172,17 +170,19 @@ class Warga extends BaseController
     // upload kartu keluarga
     public function upload_kk()
     {
-        if (!$this->validate([
-            'kk' => [
-                'rules' => 'uploaded[kk]|mime_in[kk,image/jpg,image/jpeg,image/png]|max_size[kk,2048]',
-                'errors' => [
-                    'uploaded' => 'Harus Ada File yang diupload',
-                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,png',
-                    'max_size' => 'Ukuran File Maksimal 2 MB'
-                ]
+        if (
+            !$this->validate([
+                'kk' => [
+                    'rules' => 'uploaded[kk]|mime_in[kk,image/jpg,image/jpeg,image/png]|max_size[kk,2048]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'mime_in' => 'File Extention Harus Berupa jpg,jpeg,png',
+                        'max_size' => 'Ukuran File Maksimal 2 MB'
+                    ]
 
-            ]
-        ])) {
+                ]
+            ])
+        ) {
             session()->setFlashdata('Gagal', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
