@@ -120,13 +120,25 @@ class Warga extends BaseController
         if ($profil_lengkap) {
             if ($this->sm->insert($data)) {
                 session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
+                
+                if (in_groups('user') || in_groups('warga')) {
+                    return redirect()->to(base_url('/pengajuan-surat'));
+                }
                 return redirect()->to(base_url('/manajemen-surat'));
             } else {
                 session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
+                
+                if (in_groups('user') || in_groups('warga')) {
+                    return redirect()->to(base_url('/pengajuan-surat'));
+                }
                 return redirect()->to(base_url('/manajemen-surat'));
             }
         } else {
             session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan profil lengkap');
+            
+            if (in_groups('user') || in_groups('warga')) {
+                return redirect()->to(base_url('/pengajuan-surat'));
+            }
             return redirect()->to(base_url('/manajemen-surat'));
         }
 
@@ -202,10 +214,10 @@ class Warga extends BaseController
 
         if ($this->sm->updateProfil($id_user, $data)) {
             session()->setFlashdata('Berhasil', 'Kartu Keluarga berhasil diupload');
-            return redirect()->to(base_url('/profil'));
+            return redirect()->back();
         } else {
             session()->setFlashdata('Gagal', 'Kartu Keluarga gagal diupload');
-            return redirect()->to(base_url('/profil'));
+            return redirect()->back();
         }
 
         return view('profil', $data);

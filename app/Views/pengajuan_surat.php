@@ -9,11 +9,9 @@
             $erros = array_values($erros);
             $erros = $erros[0];
             echo $erros;
-        }
-// dd($erros->getErrors());
-?>
-        <!-- <?php if (isset($validation)) { ?>
-            <div class="col-md-12">
+        } ?>
+        <?php if (isset($validation)) : ?>
+            <!-- <div class="col-md-12">
                 <?php foreach ($validation->getErrors() as $error): ?>
                     <div class="alert alert-warning text-white d-flex justify-content-between" role="alert">
                         <div>
@@ -23,38 +21,105 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php } ?> -->
+            </div> -->
+        <?php endif; ?>
         <div class="col-auto">
             <?php if (session()->getFlashData("Berhasil")): ?>
-                        <div class="alert alert-success alert-dismissible text-white" role="alert">
-                            <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData(
-                                "Berhasil"
-                            ) ?></span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                <div class="alert alert-success alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Berhasil!</strong>, 
+                    <?= session()->getFlashData("Berhasil") ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php elseif (session()->getFlashData("Gagal")): ?>
-                        <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                            <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData(
-                                "Gagal"
-                            ) ?></span>
-                            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData(
+                        "Gagal"
+                    ) ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif; ?>
 
             <?php if (!$profil_lengkap): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <span class="alert-icon text-white"><i class="fas fa-exclamation-triangle"></i></span>
-                    <span class="alert-text text-white">Anda belum melengkapi profil, silahkan lengkapi profil anda <a href="<?= base_url(
-                        "profil"
-                    ) ?>" class="text-white font-weight-bold text-decoration-underline">disini</a></span>
+                    <span class="alert-text text-white">Anda belum melengkapi profil, silahkan lengkapi profil anda 
+                        <a href="<?= base_url("profil") ?>" class="text-white font-weight-bold text-decoration-underline">disini</a>
+                    </span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
+        </div>
+
+        <div class="col-auto">
+            <!-- Button trigger modal pengajuan surat -->
+            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modal_buat_surat">
+                Buat Baru
+                <i class="material-icons opacity-10">add</i>
+            </button>
+
+            <!-- Modal pengajuan surat -->
+            <div class="modal fade bd-example-modal-xl" id="modal_buat_surat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal modal-dialog-centered modal-dialog-scrollable">
+                    <form class="modal-content" method="post" action="/pengajuan-surat">
+                        <?php if (in_groups('warga') || in_groups('user')) : ?>
+                            <input type="hidden" name="pemohon" id="pemohon" value="<?= user_id() ?>">
+                        <?php endif ?>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Buat Surat Pemohonan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="col-12">
+                                            <div class=" mb-3">
+                                                <div class="text-start">
+                                                    <label for="jenis">Jenis Surat</label>
+                                                    <select name="jenis" id="jenis" autofocus required class="form-control border-modal form-select px-3">
+                                                        <option class="p-2" disabled>Pilih jenis surat</option>
+                                                        <option class="p-2" value="Surat Keterangan">Surat Keterangan</option>
+                                                        <option class="p-2" value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
+                                                        <option class="p-2" value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <div class="text-start">
+                                                    <label for="perihal">Perihal</label>
+                                                    <select name="perihal" id="perihal" required class="form-control border-modal form-select px-3">
+                                                        <option class="p-2" disabled>Pilih perihal</option>
+                                                        <option class="p-2" value="Permohonan">Permohonan</option>
+                                                        <option class="p-2" value="Pengajuan">Pengajuan</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class=" mb-3">
+                                                <div class="col-12 text-start">
+                                                    <label for="keperluan">Keperluan</label>
+                                                    <textarea name="keperluan" id="keperluan" rows="3" required class="form-control border-modal w-100 px-3" placeholder="keperluan pembuatan surat"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-info">Buat Surat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -101,17 +166,13 @@
                                             <p class="text-xs font-weight-bold mb-0"><?= $srt->pemohon ?></p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <?php if (
-                                                $srt->status == "antre"
-                                            ): ?>
-                                                        <span class="badge badge-sm bg-gradient-info"><?= $srt->status ?></span>
-                                                    <?php elseif (
-                                                $srt->status == "siap"
-                                            ): ?>
-                                                        <span class="badge badge-sm bg-gradient-success"><?= $srt->status ?></span>
-                                                    <?php else: ?>
-                                                        <span class="badge badge-sm bg-gradient-danger"><?= $srt->status ?></span>
-                                                    <?php endif; ?>
+                                            <?php if ($srt->status == "antre"): ?>
+                                                <span class="badge badge-sm bg-gradient-info"><?= $srt->status ?></span>
+                                            <?php elseif ( $srt->status == "siap" ): ?>
+                                                <span class="badge badge-sm bg-gradient-success"><?= $srt->status ?></span>
+                                            <?php else: ?>
+                                                <span class="badge badge-sm bg-gradient-danger"><?= $srt->status ?></span>
+                                            <?php endif; ?>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold"><?= $srt->tanggal_surat ?></span>
@@ -149,18 +210,9 @@
                                                                             <div class="col-12">
                                                                                 <select name="jenis" autofocus class="form-control border-modal form-select px-3" required>
                                                                                     <option class="p-2" disabled>Pilih jenis surat</option>
-                                                                                    <option class="p-2" value="Surat Keterangan" <?= $srt->jenis ==
-                                                                                    "Surat Keterangan"
-                                                                                        ? "selected"
-                                                                                        : "" ?>>Surat Keterangan</option>
-                                                                                    <option class="p-2" value="Surat Keterangan Usaha" <?= $srt->jenis ==
-                                                                                    "Surat Keterangan Usaha"
-                                                                                        ? "selected"
-                                                                                        : "" ?>>Surat Keterangan Usaha</option>
-                                                                                    <option class="p-2" value="Surat Keterangan Tidak Mampu" <?= $srt->jenis ==
-                                                                                    "Surat Keterangan Tidak Mampu"
-                                                                                        ? "selected"
-                                                                                        : "" ?>>Surat Keterangan Tidak Mampu</option>
+                                                                                    <option class="p-2" value="Surat Keterangan" <?= $srt->jenis == "Surat Keterangan" ? "selected" : "" ?>>Surat Keterangan</option>
+                                                                                    <option class="p-2" value="Surat Keterangan Usaha" <?= $srt->jenis == "Surat Keterangan Usaha" ? "selected" : "" ?>>Surat Keterangan Usaha</option>
+                                                                                    <option class="p-2" value="Surat Keterangan Tidak Mampu" <?= $srt->jenis == "Surat Keterangan Tidak Mampu" ? "selected" : "" ?>>Surat Keterangan Tidak Mampu</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -211,21 +263,18 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <?php if (
-                                                $srt->pesan != "" ||
-                                                $srt->pesan != null
-                                            ): ?>
-                                                        <button class="badge bg-info text-white border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
-                                                            <i class="fas fa-envelope"></i>
-                                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                                1
-                                                                <span class="visually-hidden">unread messages</span>
-                                                            </span>
-                                                        </button>
+                                            <?php if ( $srt->pesan != "" || $srt->pesan != null ): ?>
+                                                <button class="badge bg-info text-white border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
+                                                    <i class="fas fa-envelope"></i>
+                                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                        1
+                                                        <span class="visually-hidden">unread messages</span>
+                                                    </span>
+                                                </button>
                                             <?php else: ?>
-                                                        <button disabled class="badge border border-1 border-secondary text-secondary border-0">
-                                                            <i class="fas fa-envelope"></i>
-                                                        </button>
+                                                <button disabled class="badge border border-1 border-secondary text-secondary border-0">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
                                             <?php endif; ?>
                                             <!-- Modal pesan pembatalan surat -->
                                             <div class="modal fade bd-example-modal-xl" id="pesan_pembatalan_surat<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="pesan_pembatalan_suratLabel" aria-hidden="true">
@@ -270,7 +319,6 @@
                         </script> -
                         Aplikasi Sistem Manajemen Surat
                     </div>
-
                 </div>
             </div>
     </footer>

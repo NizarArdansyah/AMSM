@@ -108,16 +108,17 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIK</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detail User</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($users as $rw) {
-                                $row = "row" . $rw->id;
-                                echo $$row;
-                            }
+                                foreach ($users as $rw) {
+                                    $row = "row" . $rw->id;
+                                    echo $$row;
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -163,13 +164,9 @@
                                 </div>
                                 <div class="col mb-8pt mb-md-0">
                                     <select name="group" class="form-control border-modal form-select px-3" data-toggle="select">
-                                        <?php
-                                        foreach ($groups as $key => $row) {
-                                        ?>
+                                        <?php foreach ($groups as $key => $row) : ?>
                                             <option value="<?= $row->id; ?>"><?= $row->name; ?></option>
-                                        <?php
-                                        }
-                                        ?>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
