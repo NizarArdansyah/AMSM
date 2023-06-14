@@ -19,7 +19,7 @@ class Petugas extends BaseController
     public function manajemen_surat()
     {
         $userModel = new UserModel();
-        $data['users'] = $userModel->orderBy('fullname', 'ASC')->findAll();
+        $data['users'] = $userModel->orderBy('nik', 'ASC')->findAll();
 
         $data['user'] = user();
         if (in_groups('user')) {

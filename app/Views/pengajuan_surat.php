@@ -63,7 +63,7 @@
 
             <!-- Modal pengajuan surat -->
             <div class="modal fade bd-example-modal-xl" id="modal_buat_surat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                     <form class="modal-content" method="post" action="/pengajuan-surat">
                         <?php if (in_groups('warga') || in_groups('user')) : ?>
                             <input type="hidden" name="pemohon" id="pemohon" value="<?= user_id() ?>">

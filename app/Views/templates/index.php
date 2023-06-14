@@ -271,6 +271,9 @@ use function PHPUnit\Framework\isNull;
     <script src="/js/jquery.magnific-popup.js"></script>
     <script src="<?= base_url() ?>/assets/DataTables-1.13.2/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>/assets/DataTables-1.13.2/js/dataTables.bootstrap5.min.js"></script>
+
+    <?= $this->renderSection('bsc') ;?>
+
     <script>
         $(document).ready(function() {
             $('#data_table').DataTable();
