@@ -51,6 +51,7 @@ use function PHPUnit\Framework\isNull;
         .mfp-wrap {
             z-index: 1200 !important;
         }
+
         .mfp-bg {
             z-index: 1150 !important;
         }
@@ -169,6 +170,15 @@ use function PHPUnit\Framework\isNull;
                         </a>
                     </li>
                 <?php endif ?>
+                <hr class="horizontal light mt-0 mb-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="<?= base_url('profil-desa') ?>">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">webhook</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profil Desa</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
@@ -272,7 +282,7 @@ use function PHPUnit\Framework\isNull;
     <script src="<?= base_url() ?>/assets/DataTables-1.13.2/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>/assets/DataTables-1.13.2/js/dataTables.bootstrap5.min.js"></script>
 
-    <?= $this->renderSection('bsc') ;?>
+    <?= $this->renderSection('bsc'); ?>
 
     <script>
         $(document).ready(function() {

@@ -36,6 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/profil-desa', 'Home::profil_desa');
 
 // Role User Route
 $routes->get('/profil', 'Warga\Warga::profil', ['filter' => 'role:user,petugas,admin']);

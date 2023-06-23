@@ -28,4 +28,11 @@ class Home extends BaseController
 
         return view('index', $data);
     }
+
+    public function profil_desa()
+    {
+        $data['user'] = user();
+        $data['title'] = 'AMSM - Profil Desa';
+        return view('profil_desa', $data);
+    }
 }
