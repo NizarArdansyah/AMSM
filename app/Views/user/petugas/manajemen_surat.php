@@ -4,19 +4,19 @@
     <div class="row justify-content-between">
         <div class="col-auto">
             <?php if (session()->getFlashData('Berhasil')): ?>
-                    <div class="alert alert-success alert-dismissible text-white" role="alert">
-                        <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData('Berhasil') ?></span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                <div class="alert alert-success alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Berhasil!</strong>, <?= session()->getFlashData('Berhasil') ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php elseif (session()->getFlashData('Gagal')): ?>
-                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                        <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData('Gagal') ?></span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                    <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData('Gagal') ?></span>
+                    <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif; ?>
         </div>
 
@@ -50,22 +50,22 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($users as $u): ?>
-                                                            <tr data-id="<?= $u->id ?>">
-                                                                <td>
-                                                                    <input type="radio" name="pemohon" id="<?= $u->id ?>" value="<?= $u->id ?>" required>
-                                                                    <label for="<?= $u->id ?>" class="form-label m-0 px-2"><?= $u->fullname ?></label>
-                                                                </td>
-                                                                <td><span class="text-sm"><?= $u->nik ?></span></td>
-                                                                <td class="text-center">
-                                                                    <?php $roles = $u->getRoles() ?>
-                                                                    <?php $roles = end($roles) ?>
-                                                                    <?php if ($roles !== 'petugas' && $roles !== 'admin'): ?>
-                                                                            <small><div class="badge bg-success">warga</div></small>
-                                                                    <?php else: ?>
-                                                                            <small><div class="badge bg-warning"><?= strtolower($roles) ?></div></small>
-                                                                    <?php endif ?>
-                                                                </td>
-                                                            </tr>
+                                                        <tr data-id="<?= $u->id ?>" <?= !$muser->cekProfil($u->id) ? 'style="pointer-events: none;" title="data belum lengkap"' : '' ?>>
+                                                            <td <?= !$muser->cekProfil($u->id) ? 'class="text-danger"' : '' ?>>
+                                                                <input type="radio" name="pemohon" id="<?= $u->id ?>" value="<?= $u->id ?>" required>
+                                                                <label for="<?= $u->id ?>" class="form-label m-0 px-2  <?= !$muser->cekProfil($u->id) ? "text-danger" : '' ?>"><?= $u->fullname ?></label>
+                                                            </td>
+                                                            <td <?= !$muser->cekProfil($u->id) ? 'class="text-danger"' : '' ?>><span class="text-sm"><?= $u->nik ?></span></td>
+                                                            <td class="text-center">
+                                                                <?php $roles = $u->getRoles() ?>
+                                                                <?php $roles = end($roles) ?>
+                                                                <?php if ($roles !== 'petugas' && $roles !== 'admin'): ?>
+                                                                    <small><div class="badge bg-success">warga</div></small>
+                                                                <?php else: ?>
+                                                                    <small><div class="badge bg-warning"><?= strtolower($roles) ?></div></small>
+                                                                <?php endif ?>
+                                                            </td>
+                                                        </tr>
                                                     <?php endforeach ?>
                                                 </tbody>
                                             </table>
@@ -85,7 +85,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <div class="mb-3">
                                                 <div class="text-start">
                                                     <label for="perihal">Perihal</label>
@@ -96,12 +96,12 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-12">
                                             <div class=" mb-3">
                                                 <div class="col-12 text-start">
-                                                    <label for="keperluan">Keperluan</label>
-                                                    <textarea name="keperluan" id="keperluan" rows="5" required class="form-control border-modal w-100 px-3" placeholder="keperluan pembuatan surat"></textarea>
+                                                    <label for="keperluan">Keterangan</label>
+                                                    <textarea name="keperluan" id="keperluan" rows="5" required class="form-control border-modal w-100 px-3" placeholder="Keterangan pembuatan surat"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -226,14 +226,14 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <div class=" mb-3">
+                                                                            <!-- <div class=" mb-3">
                                                                                 <div class="col-12 text-start ">
                                                                                     <label for="perihal">Perihal</label>
                                                                                 </div>
                                                                                 <div class="col-10">
-                                                                                    <input type="text" name="perihal" id="perihal" value="<?= $srt->perihal ?>" class="form-control border-modal w-100 px-3" required>
+                                                                                    <input type="text" name="perihal" id="perihal" value="" class="form-control border-modal w-100 px-3" required>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> -->
                                                                             <div class=" mb-3">
                                                                                 <div class="col-12 text-start ">
                                                                                     <label for="keperluan">Keperluan</label>

@@ -90,18 +90,21 @@
                         <tbody>
                             <tr>
                                 <th>Nama</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->fullname ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th>NIK</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->nik ?>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Tempat & Tanggal Lahir</th>
+                                <th style="width:25%;">Tempat & Tanggal Lahir</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->tempat_lahir ?>,
                                     <?= $data_pemohon[0]->tgl_lahir ?>
@@ -109,31 +112,36 @@
                             </tr>
                             <tr>
                                 <th>Kewarganegaraan</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->kewarganegaraan ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Agama</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->agama ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Pekerjaan</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->pekerjaan ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Tempat Tinggal</th>
+                                <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->alamat ?>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Keperluan</th>
-                                <td>
+                                <th>Keterangan</th>
+                                <th>:</th>
+                                <td style="text-align:justify;">
                                     <?= $surat->keperluan ?>
                                 </td>
                             </tr>

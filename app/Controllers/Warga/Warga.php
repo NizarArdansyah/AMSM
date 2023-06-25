@@ -109,7 +109,7 @@ class Warga extends BaseController
             'nomor_surat' => $this->sm->generate_nomor_surat(),
             'tanggal_surat' => date('Y-m-d H:i:s'),
             'pemohon' => $this->sm->getPemohon($this->request->getPost('pemohon')),
-            'perihal' => $this->request->getVar('perihal'),
+            // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
             'jenis' => $this->request->getVar('jenis'),
             'status' => 'antre',
@@ -161,7 +161,7 @@ class Warga extends BaseController
         $data = [
             'tanggal_surat' => date("Y-m-d H:i:s"),
             'jenis' => $this->request->getVar('jenis'),
-            'perihal' => $this->request->getVar('perihal'),
+            // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
             'status' => 'antre',
         ];
