@@ -89,7 +89,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <div class="mb-3">
                                                 <div class="text-start">
                                                     <label for="perihal">Perihal</label>
@@ -100,7 +100,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-12">
                                             <div class=" mb-3">
                                                 <div class="col-12 text-start">
@@ -234,14 +234,14 @@
                                                                                 <input readonly type="text" name="tanggal" id="tanggal" value="<?= $srt->tanggal_surat ?>" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
                                                                         </div>
-                                                                        <div class=" mb-3">
+                                                                        <!-- <div class=" mb-3">
                                                                             <div class="col-12 text-start">
                                                                                 <label for="perihal">Perihal</label>
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <input type="text" name="perihal" id="perihal" value="<?= $srt->perihal ?>" class="form-control border-modal w-100 px-3" required>
+                                                                                <input type="text" name="perihal" id="perihal" value="" class="form-control border-modal w-100 px-3" required>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class=" mb-3">
                                                                             <div class="col-12 text-start">
                                                                                 <label for="keperluan">Keperluan</label>

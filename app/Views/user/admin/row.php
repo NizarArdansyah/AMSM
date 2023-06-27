@@ -5,8 +5,8 @@
                 <img src="<?= base_url() ?>/assets/img/<?= $row->img_user ?>" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
             </div>
             <div class="d-flex flex-column justify-content-center">
-                <h6 class="mb-0 text-sm"><?= $row->username; ?></h6>
-                <p class="text-xs text-secondary mb-0">ID : <?= $row->id; ?></p>
+                <h6 class="mb-0 text-sm"><?= $row->fullname; ?></h6>
+                <p class="text-xs text-secondary mb-0"><?= $row->username ?> | <?= $row->id; ?></p>
             </div>
         </div>
     </td>

@@ -30,6 +30,7 @@ class Petugas extends BaseController
             $data['title'] = 'AMSM - Admin';
         }
         $data['surat'] = $this->sm->getSurats();
+        $data['muser'] = $this->sm;
 
         return view('user/petugas/manajemen_surat', $data);
     }
@@ -42,7 +43,7 @@ class Petugas extends BaseController
         $data = [
             'tanggal_surat' => date("Y-m-d H:i:s"),
             'pemohon' => $this->request->getVar('pemohon'),
-            'perihal' => $this->request->getVar('perihal'),
+            // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
             'status' => $this->request->getVar('status'),
             'jenis' => $this->request->getVar('jenis'),
@@ -58,7 +59,8 @@ class Petugas extends BaseController
             return redirect()->to(base_url('/manajemen-surat'));
         }
 
-        return view('user/petugas/manajemen_surat', $data);
+        return redirect()->to(base_url('/manajemen-surat'));
+        // return view('user/petugas/manajemen_surat', $data);
     }
 
     // cetak surat
@@ -108,8 +110,9 @@ class Petugas extends BaseController
             session()->setFlashdata('Gagal', 'Surat gagal dihapus');
             return redirect()->to(base_url('/manajemen-surat'));
         }
-
-        return view('user/petugas/manajemen_surat', $data);
+        
+        return redirect()->to(base_url('/manajemen-surat'));
+        // return view('user/petugas/manajemen_surat', $data);
     }
 
     //mengarahkan ke profil petugas

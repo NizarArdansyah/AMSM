@@ -73,7 +73,7 @@ class SuratModel extends Model
     //menampilkan semua data surat 
     function getSurats()
     {
-        $builder = $this->db->table('surat');
+        $builder = $this->db->table('surat')->orderBy('tanggal_surat', 'DESC');
         $data = $builder->get()->getResultObject();
         return $data;
     }

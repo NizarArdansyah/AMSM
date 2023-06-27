@@ -16,11 +16,11 @@ class Home extends BaseController
     {
         $data['user'] = user();
         if (in_groups('user')) {
-            $data['title'] = 'AMSM - Warga';
+            $data['title'] = 'ASMS - Warga';
         } elseif (in_groups('petugas')) {
-            $data['title'] = 'AMSM - Petugas';
+            $data['title'] = 'ASMS - Petugas';
         } elseif (in_groups('admin')) {
-            $data['title'] = 'AMSM - Admin';
+            $data['title'] = 'ASMS - Admin';
         }
         $data['profil_lengkap'] = $this->sm->cekProfil(user_id());
         $data['surat'] = $this->sm->getSuratByID(user_id());
@@ -37,7 +37,7 @@ class Home extends BaseController
     public function profil_desa()
     {
         $data['user'] = user();
-        $data['title'] = 'AMSM - Profil Desa';
+        $data['title'] = 'ASMS - Profil Desa';
         return view('profil_desa', $data);
     }
 }

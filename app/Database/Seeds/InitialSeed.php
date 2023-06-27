@@ -108,7 +108,7 @@ class InitialSeed extends Seeder
                 'nomor_surat'   => $dpn . "/DS.04/" .$this->monthToRomawi($month) . "/" . date('Y'),
                 'tanggal_surat' => $faker->dateTimeThisYear()->format('Y-m-d'),
                 'pemohon'       => $nama_waraga->username,
-                'perihal'       => $faker->randomElement(['permohonan', 'pengajuan']),
+                // 'perihal'       => $faker->randomElement(['permohonan', 'pengajuan']),
                 'keperluan'     => $faker->words($faker->randomDigit(), true),
                 'keterangan'    => $faker->words($faker->randomDigit(), true),
                 'jenis'         => $faker->randomElement(['Surat Pengantar SKCK', 'Surat Keterangan usaha', 'Surat Keterangan tidak mampu']),
