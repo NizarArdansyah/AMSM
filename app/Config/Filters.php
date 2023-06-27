@@ -35,8 +35,9 @@ class Filters extends BaseConfig
      * @var array
      */
     public $globals = [
+        // add landing page to skip filter
         'before' => [
-            'login',
+            'login' => ['except' => ['/', 'lp', 'auth/*', 'profil_desa']],
             'honeypot',
             // 'csrf',
             // 'invalidchars',

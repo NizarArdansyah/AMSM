@@ -29,6 +29,11 @@ class Home extends BaseController
         return view('index', $data);
     }
 
+    public function lp()
+    {
+        return view('lp');
+    }
+
     public function profil_desa()
     {
         $data['user'] = user();
