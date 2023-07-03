@@ -402,7 +402,9 @@
 
         <div class="section-title">
           <h2>Pelayanan</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>
+            Berikut ini adalah jam pelayanan Desa Podosari, Kecamatan Kesesi, Kabupaten Pekalongan
+          </p>
         </div>
 
         <div class="row">
@@ -420,8 +422,8 @@
                 <h4>Jum'at :</h4>
                 <p>08:00 - 10:00 WIB</p>
               </div>
-
-              <iframe src="https:/www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29721.094263872128!2d109.51841743750269!3d-7.042781093123676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fe04d4ff180eb%3A0x3250ee8d31b58317!2sPodosari%2C%20Kec.%20Kesesi%2C%20Kabupaten%20Pekalongan%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1688364051420!5m2!1sid!2sid" frameborder="0" style="border:0; width: 100%; height: 350px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
           </div>
