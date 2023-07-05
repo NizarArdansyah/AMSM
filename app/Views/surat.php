@@ -176,8 +176,8 @@
 
                 <!-- Gambar tanda tangan -->
                 <div class="position-relative" style="width: fit-content;">
-                    <img src="<?= base_url() ?>/assets/img/ttd.png" alt="" srcset=""
-                        style="width: 200px; top:-60px; z-index: 10;" class="position-absolute">
+                    <!-- <img src="<?= base_url() ?>/assets/img/ttd.png" alt="" srcset=""
+                        style="width: 200px; top:-60px; z-index: 10;" class="position-absolute"> -->
                 </div>
                 <!-- Nama Kepala Desa -->
                 <p style="margin-top: 100px;"><strong>NURCAHYO</strong></p>
