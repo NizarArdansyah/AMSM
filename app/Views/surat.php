@@ -22,6 +22,7 @@
         html {
             font-family: Arial, Helvetica, sans-serif;
             color: #094471;
+            text-align: justify;
         }
 
         .logo-kab {
@@ -48,13 +49,21 @@
             margin-top: 5em;
             margin-right: 2.5em;
         }
+        .sheet.padding-y-0mm {
+            padding-top: 0mm !important;
+            padding-bottom: 0mm !important;
+        }
+        .sheet.padding-x-15mm {
+            padding-left: 15mm !important;
+            padding-right: 15mm !important;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body class="A4">
-    <section class="sheet padding-10mm">
+<body class="A4" onload="window.print()">
+    <section class="sheet padding-x-15mm padding-y-0mm">
         <?php
         ?>
         <div id="kop_surat" class="d-flex position-relative justify-content-center border-bottom border-3 border-dark">
@@ -96,18 +105,18 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>NIK</th>
-                                <th>:</th>
-                                <td>
-                                    <?= $data_pemohon[0]->nik ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th style="width:25%;">Tempat & Tanggal Lahir</th>
+                                <th style="width:35%;">Tempat & Tanggal Lahir</th>
                                 <th>:</th>
                                 <td>
                                     <?= $data_pemohon[0]->tempat_lahir ?>,
                                     <?= $data_pemohon[0]->tgl_lahir ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>NIK</th>
+                                <th>:</th>
+                                <td>
+                                    <?= $data_pemohon[0]->nik ?>
                                 </td>
                             </tr>
                             <tr>
@@ -139,10 +148,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Keterangan</th>
+                                <th>Keperluan</th>
                                 <th>:</th>
                                 <td style="text-align:justify;">
                                     <?= $surat->keperluan ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Keterangan</th>
+                                <th>:</th>
+                                <td style="text-align:justify;">
+                                    <?= $surat->keterangan ?>
                                 </td>
                             </tr>
                         </tbody>

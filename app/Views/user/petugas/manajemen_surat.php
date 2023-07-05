@@ -100,8 +100,16 @@
                                         <div class="col-12">
                                             <div class=" mb-3">
                                                 <div class="col-12 text-start">
-                                                    <label for="keperluan">Keterangan</label>
-                                                    <textarea name="keperluan" id="keperluan" rows="5" required class="form-control border-modal w-100 px-3" placeholder="Keterangan pembuatan surat"></textarea>
+                                                    <label for="keperluan">Keperluan</label>
+                                                    <textarea name="keperluan" id="keperluan" rows="3" required class="form-control border-modal w-100 px-3" placeholder="Penerbitan SKCK untuk ......"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class=" mb-3">
+                                                <div class="col-12 text-start">
+                                                    <label for="keterangan">Keterangan</label>
+                                                    <textarea name="keterangan" id="keterangan" rows="3" required class="form-control border-modal w-100 px-3" placeholder="Bahwa yang bersangkutan ......"></textarea>
                                                 </div>
                                             </div>
                                         </div>

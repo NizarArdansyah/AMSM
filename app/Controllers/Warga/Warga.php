@@ -111,6 +111,7 @@ class Warga extends BaseController
             'pemohon' => $this->sm->getPemohon($this->request->getPost('pemohon')),
             // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
+            'keterangan' => $this->request->getVar('keterangan'),
             'jenis' => $this->request->getVar('jenis'),
             'status' => 'antre',
         ];
