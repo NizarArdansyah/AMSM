@@ -82,9 +82,13 @@
                                                     <label for="jenis">Jenis Surat</label>
                                                     <select name="jenis" id="jenis" autofocus required class="form-control border-modal form-select px-3">
                                                         <option class="p-2" disabled>Pilih jenis surat</option>
-                                                        <option class="p-2" value="Surat Keterangan">Surat Keterangan</option>
+                                                        <?php foreach ($master as $m) : ?>
+                                                            <option class="p-2" value="<?= $m->jenis_surat ?>"><?= $m->jenis_surat ?></option>
+                                                        <?php endforeach ?>
+
+                                                        <!-- <option class="p-2" value="Surat Keterangan">Surat Keterangan</option>
                                                         <option class="p-2" value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
-                                                        <option class="p-2" value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu</option>
+                                                        <option class="p-2" value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu</option> -->
                                                     </select>
                                                 </div>
                                             </div>
@@ -218,9 +222,12 @@
                                                                             <div class="col-12">
                                                                                 <select name="jenis" autofocus class="form-control border-modal form-select px-3" required>
                                                                                     <option class="p-2" disabled>Pilih jenis surat</option>
-                                                                                    <option class="p-2" value="Surat Keterangan" <?= $srt->jenis == "Surat Keterangan" ? "selected" : "" ?>>Surat Keterangan</option>
+                                                                                    <?php foreach ($master as $m) : ?>
+                                                                                        <option class="p-2" value="<?= $m->jenis_surat ?>" <?= $srt->jenis == $m->jenis_surat ? "selected" : "" ?>><?= $m->jenis_surat ?></option>
+                                                                                    <?php endforeach ?>
+                                                                                    <!-- <option class="p-2" value="Surat Keterangan" <?= $srt->jenis == "Surat Keterangan" ? "selected" : "" ?>>Surat Keterangan</option>
                                                                                     <option class="p-2" value="Surat Keterangan Usaha" <?= $srt->jenis == "Surat Keterangan Usaha" ? "selected" : "" ?>>Surat Keterangan Usaha</option>
-                                                                                    <option class="p-2" value="Surat Keterangan Tidak Mampu" <?= $srt->jenis == "Surat Keterangan Tidak Mampu" ? "selected" : "" ?>>Surat Keterangan Tidak Mampu</option>
+                                                                                    <option class="p-2" value="Surat Keterangan Tidak Mampu" <?= $srt->jenis == "Surat Keterangan Tidak Mampu" ? "selected" : "" ?>>Surat Keterangan Tidak Mampu</option> -->
                                                                                 </select>
                                                                             </div>
                                                                         </div>

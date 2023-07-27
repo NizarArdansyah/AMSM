@@ -127,6 +127,14 @@ use function PHPUnit\Framework\isNull;
                             <span class="nav-link-text ms-1">Manajemen Surat</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white <?= uri_string() == 'master-surat' ? 'active' : '' ?>" href="<?= base_url('master-surat') ?>">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">post_add</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Master Surat</span>
+                        </a>
+                    </li>
                 <?php elseif (in_groups('admin')) : ?>
                     <li class="nav-item">
                         <a class="nav-link text-white <?= uri_string() == 'manajemen-surat' ? 'active' : '' ?>" href="<?= base_url('manajemen-surat') ?>">
@@ -142,6 +150,14 @@ use function PHPUnit\Framework\isNull;
                                 <i class="material-icons opacity-10">person</i>
                             </div>
                             <span class="nav-link-text ms-1">Manajemen User</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white <?= uri_string() == 'master-surat' ? 'active' : '' ?>" href="<?= base_url('master-surat') ?>">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">post_add</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Master Surat</span>
                         </a>
                     </li>
                 <?php endif; ?>

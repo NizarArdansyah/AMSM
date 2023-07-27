@@ -94,6 +94,17 @@ class InitialSeed extends Seeder
             ]));
         }
 
+        // Insert Master Surat
+        $master = new \App\Models\MasterSuratModel();
+        $m = [
+            'Surat Pengantar SKCK',
+            'Surat Keterangan usaha',
+            'Surat Keterangan tidak mampu',
+        ];
+
+        foreach ($m as $m) {
+            $master->insert(['jenis_surat' => $m]);
+        }
 
         // Insert to table surat
         $surat = new \App\Models\SuratModel();

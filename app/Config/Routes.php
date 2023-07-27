@@ -49,6 +49,9 @@ $routes->post('/upload-kk', 'Warga\Warga::upload_kk', ['filter' => 'role:user,pe
 
 // Role Petugas Route
 $routes->get('/manajemen-surat', 'Petugas\Petugas::manajemen_surat', ['filter' => 'role:petugas,admin']);
+$routes->get('/master-surat', 'Petugas\Petugas::master_surat', ['filter' => 'role:petugas,admin']);
+$routes->post('/master-surat', 'Petugas\Petugas::simpan_master', ['filter' => 'role:petugas,admin']);
+$routes->delete('/master-surat/(:num)', 'Petugas\Petugas::hapus_master/$1', ['filter' => 'role:petugas,admin']);
 $routes->post('/update-surat', 'Petugas\Petugas::update_surat', ['filter' => 'role:petugas,admin']);
 $routes->post('/pesan-pembatalan', 'Petugas\Petugas::pesan_pembatalan', ['filter' => 'role:petugas,admin']);
 $routes->get('/cetak-surat/(:num)', 'Petugas\Petugas::cetak_surat/$1', ['filter' => 'role:petugas,admin']);

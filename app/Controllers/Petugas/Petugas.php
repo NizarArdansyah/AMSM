@@ -9,10 +9,50 @@ use App\Models\UserModel;
 class Petugas extends BaseController
 {
     protected $sm;
+    protected $master;
 
     public function __construct()
     {
         $this->sm = new SuratModel();
+        $this->master = new \App\Models\MasterSuratModel();
+    }
+
+    function master_surat() {
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
+
+        $data['master'] = $this->master->findAll();
+
+        return view('user/petugas/master_surat', $data);
+    }
+
+    function simpan_master() {
+        $data = [
+            'jenis_surat' => $this->request->getVar('jenis_surat'),
+        ];
+
+        if ($this->master->save($data)) {
+            session()->setFlashdata('Berhasil', 'Master surat berhasil ditambahkan');
+            return redirect()->to(base_url('/master-surat'));
+        } else {
+            session()->setFlashdata('Gagal', 'Master surat gagal ditambahkan');
+            return redirect()->to(base_url('/master-surat'));
+        }
+    }
+
+    function hapus_master($id) {
+        if ($this->master->delete($id)) {
+            session()->setFlashdata('Berhasil', 'Master surat berhasil dihapus');
+            return redirect()->to(base_url('/master-surat'));
+        } else {
+            session()->setFlashdata('Gagal', 'Master surat gagal dihapus');
+            return redirect()->to(base_url('/master-surat'));
+        }
     }
 
     // mengarahkan ke manajemen surat
@@ -31,6 +71,7 @@ class Petugas extends BaseController
         }
         $data['surat'] = $this->sm->getSurats();
         $data['muser'] = $this->sm;
+        $data['master'] = $this->master->findAll();
 
         return view('user/petugas/manajemen_surat', $data);
     }

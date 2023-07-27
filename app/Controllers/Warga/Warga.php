@@ -12,10 +12,12 @@ use App\Models\SuratModel;
 class Warga extends BaseController
 {
     protected $sm;
+    protected $master;
 
     public function __construct()
     {
         $this->sm = new SuratModel();
+        $this->master = new \App\Models\MasterSuratModel();
     }
 
     public function profil()
@@ -88,6 +90,8 @@ class Warga extends BaseController
         $data['id_user'] = user_id();
         $data['surat'] = $this->sm->getSuratByID(user_id());
         $data['profil_lengkap'] = $this->sm->cekProfil(user_id());
+        $data['master'] = $this->master->findAll();
+
 
         return view('pengajuan_surat', $data);
     }
@@ -165,6 +169,7 @@ class Warga extends BaseController
             // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
             'status' => 'antre',
+            'master' => $this->request->getVar('master'),
         ];
 
         $id_surat = $this->request->getVar('id_surat');
