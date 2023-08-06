@@ -46,7 +46,7 @@
             <?php if (!$profil_lengkap): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <span class="alert-icon text-white"><i class="fas fa-exclamation-triangle"></i></span>
-                    <span class="alert-text text-white">Anda belum melengkapi profil, silahkan lengkapi profil anda 
+                    <span class="alert-text text-white">Lengkapi profil anda untuk dapat menggunakanan layanan surat, silahkan lengkapi profil anda 
                         <a href="<?= base_url("profil") ?>" class="text-white font-weight-bold text-decoration-underline">disini</a>
                     </span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
