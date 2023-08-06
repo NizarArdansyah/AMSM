@@ -37,7 +37,7 @@
         <button type="button" class="btn btn-icon bg-dark text-white btn-circle btn-sm m-0" title="Detail User" data-bs-toggle="modal" data-bs-target="#editUserModal<?= $row->id ?>">
             <i class="fas fa-tasks"></i>
         </button>
-        
+
         <?php if (!$row->kk) : ?>
             <button type="button" class="btn btn-icon bg-warning text-white btn-circle btn-sm m-0" title="Detail User" data-bs-toggle="modal" data-bs-target="#modalUploadKK<?= $row->id ?>">
                 <small>KK</small>
@@ -57,13 +57,12 @@
                                 <div class="container-fluid">
                                     <input type="hidden" name="id_user" value="<?= $row->id ?>">
                                     <div class="row">
-                                        <div class="col-xl">
-                                            <div class=" mb-3">
-                                                <div class="col-12 text-start ">
-                                                    <label for="kk">Pilih File</label>
-                                                    <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
-                                                </div>
-                                            </div>
+                                        <div class="col-12 text-start ">
+                                            <label for="kk">Pilih File</label>
+                                            <input type="file" name="kk" id="kk" class="form-control border-modal w-100 px-3" required>
+                                            <small>
+                                                KK harus harus file berformat .jpg, .jpeg, .png, dan .pdf dengan maksimal ukuran 2 MB
+                                            </small>
                                         </div>
                                     </div>
                                 </div>

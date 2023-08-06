@@ -191,10 +191,10 @@ class Warga extends BaseController
         if (
             !$this->validate([
                 'kk' => [
-                    'rules' => 'uploaded[kk]|mime_in[kk,image/jpg,image/jpeg,image/png]|max_size[kk,2048]',
+                    'rules' => 'uploaded[kk]|mime_in[kk,image/jpg,image/jpeg,image/png,application/pdf]|max_size[kk,2048]',
                     'errors' => [
                         'uploaded' => 'Harus Ada File yang diupload',
-                        'mime_in' => 'File Extention Harus Berupa jpg,jpeg,png',
+                        'mime_in' => 'File Extention Harus Berupa jpg,jpeg,png,pdf',
                         'max_size' => 'Ukuran File Maksimal 2 MB'
                     ]
 
