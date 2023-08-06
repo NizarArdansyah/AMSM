@@ -51,15 +51,17 @@ use Config\Email;
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
                   <h4 class="text-white font-weight-bolder text-center mt-2 mb-0" style="letter-spacing: 1px;">Daftar</h4>
-                  <div class="row mt-3">
-                    <p class="text-white text-center">Aplikasi Sistem Manajemen Surat </p>
-                  </div>
+                  <p class="text-white text-center">Aplikasi Sistem Manajemen Surat </p>
                 </div>
               </div>
               <div class="card-body">
 
                 <form role="form" class="text-start" action="<?= url_to('register') ?>" method="post">
                   <?= csrf_field() ?>
+                  <div class="input-group input-group-outline my-3">
+                    <label for="nik" class="form-label">NIK</label>
+                    <input type="number" min=0 name="nik" class="form-control <?php if (session('errors.nik')) : ?>is-invalid<?php endif ?>" value="<?= old('nik') ?>">
+                  </div>
                   <div class="input-group input-group-outline mb-3">
                     <label for="email" class="form-label"><?= lang('Auth.email') ?></label>
                     <input type="email" name="email" class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" value="<?= old('email') ?>">
@@ -74,12 +76,12 @@ use Config\Email;
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label for="pass_confirm" class="form-label">Ulangi Password</label>
-                    <input type="ulangi password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
+                    <input type="password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Daftar</button>
                   </div>
-                  <p class="mt-4 text-sm text-center">
+                  <p class="mt-2 text-sm text-center">
                     <?= lang('Auth.alreadyRegistered') ?>
                     <a class="text-info text-gradient font-weight-bold" href="<?= url_to('login') ?>">
                       <?= lang('Auth.signIn') ?>

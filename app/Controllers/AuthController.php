@@ -149,6 +149,16 @@ class AuthController extends Controller
         $rules = config('Validation')->registrationRules ?? [
             'username' => 'required|alpha_numeric_space|min_length[3]|max_length[30]|is_unique[users.username]',
             'email'    => 'required|valid_email|is_unique[users.email]',
+            'nik'      => [
+                'label' => 'NIK',
+                'rules' => 'required|numeric|exact_length[16]|is_unique[users.nik]',
+                'errors' => [
+                    'is_unique' => 'NIK sudah terdaftar',
+                    'exact_length' => 'NIK harus 16 digit',
+                    'is_unique' => 'NIK sudah terdaftar',
+                    'numeric' => 'NIK harus berupa angka',
+                ],
+            ],
         ];
 
         if (!$this->validate($rules)) {
