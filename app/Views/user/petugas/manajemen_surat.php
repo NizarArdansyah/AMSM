@@ -144,13 +144,13 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-4">
-                        <table id="data_table" class="table align-items-center mb-0">
+                        <table id="tblSurat" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Pemohon</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Permohonan</th>
+                                    <th id="tgl_permohonan" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Permohonan</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detail Surat</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
@@ -438,6 +438,14 @@
             "info": false,
             "autoWidth": false,
             "responsive": true,
+        });
+        $('#tblSurat').DataTable({
+            "responsive": true,
+            "order": [
+                [3, "desc"]
+            ],
+            "pagingType": "numbers",
+
         });
     });
 </script>
