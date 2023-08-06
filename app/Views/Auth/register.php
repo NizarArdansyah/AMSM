@@ -73,8 +73,8 @@ use Config\Email;
                     <input type="password" name="password" class="form-control <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label for="pass_confirm" class="form-label">Password</label>
-                    <input type="password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
+                    <label for="pass_confirm" class="form-label">Ulangi Password</label>
+                    <input type="ulangi password" name="pass_confirm" class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" autocomplete="off">
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Daftar</button>
