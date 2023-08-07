@@ -248,6 +248,16 @@ use function PHPUnit\Framework\isNull;
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     </div>
                     <ul class="navbar-nav dropdown justify-content-end">
+                        <?php if (in_groups(['admin', 'petugas'])) : ?>
+                            <li class="nav-item d-flex align-items-center d-none d-lg-block me-4">
+                                <a href="/manajemen-surat?status=new" class="nav-link text-white font-weight-bold bg-info p-2 px-4 rounded-pill" style="position: relative;" data-toggle="tooltip" data-placement="bottom" title="<?= count_surat('antre') ?> permintaan surat baru belum di proses">
+                                    <i class="fa fa-bell"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-info <?= count_surat('antre') > 0 ? "bg-danger text-white" : "bg-white text-info" ?>">
+                                        <?= count_surat('antre') ?> <span class="visually-hidden"></span>
+                                    </span>
+                                </a>
+                            </li>
+                        <?php endif ?>
                         <li class="nav-item d-flex align-items-center d-none d-lg-block">
                             <a href="javascript:;" class="nav-link text-white font-weight-bold bg-info p-2 px-4 rounded-pill" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user me-sm-1"></i>&nbsp; |
@@ -304,6 +314,10 @@ use function PHPUnit\Framework\isNull;
         $(document).ready(function() {
             $('#data_table').DataTable();
         });
+
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
     <script>
         $('.btn-change-group').on('click', function() {

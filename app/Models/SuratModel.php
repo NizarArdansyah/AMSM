@@ -78,6 +78,13 @@ class SuratModel extends Model
         return $data;
     }
 
+    function getSuratByStatus($s)
+    {
+        $builder = $this->db->table('surat')->where('status', $s)->orderBy('tanggal_surat', 'DESC');
+        $data = $builder->get()->getResultObject();
+        return $data;
+    }
+
     //mengambil nomor surat terakhir
     private function get_nomor_surat()
     {

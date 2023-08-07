@@ -17,7 +17,8 @@ class Petugas extends BaseController
         $this->master = new \App\Models\MasterSuratModel();
     }
 
-    function master_surat() {
+    function master_surat()
+    {
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
         } elseif (in_groups('petugas')) {
@@ -31,7 +32,8 @@ class Petugas extends BaseController
         return view('user/petugas/master_surat', $data);
     }
 
-    function simpan_master() {
+    function simpan_master()
+    {
         $data = [
             'jenis_surat' => $this->request->getVar('jenis_surat'),
         ];
@@ -45,7 +47,8 @@ class Petugas extends BaseController
         }
     }
 
-    function hapus_master($id) {
+    function hapus_master($id)
+    {
         if ($this->master->delete($id)) {
             session()->setFlashdata('Berhasil', 'Master surat berhasil dihapus');
             return redirect()->to(base_url('/master-surat'));
@@ -69,7 +72,14 @@ class Petugas extends BaseController
         } elseif (in_groups('admin')) {
             $data['title'] = 'AMSM - Admin';
         }
-        $data['surat'] = $this->sm->getSurats();
+
+        if (isset($_GET['status'])) {
+            $status = $_GET['status'] == "new" ? "antre" : $_GET['status'];
+            $data['surat'] = $this->sm->getSuratByStatus($status);
+        } else {
+            $data['surat'] = $this->sm->getSurats();
+        }
+
         $data['muser'] = $this->sm;
         $data['master'] = $this->master->findAll();
 
@@ -86,6 +96,7 @@ class Petugas extends BaseController
             'pemohon' => $this->request->getVar('pemohon'),
             // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
+            'keterangan' => $this->request->getVar('keterangan'),
             'status' => $this->request->getVar('status'),
             'jenis' => $this->request->getVar('jenis'),
         ];
@@ -151,7 +162,28 @@ class Petugas extends BaseController
             session()->setFlashdata('Gagal', 'Surat gagal dihapus');
             return redirect()->to(base_url('/manajemen-surat'));
         }
-        
+
+        return redirect()->to(base_url('/manajemen-surat'));
+        // return view('user/petugas/manajemen_surat', $data);
+    }
+
+    public function selesaikan_surat($id_surat)
+    {
+        $data['title'] = 'AMSM - Petugas';
+        $data['user'] = user();
+
+        $data = [
+            'status' => 'siap',
+        ];
+
+        if ($this->sm->updateSurat($id_surat, $data)) {
+            session()->setFlashdata('Berhasil', 'Surat berhasil dihapus');
+            return redirect()->to(base_url('/manajemen-surat'));
+        } else {
+            session()->setFlashdata('Gagal', 'Surat gagal dihapus');
+            return redirect()->to(base_url('/manajemen-surat'));
+        }
+
         return redirect()->to(base_url('/manajemen-surat'));
         // return view('user/petugas/manajemen_surat', $data);
     }
