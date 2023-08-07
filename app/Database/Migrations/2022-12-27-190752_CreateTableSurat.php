@@ -17,7 +17,7 @@ class CreateTableSurat extends Migration
             'pemohon'       => [ 'type' => 'VARCHAR', 'constraint' => 100 ],
             // 'perihal'       => [ 'type' => 'TEXT', 'constraint' => 255 ],
             'keperluan'     => [ 'type' => 'VARCHAR', 'constraint' => 255],
-            'keterangan'    => [ 'type' => 'VARCHAR', 'constraint' => 255 ],
+            'keterangan'    => [ 'type' => 'VARCHAR', 'constraint' => 255, 'null' => true],
             'jenis'         => [ 'type' => 'VARCHAR', 'constraint' => 200 ],
             'status'        => [ 'type' => 'VARCHAR', 'constraint' => 30 ],
             'pesan'         => [ 'type' => 'TEXT', 'null' => true ],

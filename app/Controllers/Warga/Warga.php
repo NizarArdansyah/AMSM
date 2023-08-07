@@ -150,6 +150,59 @@ class Warga extends BaseController
         return view('pengajuan_surat', $data);
     }
 
+    public function buat_pengajuan_surat_admin()
+    {
+        if (in_groups('user')) {
+            $data['title'] = 'AMSM - Warga';
+        } elseif (in_groups('petugas')) {
+            $data['title'] = 'AMSM - Petugas';
+        } elseif (in_groups('admin')) {
+            $data['title'] = 'AMSM - Admin';
+        }
+
+        
+        $data = [
+            'id_user' => $this->request->getPost('pemohon'),
+            'nomor_surat' => $this->sm->generate_nomor_surat(),
+            'tanggal_surat' => date('Y-m-d H:i:s'),
+            'pemohon' => $this->sm->getPemohon($this->request->getPost('pemohon')),
+            // 'perihal' => $this->request->getVar('perihal'),
+            'keperluan' => $this->request->getVar('keperluan'),
+            'keterangan' => $this->request->getVar('keterangan'),
+            'jenis' => $this->request->getVar('jenis'),
+            'status' => 'antre',
+        ];
+
+        $profil_lengkap = $this->sm->cekProfil($this->request->getPost('pemohon'));
+
+        if ($profil_lengkap) {
+            if ($this->sm->insert($data)) {
+                session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
+                
+                if (in_groups('user') || in_groups('warga')) {
+                    return redirect()->to(base_url('/pengajuan-surat'));
+                }
+                return redirect()->to(base_url('/manajemen-surat'));
+            } else {
+                session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
+                
+                if (in_groups('user') || in_groups('warga')) {
+                    return redirect()->to(base_url('/pengajuan-surat'));
+                }
+                return redirect()->to(base_url('/manajemen-surat'));
+            }
+        } else {
+            session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan profil lengkap');
+            
+            if (in_groups('user') || in_groups('warga')) {
+                return redirect()->to(base_url('/pengajuan-surat'));
+            }
+            return redirect()->to(base_url('/manajemen-surat'));
+        }
+
+        return view('pengajuan_surat', $data);
+    }
+
     // update surat yang sudah diajukan
     public function update_pengajuan_surat()
     {

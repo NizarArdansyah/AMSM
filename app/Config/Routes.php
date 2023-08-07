@@ -44,6 +44,7 @@ $routes->get('/profil', 'Warga\Warga::profil', ['filter' => 'role:user,petugas,a
 $routes->post('/ubah-profil', 'Warga\Warga::ubah_profil', ['filter' => 'role:user,petugas,admin']);
 $routes->get('/pengajuan-surat', 'Warga\Warga::pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
 $routes->post('/pengajuan-surat', 'Warga\Warga::buat_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
+$routes->post('/pengajuan-surat-admin', 'Warga\Warga::buat_pengajuan_surat_admin', ['filter' => 'role:user,petugas,admin']);
 $routes->post('/update-pengajuan-surat', 'Warga\Warga::update_pengajuan_surat', ['filter' => 'role:user,petugas,admin']);
 $routes->post('/upload-kk', 'Warga\Warga::upload_kk', ['filter' => 'role:user,petugas,admin']);
 
@@ -56,6 +57,7 @@ $routes->post('/update-surat', 'Petugas\Petugas::update_surat', ['filter' => 'ro
 $routes->post('/pesan-pembatalan', 'Petugas\Petugas::pesan_pembatalan', ['filter' => 'role:petugas,admin']);
 $routes->get('/cetak-surat/(:num)', 'Petugas\Petugas::cetak_surat/$1', ['filter' => 'role:petugas,admin']);
 $routes->get('/hapus-surat/(:num)', 'Petugas\Petugas::hapus_surat/$1', ['filter' => 'role:petugas,admin']);
+$routes->get('/selesaikan-surat/(:num)', 'Petugas\Petugas::selesaikan_surat/$1', ['filter' => 'role:petugas,admin']);
 
 // Role Admin Route
 $routes->get('/manajemen-user', 'Admin\Admin::manajemen_user', ['filter' => 'role:admin']);

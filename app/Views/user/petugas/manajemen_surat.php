@@ -30,7 +30,7 @@
             <!-- Modal pengajuan surat -->
             <div class="modal fade bd-example-modal-xl" id="modal_buat_surat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                    <form class="modal-content" method="post" action="/pengajuan-surat">
+                    <form class="modal-content" method="post" action="/pengajuan-surat-admin">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Buat Surat Pemohonan</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -189,6 +189,7 @@
                                             <button type="" class="btn btn-sm m-0 bg-dark text-white border-0 mr-2" data-bs-toggle="modal" data-bs-target="#detail_surat<?= $srt->id ?>">
                                                 <i class="fas fa-tasks"></i>
                                             </button>
+
                                             <!-- Modal detail surat -->
                                             <div class="modal fade bd-example-modal-xl" id="detail_surat<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detail_suratLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -233,12 +234,12 @@
                                                                         <div class="mb-3">
                                                                             <div class="col-12 text-start ">
                                                                                 <label for="status">Kartu Keluarga</label>
-                                                                                <?php foreach ($users as $usr) : ?>
-                                                                                    <?php if ($usr->id == $srt->id_user) : ?>
+                                                                                <?php foreach ($users as $user) : ?>
+                                                                                    <?php if ($user->id == $srt->id_user) : ?>
                                                                                         <div id="portfolio" class="w-100">
                                                                                             <div class="portfolio-item">
-                                                                                                <a href="<?= base_url() . "/uploads/kk/" . $usr->kk; ?>" class="portfolio-popup">
-                                                                                                    <img src="<?= base_url() . "/uploads/kk/" . $usr->kk; ?>" alt="your image" class="img-fluid w-100" id="gambar">
+                                                                                                <a href="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" class="portfolio-popup">
+                                                                                                    <img src="<?= base_url() . "/uploads/kk/" . $user->kk; ?>" alt="your image" class="img-fluid w-100" id="gambar">
                                                                                                     <div class="portfolio-overlay w-100">
                                                                                                         <div class="portfolio-info">
                                                                                                             <div class="text-center">
@@ -312,22 +313,57 @@
                                                     </button>
                                                 <?php endif; ?>
                                             <?php else : ?>
-                                                <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge border border-1 border-info m-0 text-info" target="_blank"><i class="fas fa-print"></i></a>
+                                                <?php if ($srt->keterangan) : ?>
+                                                    <a href="<?= base_url('cetak-surat') . "/" . $srt->id ?>" class="badge border border-1 border-info m-0 text-info" target="_blank"><i class="fas fa-print"></i></a>
+                                                <?php else : ?>
+                                                    <button disable class="badge border border-1 border-secondary m-0 text-secondary" data-toggle="tooltip" title="anda harus memasikan keterangan surat, dan melakukan pengecekan kembali pada perihal surat"><i class="fas fa-print"></i></button>
+                                                <?php endif ?>
                                             <?php endif; ?>
 
-                                            <?php if (in_groups('admin')) : ?>
-                                                <!-- Button trigger modal hapus surat -->
+                                            <?php if (in_groups(['admin', 'petugas'])) : ?>
+                                                <?php if ($srt->status == 'siap') : ?>
+                                                    <button class="badge border border-1 bg-success text-white border-success m-0 text-success me-2" data-toggle="tooltip" title="surat siap diambil"><i class="fas fa-check"></i></button>
+                                                <?php elseif ($srt->keterangan && $srt->status == 'antre') : ?>
+                                                    <button type="button" class="badge border border-1 border-success badge-success text-success me-2" title="ubah status menjadi selesai" data-bs-toggle="modal" data-bs-target="#selesaikanSurat<?= $srt->id ?>">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                <?php else : ?>
+                                                    <button disable class="badge border border-1 border-secondary m-0 text-secondary me-2" data-toggle="tooltip" title="anda harus memasikan keterangan surat, dan melakukan pengecekan kembali pada perihal surat"><i class="fas fa-check"></i></button>
+                                                <?php endif ?>
                                                 <button type="button" class="badge border border-1 border-danger badge-danger text-danger" title="Hapus surat" data-bs-toggle="modal" data-bs-target="#hapusSuratModal<?= $srt->id ?>">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             <?php endif ?>
+
+                                            <!-- Modal selesaikan surat -->
+                                            <div class="modal fade" id="selesaikanSurat<?= $srt->id ?>" tabindex="-1" aria-labelledby="selesaikanSuratLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="selesaikanSuratLabel">Selesaikan Surat</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <span>
+                                                                Apakah anda yakin akan merubah status surat <br> <b><?= $srt->jenis ?></b> milik <b><?= $srt->pemohon ?></b> ?
+                                                            </span>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <a href="<?= base_url() ?>/selesaikan-surat/<?= $srt->id ?>" class="btn btn-success">
+                                                                <i class="fa fa-check me-1"></i> Selesai
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <!-- Modal hapus surat -->
                                             <div class="modal fade" id="hapusSuratModal<?= $srt->id ?>" tabindex="-1" aria-labelledby="hapusSuratModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="hapusSuratModalLabel">Modal title</h5>
+                                                            <h5 class="modal-title" id="hapusSuratModalLabel">Hapus Surat</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">

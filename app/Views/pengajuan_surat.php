@@ -113,14 +113,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class=" mb-3">
-                                                <div class="col-12 text-start">
-                                                    <label for="keterangan">Keterangan</label>
-                                                    <textarea name="keterangan" id="keterangan" rows="3" required class="form-control border-modal w-100 px-3" placeholder="Bahwa yang bersangkutan ......"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
