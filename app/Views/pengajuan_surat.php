@@ -12,7 +12,7 @@
         } ?>
         <?php if (isset($validation)) : ?>
             <!-- <div class="col-md-12">
-                <?php foreach ($validation->getErrors() as $error): ?>
+                <?php foreach ($validation->getErrors() as $error) : ?>
                     <div class="alert alert-warning text-white d-flex justify-content-between" role="alert">
                         <div>
                             <i class="fas fa-bell me-2"></i>
@@ -24,29 +24,29 @@
             </div> -->
         <?php endif; ?>
         <div class="col-auto">
-            <?php if (session()->getFlashData("Berhasil")): ?>
+            <?php if (session()->getFlashData("Berhasil")) : ?>
                 <div class="alert alert-success alert-dismissible text-white" role="alert">
-                    <span class="text-sm"><strong>Berhasil!</strong>, 
-                    <?= session()->getFlashData("Berhasil") ?></span>
+                    <span class="text-sm"><strong>Berhasil!</strong>,
+                        <?= session()->getFlashData("Berhasil") ?></span>
                     <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            <?php elseif (session()->getFlashData("Gagal")): ?>
+            <?php elseif (session()->getFlashData("Gagal")) : ?>
                 <div class="alert alert-danger alert-dismissible text-white" role="alert">
                     <span class="text-sm"><strong>Gagal!</strong>, <?= session()->getFlashData(
-                        "Gagal"
-                    ) ?></span>
+                                                                        "Gagal"
+                                                                    ) ?></span>
                     <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             <?php endif; ?>
 
-            <?php if (!$profil_lengkap): ?>
+            <?php if (!$profil_lengkap) : ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <span class="alert-icon text-white"><i class="fas fa-exclamation-triangle"></i></span>
-                    <span class="alert-text text-white">Lengkapi profil anda untuk dapat menggunakanan layanan surat, silahkan lengkapi profil anda 
+                    <span class="alert-text text-white">Lengkapi profil anda untuk dapat menggunakanan layanan surat, silahkan lengkapi profil anda
                         <a href="<?= base_url("profil") ?>" class="text-white font-weight-bold text-decoration-underline">disini</a>
                     </span>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -145,15 +145,15 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Permohonan</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detail Surat</th>
-                                    <?php if (in_groups("user")): ?>
+                                    <?php if (in_groups("user")) : ?>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pesan</th>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                     <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($surat as $srt): ?>
+                                <?php foreach ($surat as $srt) : ?>
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -170,11 +170,11 @@
                                             <p class="text-xs font-weight-bold mb-0"><?= $srt->pemohon ?></p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <?php if ($srt->status == "antre"): ?>
+                                            <?php if ($srt->status == "antre") : ?>
                                                 <span class="badge badge-sm bg-gradient-info"><?= $srt->status ?></span>
-                                            <?php elseif ( $srt->status == "siap" ): ?>
+                                            <?php elseif ($srt->status == "siap") : ?>
                                                 <span class="badge badge-sm bg-gradient-success"><?= $srt->status ?></span>
-                                            <?php else: ?>
+                                            <?php else : ?>
                                                 <span class="badge badge-sm bg-gradient-danger"><?= $srt->status ?></span>
                                             <?php endif; ?>
                                         </td>
@@ -184,7 +184,7 @@
                                         <td class="align-middle text-center">
                                             <!-- Button trigger modal detail surat  -->
                                             <button class="badge bg-dark text-white border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $srt->id ?>">
-                                                Detail
+                                                <?= $srt->status == 'dibatalkan' ? 'edit' : 'detail' ?>
                                             </button>
                                             <!-- Modal detail surat -->
                                             <div class="modal fade bd-example-modal-xl" id="staticBackdrop<?= $srt->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -270,7 +270,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <?php if ( $srt->pesan != "" || $srt->pesan != null ): ?>
+                                            <?php if ($srt->status == 'dibatalkan') : ?>
                                                 <button class="badge bg-info text-white border-0 position-relative" data-bs-toggle="modal" data-bs-target="#pesan_pembatalan_surat<?= $srt->id ?>">
                                                     <i class="fas fa-envelope"></i>
                                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -278,7 +278,7 @@
                                                         <span class="visually-hidden">unread messages</span>
                                                     </span>
                                                 </button>
-                                            <?php else: ?>
+                                            <?php else : ?>
                                                 <button disabled class="badge border border-1 border-secondary text-secondary border-0">
                                                     <i class="fas fa-envelope"></i>
                                                 </button>

@@ -222,7 +222,6 @@ class Warga extends BaseController
             // 'perihal' => $this->request->getVar('perihal'),
             'keperluan' => $this->request->getVar('keperluan'),
             'status' => 'antre',
-            'master' => $this->request->getVar('master'),
         ];
 
         $id_surat = $this->request->getVar('id_surat');
