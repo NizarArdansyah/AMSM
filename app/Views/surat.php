@@ -46,7 +46,7 @@
         }
 
         .ttd {
-            margin-top: 5em;
+            margin-top: .5em;
             margin-right: 2.5em;
         }
         .sheet.padding-y-0mm {
@@ -144,7 +144,9 @@
                                 <th>Tempat Tinggal</th>
                                 <th>:</th>
                                 <td>
-                                    <?= $data_pemohon[0]->alamat ?>
+                                    <?= 
+                                        $data_pemohon[0]->alamat . " Kecamatan " . ucfirst(strtolower($data_pemohon[0]->kecamatan)) . " Kabupaten " . ucfirst(strtolower($data_pemohon[0]->kabupaten)) . " Provinsi " . ucfirst(strtolower($data_pemohon[0]->provinsi))
+                                    ?>
                                 </td>
                             </tr>
                             <tr>
@@ -170,15 +172,15 @@
         <div class="ttd d-flex flex-column align-items-end">
             <div class="text-center">
                 <p>
-                    <?= $tanggal ?>
+                    <?= $tanggal ?><br>
+                    Kepala Desa Podosari
                 </p>
-                <p>Kepala Desa Podosari</p>
 
                 <!-- Gambar tanda tangan -->
-                <div class="position-relative" style="width: fit-content;">
-                    <!-- <img src="<?= base_url() ?>/assets/img/ttd.png" alt="" srcset=""
-                        style="width: 200px; top:-60px; z-index: 10;" class="position-absolute"> -->
-                </div>
+                <!-- <div class="position-relative" style="width: fit-content;">
+                    <img src="<?= base_url() ?>/assets/img/ttd.png" alt="" srcset=""
+                        style="width: 200px; top:-60px; z-index: 10;" class="position-absolute">
+                </div> -->
                 <!-- Nama Kepala Desa -->
                 <p style="margin-top: 100px;"><strong>NURCAHYO</strong></p>
             </div>

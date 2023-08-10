@@ -46,6 +46,15 @@ class Admin extends BaseController
         return view('user/admin/manajemen_user', $data);
     }
 
+    public function manajemen_user_edit($id)
+    {
+        $userModel = new UserModel();
+        $data['user'] = $userModel->find($id);
+        $data['title'] = 'AMSM - Admin';
+
+        return view('user/admin/manajemen_user_edit', $data);
+    }
+
     public function tambah_user()
     {
         $users = model(UserModel::class);

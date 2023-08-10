@@ -16,7 +16,6 @@ class CreateAuthTables extends Migration
             
             'fullname'         => ['type' => 'varchar', 'constraint' => 255],
             'img_user'         => ['type' => 'varchar', 'constraint' => 255, 'default' => 'default.svg'],
-            'alamat'           => ['type' => 'varchar', 'constraint' => 255],
             'nik'              => ['type' => 'varchar', 'constraint' => 20],
             'kk'               => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'tgl_lahir'        => ['type' => 'date'],
@@ -24,6 +23,12 @@ class CreateAuthTables extends Migration
             'kewarganegaraan'  => ['type' => 'varchar', 'constraint' => 50],
             'agama'            => ['type' => 'varchar', 'constraint' => 30],
             'pekerjaan'        => ['type' => 'varchar', 'constraint' => 255],
+            
+            'provinsi'         => ['type' => 'varchar', 'constraint' => 255],
+            'kabupaten'        => ['type' => 'varchar', 'constraint' => 255],
+            'kecamatan'        => ['type' => 'varchar', 'constraint' => 255],
+            'kelurahan'        => ['type' => 'varchar', 'constraint' => 255],
+            'alamat'           => ['type' => 'varchar', 'constraint' => 255],
 
             'password_hash'    => ['type' => 'varchar', 'constraint' => 255],
             'reset_hash'       => ['type' => 'varchar', 'constraint' => 255, 'null' => true],

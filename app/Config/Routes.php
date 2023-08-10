@@ -61,6 +61,7 @@ $routes->get('/selesaikan-surat/(:num)', 'Petugas\Petugas::selesaikan_surat/$1',
 
 // Role Admin Route
 $routes->get('/manajemen-user', 'Admin\Admin::manajemen_user', ['filter' => 'role:admin']);
+$routes->get('/manajemen-user/(:num)', 'Admin\Admin::manajemen_user_edit/$1', ['filter' => 'role:admin']);
 $routes->post('/tambah-user', 'Admin\Admin::tambah_user', ['filter' => 'role:admin']);
 $routes->post('/ubah-group', 'Admin\Admin::ubah_group', ['filter' => 'role:admin']);
 $routes->get('/update-password/(:num)', 'Admin\Admin::update_pass/$1', ['filter' => 'role:admin']);

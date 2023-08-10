@@ -47,6 +47,7 @@ class Warga extends BaseController
         } elseif (in_groups('admin')) {
             $data['title'] = 'AMSM - Admin';
         }
+
         $data = [
             'fullname' => $this->request->getVar('fullname'),
             'nik' => $this->request->getVar('nik'),
@@ -55,6 +56,11 @@ class Warga extends BaseController
             'kewarganegaraan' => $this->request->getVar('kewarganegaraan'),
             'agama' => $this->request->getVar('agama'),
             'pekerjaan' => $this->request->getVar('pekerjaan'),
+
+            'provinsi' => $this->request->getVar('real_provinsi'),
+            'kabupaten' => $this->request->getVar('real_kota'),
+            'kecamatan' => $this->request->getVar('real_kecamatan'),
+            'kelurahan' => $this->request->getVar('real_kelurahan'),
             'alamat' => $this->request->getVar('alamat'),
         ];
 

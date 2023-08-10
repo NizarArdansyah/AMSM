@@ -115,10 +115,10 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach ($users as $rw) {
-                                    $row = "row" . $rw->id;
-                                    echo $$row;
-                                }
+                            foreach ($users as $rw) {
+                                $row = "row" . $rw->id;
+                                echo $$row;
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -183,5 +183,5 @@
             </div>
         </div>
     </form>
-
-    <?= $this->endSection(); ?>
+</div>
+<?= $this->endSection(); ?>

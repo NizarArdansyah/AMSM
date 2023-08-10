@@ -21,8 +21,8 @@ class UserModel extends Model
         'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at',
 
         // Custom Fields
-        'fullname', 'img_user', 'alamat', 'nik', 'kk', 'tgl_lahir', 'tempat_lahir', 'kewarganegaraan', 
-        'agama', 'pekerjaan'
+        'fullname', 'img_user', 'nik', 'kk', 'tgl_lahir', 'tempat_lahir', 'kewarganegaraan', 
+        'agama', 'pekerjaan', 'provinsi', 'kabupaten', 'kecamatan', 'kelurahan', 'alamat'
     ];
     protected $useTimestamps   = true;
     protected $validationRules = [
