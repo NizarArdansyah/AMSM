@@ -16,12 +16,32 @@ class Warga extends BaseController
 
     public function __construct()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $this->sm = new SuratModel();
         $this->master = new \App\Models\MasterSuratModel();
     }
 
     public function profil()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['user'] = user();
 
         if (in_groups('user')) {
@@ -38,6 +58,16 @@ class Warga extends BaseController
     // update profil 
     public function ubah_profil()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['user'] = user();
 
         if (in_groups('user')) {
@@ -83,6 +113,16 @@ class Warga extends BaseController
     // mengarahkan ke pengajuan surat
     public function pengajuan_surat()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
 
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
@@ -106,6 +146,16 @@ class Warga extends BaseController
     // membuat pengajuan surat
     public function buat_pengajuan_surat()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
         } elseif (in_groups('petugas')) {
@@ -131,14 +181,14 @@ class Warga extends BaseController
         if ($profil_lengkap) {
             if ($this->sm->insert($data)) {
                 session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
-                
+
                 if (in_groups('user') || in_groups('warga')) {
                     return redirect()->to(base_url('/pengajuan-surat'));
                 }
                 return redirect()->to(base_url('/manajemen-surat'));
             } else {
                 session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
-                
+
                 if (in_groups('user') || in_groups('warga')) {
                     return redirect()->to(base_url('/pengajuan-surat'));
                 }
@@ -146,7 +196,7 @@ class Warga extends BaseController
             }
         } else {
             session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan profil lengkap');
-            
+
             if (in_groups('user') || in_groups('warga')) {
                 return redirect()->to(base_url('/pengajuan-surat'));
             }
@@ -158,6 +208,16 @@ class Warga extends BaseController
 
     public function buat_pengajuan_surat_admin()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
         } elseif (in_groups('petugas')) {
@@ -166,7 +226,7 @@ class Warga extends BaseController
             $data['title'] = 'AMSM - Admin';
         }
 
-        
+
         $data = [
             'id_user' => $this->request->getPost('pemohon'),
             'nomor_surat' => $this->sm->generate_nomor_surat(),
@@ -184,14 +244,14 @@ class Warga extends BaseController
         if ($profil_lengkap) {
             if ($this->sm->insert($data)) {
                 session()->setFlashdata('Berhasil', 'Surat berhasil diajukan');
-                
+
                 if (in_groups('user') || in_groups('warga')) {
                     return redirect()->to(base_url('/pengajuan-surat'));
                 }
                 return redirect()->to(base_url('/manajemen-surat'));
             } else {
                 session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan masukan setiap kolom sesuai');
-                
+
                 if (in_groups('user') || in_groups('warga')) {
                     return redirect()->to(base_url('/pengajuan-surat'));
                 }
@@ -199,7 +259,7 @@ class Warga extends BaseController
             }
         } else {
             session()->setFlashdata('Gagal', 'Surat gagal diajukan, pastikan profil lengkap');
-            
+
             if (in_groups('user') || in_groups('warga')) {
                 return redirect()->to(base_url('/pengajuan-surat'));
             }
@@ -212,6 +272,16 @@ class Warga extends BaseController
     // update surat yang sudah diajukan
     public function update_pengajuan_surat()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
 
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
@@ -246,6 +316,16 @@ class Warga extends BaseController
     // upload kartu keluarga
     public function upload_kk()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         if (
             !$this->validate([
                 'kk' => [

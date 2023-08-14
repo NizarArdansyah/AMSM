@@ -68,7 +68,7 @@ $routes->get('/update-password/(:num)', 'Admin\Admin::update_pass/$1', ['filter'
 $routes->post('/update-password', 'Admin\Admin::set_password', ['filter' => 'role:admin']);
 $routes->get('/hapus-user/(:num)', 'Admin\Admin::hapus_user/$1', ['filter' => 'role:admin']);
 
-
+$routes->get('/error', 'Home::error');
 
 // myth auth routes
 $routes->group('', ['namespace' => 'App\Controllers'], static function ($routes) {

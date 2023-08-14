@@ -6,3 +6,8 @@ function count_surat($status)
     $count = $sm->where('status', $status)->countAllResults();
     return $count;
 }
+
+function checkAlamat()
+{
+    
+}

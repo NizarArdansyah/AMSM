@@ -14,6 +14,16 @@ class Home extends BaseController
 
     public function index()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['user'] = user();
         if (in_groups('user')) {
             $data['title'] = 'ASMS - Warga';
@@ -31,13 +41,37 @@ class Home extends BaseController
 
     public function lp()
     {
+        // if (logged_in()) {
+        //     foreach (user()->getRoles() as $role) {
+        //         if (!in_array($role, ['admin', 'petugas'])) {
+        //             if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+        //                 return redirect()->to(base_url('/error?code=403'));
+        //             }
+        //         }
+        //     }
+        // }
+
         return view('lp');
     }
 
     public function profil_desa()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         $data['user'] = user();
         $data['title'] = 'ASMS - Profil Desa';
         return view('profil_desa', $data);
+    }
+
+    function error() {
+        return view('error');
     }
 }

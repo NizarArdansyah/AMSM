@@ -13,12 +13,32 @@ class Petugas extends BaseController
 
     public function __construct()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $this->sm = new SuratModel();
         $this->master = new \App\Models\MasterSuratModel();
     }
 
     function master_surat()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         if (in_groups('user')) {
             $data['title'] = 'AMSM - Warga';
         } elseif (in_groups('petugas')) {
@@ -34,6 +54,16 @@ class Petugas extends BaseController
 
     function simpan_master()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data = [
             'jenis_surat' => $this->request->getVar('jenis_surat'),
         ];
@@ -49,6 +79,16 @@ class Petugas extends BaseController
 
     function hapus_master($id)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         if ($this->master->delete($id)) {
             session()->setFlashdata('Berhasil', 'Master surat berhasil dihapus');
             return redirect()->to(base_url('/master-surat'));
@@ -61,6 +101,16 @@ class Petugas extends BaseController
     // mengarahkan ke manajemen surat
     public function manajemen_surat()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $userModel = new UserModel();
         $data['users'] = $userModel->orderBy('nik', 'ASC')->findAll();
 
@@ -89,6 +139,16 @@ class Petugas extends BaseController
     // update surat
     public function update_surat()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['title'] = 'AMSM - Petugas';
         $data['user'] = user();
         $data = [
@@ -118,6 +178,16 @@ class Petugas extends BaseController
     // cetak surat
     public function cetak_surat($id_surat)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
 
         $data['title'] = 'AMSM - Petugas';
         $data['tanggal'] = $this->getTanggalIndo();
@@ -137,6 +207,16 @@ class Petugas extends BaseController
     // mengirim pesan pembatalan ke pemohon
     public function pesan_pembatalan()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $id_surat = $this->request->getVar('id_surat');
         $data = [
             'pesan' => $this->request->getVar('pesan'),
@@ -152,6 +232,16 @@ class Petugas extends BaseController
 
     public function hapus_surat($id_surat)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['title'] = 'AMSM - Petugas';
         $data['user'] = user();
 
@@ -169,6 +259,16 @@ class Petugas extends BaseController
 
     public function selesaikan_surat($id_surat)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['title'] = 'AMSM - Petugas';
         $data['user'] = user();
 
@@ -191,6 +291,16 @@ class Petugas extends BaseController
     //mengarahkan ke profil petugas
     public function profil_petugas()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $data['user'] = user();
         $data['title'] = 'AMSM - Petugas';
         return view('user/petugas/profil_petugas', $data);
@@ -199,6 +309,16 @@ class Petugas extends BaseController
     //mengambil waktu dg format indonesia
     public function getTanggalIndo()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+
         $hari = date("l");
         $tanggal = date("d");
         $bulan = date("F");

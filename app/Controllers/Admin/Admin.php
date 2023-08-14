@@ -20,6 +20,16 @@ class Admin extends BaseController
 
     public function __construct()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         $this->um = new UserModel();
 
         $this->config = config('Auth');
@@ -29,6 +39,16 @@ class Admin extends BaseController
 
     public function manajemen_user()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         $userModel = new UserModel();
         $data['users'] = $userModel->findAll();
 
@@ -48,6 +68,16 @@ class Admin extends BaseController
 
     public function manajemen_user_edit($id)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         $userModel = new UserModel();
         $data['user'] = $userModel->find($id);
         $data['title'] = 'AMSM - Admin';
@@ -57,6 +87,16 @@ class Admin extends BaseController
 
     public function tambah_user()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         $users = model(UserModel::class);
 
         $rules = [
@@ -111,6 +151,16 @@ class Admin extends BaseController
     //ubah group user
     public function ubah_group()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         $userId = $this->request->getVar('id');
         $groupId = $this->request->getVar('group');
 
@@ -124,6 +174,16 @@ class Admin extends BaseController
 
     public function update_pass($id = null)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         if ($id == null) {
             return redirect()->to(base_url('/users/index'));
         } else {
@@ -138,6 +198,16 @@ class Admin extends BaseController
 
     public function set_password()
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
 
         $id = $this->request->getVar('id');
         $rules = [
@@ -172,6 +242,16 @@ class Admin extends BaseController
     //hapus user
     public function hapus_user($id = null)
     {
+        if (logged_in()) {
+            foreach (user()->getRoles() as $role) {
+                if (!in_array($role, ['admin', 'petugas'])) {
+                    if (user()->kelurahan && user()->kelurahan != "PODOSARI") {
+                        return redirect()->to(base_url('/error?code=403'));
+                    }
+                }
+            }
+        }
+        
         if ($id == null) {
             return redirect()->to(base_url('/manajemen-user'));
         } else {
